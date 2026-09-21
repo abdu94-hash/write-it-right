@@ -1,0 +1,1656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Write It Right — Companion Toolkit</title>
+<meta name="description" content="Interactive companion toolkit for Write It Right: A Practical Guide to Medical Device Regulatory Writing."/>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%232B3A55'/%3E%3Cpath d='M8 9h16M8 16h16M8 23h10' stroke='%23fff' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E"/>
+<style>
+:root{
+  --navy:#2B3A55; --navy-2:#3d5075; --red:#C0392B; --green:#1E7A46; --purple:#4A3F9E;
+  --bg:#F4F5F8; --surface:#FFFFFF; --surface-2:#F7F8FA; --surface-3:#EDEFF4;
+  --ink:#1A1A1A; --ink-2:#4A4F5A; --ink-3:#767C88;
+  --line:#D5DAE3; --line-2:#B9C2D0;
+  --hi-high:#FBD9D5; --hi-high-b:#C0392B;
+  --hi-med:#FDEBCF; --hi-med-b:#B9761B;
+  --hi-low:#E2E7F5; --hi-low-b:#4A3F9E;
+  --ok-bg:#E8F5ED; --ok-b:#1E7A46;
+  --head-bg:#2B3A55; --head-fg:#FFFFFF; --head-dim:rgba(255,255,255,.75);
+  --btn-bg:#2B3A55; --btn-fg:#FFFFFF; --btn-hover:#3d5075;
+  --serif:Georgia,"Liberation Serif","Times New Roman",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Courier New",monospace;
+  --r:8px; --r-s:5px;
+  --shadow:0 1px 2px rgba(20,28,45,.06),0 6px 18px -8px rgba(20,28,45,.22);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --navy:#8FA6CC; --navy-2:#A8BCDC; --red:#F08579; --green:#5FC28C; --purple:#A99BF0;
+    --bg:#12151C; --surface:#1A1F29; --surface-2:#212733; --surface-3:#2A313F;
+    --ink:#E8EBF0; --ink-2:#B4BCCA; --ink-3:#848D9E;
+    --line:#333B4A; --line-2:#414B5E;
+    --hi-high:#4A2420; --hi-high-b:#F08579;
+    --hi-med:#463318; --hi-med-b:#E0A44A;
+    --hi-low:#262A46; --hi-low-b:#A99BF0;
+    --ok-bg:#16301F; --ok-b:#5FC28C;
+    --head-bg:#0E1219; --head-fg:#E8EBF0; --head-dim:rgba(232,235,240,.72);
+    --btn-bg:#8FA6CC; --btn-fg:#10141B; --btn-hover:#A8BCDC;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 6px 18px -8px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"]{
+  --navy:#8FA6CC; --navy-2:#A8BCDC; --red:#F08579; --green:#5FC28C; --purple:#A99BF0;
+  --bg:#12151C; --surface:#1A1F29; --surface-2:#212733; --surface-3:#2A313F;
+  --ink:#E8EBF0; --ink-2:#B4BCCA; --ink-3:#848D9E;
+  --line:#333B4A; --line-2:#414B5E;
+  --hi-high:#4A2420; --hi-high-b:#F08579;
+  --hi-med:#463318; --hi-med-b:#E0A44A;
+  --hi-low:#262A46; --hi-low-b:#A99BF0;
+  --ok-bg:#16301F; --ok-b:#5FC28C;
+  --head-bg:#0E1219; --head-fg:#E8EBF0; --head-dim:rgba(232,235,240,.72);
+  --btn-bg:#8FA6CC; --btn-fg:#10141B; --btn-hover:#A8BCDC;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 6px 18px -8px rgba(0,0,0,.6);
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:var(--sans); font-size:16px; line-height:1.55;
+}
+h1,h2,h3,h4{font-family:var(--sans); line-height:1.25; margin:0}
+p{margin:0 0 .85em}
+a{color:var(--purple)}
+button{font:inherit; cursor:pointer}
+textarea,input,select{font:inherit; color:inherit}
+
+/* ---------- masthead ---------- */
+.masthead{
+  background:var(--head-bg); color:var(--head-fg); padding:18px 0 0;
+  border-bottom:4px solid var(--red);
+}
+.wrap{max-width:1080px; margin:0 auto; padding:0 16px}
+.mast-top{display:flex; align-items:flex-start; gap:16px; flex-wrap:wrap; padding-bottom:14px}
+.mast-txt{flex:1 1 320px; min-width:0}
+.kicker{
+  font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+  opacity:.85; margin:0 0 4px; font-weight:700;
+}
+.masthead h1{font-size:clamp(20px,4vw,28px); letter-spacing:-.01em; color:var(--head-fg)}
+.mast-sub{margin:6px 0 0; font-size:14px; opacity:.85; max-width:62ch}
+.theme-btn{
+  background:rgba(127,127,127,.22); color:var(--head-fg); border:1px solid var(--head-dim);
+  border-radius:var(--r-s); padding:7px 12px; font-size:12px; font-weight:600;
+  letter-spacing:.04em; white-space:nowrap;
+}
+.theme-btn:hover{background:rgba(127,127,127,.38)}
+
+/* ---------- tabs ---------- */
+.tabbar{background:var(--head-bg); position:sticky; top:0; z-index:40; border-bottom:4px solid var(--red)}
+.tabs{display:flex; gap:2px; overflow-x:auto; scrollbar-width:none; -ms-overflow-style:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{
+  background:transparent; border:0; color:var(--head-dim);
+  padding:11px 15px 12px; font-size:13px; font-weight:600; letter-spacing:.02em;
+  white-space:nowrap; border-bottom:3px solid transparent; margin-bottom:-4px;
+  display:flex; align-items:center; gap:7px;
+}
+.tab:hover{color:var(--head-fg); background:rgba(127,127,127,.14)}
+.tab[aria-selected="true"]{color:var(--head-fg); border-bottom-color:var(--head-fg); background:rgba(127,127,127,.18)}
+.tab .tnum{
+  font-family:var(--mono); font-size:10px; background:rgba(127,127,127,.3);
+  border-radius:3px; padding:1px 5px; letter-spacing:0;
+}
+
+/* ---------- layout ---------- */
+main{padding:22px 0 64px}
+.panel[hidden]{display:none}
+.intro{
+  background:var(--surface); border:1px solid var(--line); border-left:5px solid var(--navy);
+  border-radius:var(--r); padding:14px 16px; margin:0 0 20px; box-shadow:var(--shadow);
+}
+.intro h2{font-size:17px; color:var(--navy); margin-bottom:6px}
+.intro p{font-size:14px; color:var(--ink-2); margin-bottom:0}
+.intro p + p{margin-top:.6em}
+.ref{
+  font-family:var(--mono); font-size:11px; color:var(--ink-3);
+  background:var(--surface-3); border-radius:3px; padding:1px 6px; white-space:nowrap;
+}
+
+.card{
+  background:var(--surface); border:1px solid var(--line); border-radius:var(--r);
+  padding:16px; margin:0 0 16px; box-shadow:var(--shadow);
+}
+.card > h3{font-size:15px; color:var(--navy); margin-bottom:10px; letter-spacing:.01em}
+.card-head{display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:10px}
+.card-head h3{font-size:15px; color:var(--navy)}
+
+label.fld{display:block; margin:0 0 12px}
+label.fld > span.lab{
+  display:block; font-size:12px; font-weight:700; letter-spacing:.04em;
+  text-transform:uppercase; color:var(--ink-2); margin-bottom:4px;
+}
+label.fld > span.hint{display:block; font-size:12px; color:var(--ink-3); margin-bottom:5px; font-weight:400; text-transform:none; letter-spacing:0}
+.req{color:var(--red); font-weight:700}
+textarea,input[type=text],select{
+  width:100%; background:var(--surface-2); color:var(--ink);
+  border:1px solid var(--line-2); border-radius:var(--r-s);
+  padding:9px 11px; font-size:15px; font-family:var(--serif); line-height:1.5;
+}
+input[type=text],select{font-family:var(--sans); font-size:14px}
+textarea{resize:vertical; min-height:92px}
+textarea:focus,input:focus,select:focus{outline:2px solid var(--purple); outline-offset:1px; border-color:var(--purple)}
+textarea.big{min-height:170px}
+
+.btn{
+  background:var(--btn-bg); color:var(--btn-fg); border:1px solid var(--btn-bg);
+  border-radius:var(--r-s); padding:9px 16px; font-size:14px; font-weight:600; letter-spacing:.01em;
+}
+.btn:hover{background:var(--btn-hover); border-color:var(--btn-hover)}
+.btn:disabled{opacity:.45; cursor:not-allowed}
+.btn.sec{background:transparent; color:var(--navy); border-color:var(--line-2)}
+.btn.sec:hover{background:var(--surface-3)}
+.btn.sm{padding:6px 11px; font-size:12.5px}
+.btn-row{display:flex; gap:9px; flex-wrap:wrap; align-items:center; margin-top:4px}
+.note{font-size:12.5px; color:var(--ink-3); margin:8px 0 0}
+
+/* ---------- analyzer ---------- */
+.score-strip{
+  display:flex; gap:14px; align-items:center; flex-wrap:wrap;
+  background:var(--surface-2); border:1px solid var(--line); border-radius:var(--r);
+  padding:13px 15px; margin-bottom:14px;
+}
+.gauge{display:flex; align-items:baseline; gap:8px}
+.gauge .num{font-size:34px; font-weight:800; font-family:var(--sans); line-height:1; letter-spacing:-.02em}
+.gauge .den{font-size:13px; color:var(--ink-3)}
+.gauge .lbl{font-size:11px; letter-spacing:.09em; text-transform:uppercase; color:var(--ink-3); font-weight:700; display:block; margin-bottom:3px}
+.sev-counts{display:flex; gap:7px; flex-wrap:wrap}
+.pill{
+  font-size:11.5px; font-weight:700; letter-spacing:.04em; text-transform:uppercase;
+  border-radius:20px; padding:3px 10px; border:1px solid;
+}
+.pill.high{background:var(--hi-high); border-color:var(--hi-high-b); color:var(--hi-high-b)}
+.pill.med{background:var(--hi-med); border-color:var(--hi-med-b); color:var(--hi-med-b)}
+.pill.low{background:var(--hi-low); border-color:var(--hi-low-b); color:var(--hi-low-b)}
+.pill.ok{background:var(--ok-bg); border-color:var(--ok-b); color:var(--ok-b)}
+
+.marked{
+  font-family:var(--serif); font-size:16px; line-height:1.75;
+  background:var(--surface-2); border:1px solid var(--line); border-radius:var(--r);
+  padding:14px 16px; white-space:pre-wrap; word-wrap:break-word;
+}
+mark{border-radius:3px; padding:.08em .18em; border-bottom:2px solid; color:inherit; cursor:help}
+mark.high{background:var(--hi-high); border-color:var(--hi-high-b)}
+mark.med{background:var(--hi-med); border-color:var(--hi-med-b)}
+mark.low{background:var(--hi-low); border-color:var(--hi-low-b)}
+mark.on{outline:2px solid var(--purple); outline-offset:1px}
+
+.finding{
+  border:1px solid var(--line); border-left-width:5px; border-radius:var(--r-s);
+  padding:11px 13px; margin:0 0 10px; background:var(--surface-2); cursor:pointer;
+}
+.finding:hover{background:var(--surface-3)}
+.finding.high{border-left-color:var(--hi-high-b)}
+.finding.med{border-left-color:var(--hi-med-b)}
+.finding.low{border-left-color:var(--hi-low-b)}
+.f-top{display:flex; align-items:center; gap:9px; flex-wrap:wrap; margin-bottom:5px}
+.f-cat{font-size:13px; font-weight:700; color:var(--ink)}
+.f-quote{font-family:var(--serif); font-style:italic; color:var(--ink-2); font-size:14.5px; margin:0 0 5px}
+.f-why{font-size:13.5px; color:var(--ink-2); margin:0}
+.f-fix{font-size:13.5px; color:var(--ink-2); margin:5px 0 0}
+.f-fix b{color:var(--green)}
+
+/* ---------- drills ---------- */
+.drill-meta{display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-bottom:10px}
+.badge{
+  font-size:11px; font-weight:700; letter-spacing:.07em; text-transform:uppercase;
+  background:var(--btn-bg); color:var(--btn-fg); border-radius:3px; padding:3px 8px;
+}
+.badge.alt{background:var(--purple); color:var(--btn-fg)}
+.badge.gr{background:var(--green); color:var(--btn-fg)}
+.passage{
+  font-family:var(--serif); font-size:16px; font-style:italic; line-height:1.65;
+  background:var(--hi-high); border-left:4px solid var(--hi-high-b);
+  border-radius:var(--r-s); padding:12px 14px; margin:0 0 14px; color:var(--ink);
+}
+.passage.good{background:var(--ok-bg); border-left-color:var(--ok-b); font-style:normal}
+.rubric{display:grid; grid-template-columns:repeat(auto-fit,minmax(158px,1fr)); gap:10px; margin:14px 0}
+.rub{background:var(--surface-2); border:1px solid var(--line); border-radius:var(--r-s); padding:10px 12px}
+.rub .rlab{font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-3); margin-bottom:5px}
+.rub .rval{font-size:20px; font-weight:800; line-height:1}
+.rub .rval small{font-size:12px; font-weight:600; color:var(--ink-3)}
+.bar{height:5px; border-radius:3px; background:var(--surface-3); margin-top:7px; overflow:hidden}
+.bar i{display:block; height:100%; border-radius:3px; transition:width .35s ease}
+.rub .rnote{font-size:12px; color:var(--ink-3); margin-top:6px; line-height:1.45}
+.model{
+  border:1px solid var(--ok-b); border-radius:var(--r); background:var(--ok-bg);
+  padding:13px 15px; margin-top:14px;
+}
+.model h4{font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--green); margin-bottom:7px}
+.model .mtext{font-family:var(--serif); font-size:15.5px; line-height:1.65}
+.model .mwhy{font-size:13.5px; color:var(--ink-2); margin-top:10px; border-top:1px dotted var(--line-2); padding-top:9px}
+
+/* ---------- builders ---------- */
+.builder-nav{display:flex; gap:7px; flex-wrap:wrap; margin-bottom:16px}
+.bnav{
+  background:var(--surface); border:1px solid var(--line-2); color:var(--ink-2);
+  border-radius:20px; padding:7px 14px; font-size:13px; font-weight:600;
+}
+.bnav:hover{border-color:var(--navy); color:var(--navy)}
+.bnav[aria-pressed="true"]{background:var(--btn-bg); border-color:var(--btn-bg); color:var(--btn-fg)}
+.out{
+  font-family:var(--serif); font-size:15.5px; line-height:1.7;
+  background:var(--surface-2); border:1px solid var(--line); border-radius:var(--r);
+  padding:14px 16px; white-space:pre-wrap; word-wrap:break-word; min-height:70px;
+}
+.out.empty{color:var(--ink-3); font-style:italic; font-family:var(--sans); font-size:14px}
+.missing{
+  background:var(--hi-med); border:1px solid var(--hi-med-b); color:var(--ink);
+  border-radius:var(--r-s); padding:10px 13px; font-size:13.5px; margin-bottom:12px;
+}
+.missing b{color:var(--hi-med-b)}
+.two{display:grid; grid-template-columns:1fr 1fr; gap:0 14px}
+@media (max-width:640px){.two{grid-template-columns:1fr}}
+
+/* ---------- checklists ---------- */
+.ck-item{
+  display:flex; gap:11px; align-items:flex-start; padding:10px 0;
+  border-bottom:1px solid var(--line);
+}
+.ck-item:last-child{border-bottom:0}
+.ck-item input[type=checkbox]{
+  width:19px; height:19px; margin:2px 0 0; accent-color:var(--green); flex:0 0 auto; cursor:pointer;
+}
+.ck-body{flex:1; min-width:0}
+.ck-text{font-size:14.5px; line-height:1.5; cursor:pointer}
+.ck-item.done .ck-text{color:var(--ink-3); text-decoration:line-through}
+.ck-note{
+  width:100%; margin-top:6px; font-size:13px; padding:5px 8px; font-family:var(--sans);
+  background:var(--surface-2); border:1px dashed var(--line-2); border-radius:4px; min-height:0;
+}
+.prog{display:flex; align-items:center; gap:10px; font-size:13px; color:var(--ink-2); font-weight:600}
+.prog .track{width:110px; height:7px; border-radius:4px; background:var(--surface-3); overflow:hidden}
+.prog .track i{display:block; height:100%; background:var(--green); transition:width .3s}
+
+/* ---------- quiz ---------- */
+.qopt{
+  display:block; width:100%; text-align:left; background:var(--surface-2);
+  border:1px solid var(--line-2); border-radius:var(--r-s);
+  padding:11px 13px; margin:0 0 9px; font-size:14.5px; line-height:1.5; font-family:var(--serif);
+}
+.qopt:hover:not(:disabled){border-color:var(--navy); background:var(--surface-3)}
+.qopt.right{background:var(--ok-bg); border-color:var(--ok-b); color:var(--ink)}
+.qopt.wrong{background:var(--hi-high); border-color:var(--hi-high-b); color:var(--ink)}
+.qopt:disabled{cursor:default}
+.qstem{font-size:19px; font-weight:700; color:var(--navy); margin-bottom:4px}
+.qcount{font-size:12px; letter-spacing:.07em; text-transform:uppercase; color:var(--ink-3); font-weight:700; margin-bottom:12px}
+
+.foot{
+  border-top:1px solid var(--line); margin-top:34px; padding-top:16px;
+  font-size:12.5px; color:var(--ink-3); line-height:1.6;
+}
+.foot strong{color:var(--ink-2)}
+.sr{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap}
+@media (max-width:520px){
+  .card{padding:13px}
+  .gauge .num{font-size:28px}
+}
+</style>
+</head>
+<body>
+<header class="masthead">
+  <div class="wrap">
+    <div class="mast-top">
+      <div class="mast-txt">
+        <p class="kicker">Companion Toolkit</p>
+        <h1>Write It Right</h1>
+        <p class="mast-sub">A Practical Guide to Medical Device Regulatory Writing — Hafez Selim,&#160;MD,&#160;PhD. Four tools that turn the book&rsquo;s exercises into repeatable practice. Nothing you type here leaves your device.</p>
+      </div>
+      <button class="theme-btn" id="themeBtn" type="button">Theme: Auto</button>
+    </div>
+  </div>
+</header>
+
+<nav class="tabbar" aria-label="Toolkit sections">
+  <div class="wrap">
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" id="tab-analyzer" aria-controls="p-analyzer" aria-selected="true"><span class="tnum">1</span>Draft Analyzer</button>
+      <button class="tab" role="tab" id="tab-drills" aria-controls="p-drills" aria-selected="false"><span class="tnum">2</span>Rewrite Drills</button>
+      <button class="tab" role="tab" id="tab-builders" aria-controls="p-builders" aria-selected="false"><span class="tnum">3</span>Document Builders</button>
+      <button class="tab" role="tab" id="tab-checklists" aria-controls="p-checklists" aria-selected="false"><span class="tnum">4</span>Checklists</button>
+      <button class="tab" role="tab" id="tab-quiz" aria-controls="p-quiz" aria-selected="false"><span class="tnum">5</span>Glossary Quiz</button>
+    </div>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<!-- ================= 1. ANALYZER ================= -->
+<section class="panel" id="p-analyzer" role="tabpanel" aria-labelledby="tab-analyzer">
+  <div class="intro">
+    <h2>Vagueness &amp; Hedge-Word Analyzer</h2>
+    <p>Paste a paragraph from a live draft — a CER conclusion, a PSUR trend statement, an IFU warning, a response to a finding. The analyzer flags the recurring defects catalogued in Chapter 5 and labels each with the section of the book that covers it.</p>
+    <p><strong>What it checks and what it cannot.</strong> This is a pattern checker for the <em>form</em> of regulatory prose. It cannot judge whether your clinical reasoning is sound, whether a cited study supports your claim, or whether a number is correct. A clean score means the sentence-level habits are right — not that the document is.</p>
+  </div>
+
+  <div class="card">
+    <label class="fld" for="anIn">
+      <span class="lab">Your draft text <span class="req">*</span></span>
+      <span class="hint">Works best on one to four paragraphs at a time. Longer passages produce findings you will not read.</span>
+      <textarea id="anIn" class="big" placeholder="Paste a paragraph from a document you are writing…" spellcheck="true"></textarea>
+    </label>
+    <div class="btn-row">
+      <button class="btn" id="anRun" type="button">Analyze draft</button>
+      <button class="btn sec" id="anSample" type="button">Load a sample</button>
+      <button class="btn sec" id="anClear" type="button">Clear</button>
+      <span class="note" id="anCount" style="margin:0"></span>
+    </div>
+  </div>
+
+  <div id="anOut" hidden>
+    <div class="score-strip">
+      <div class="gauge">
+        <div>
+          <span class="lbl">Reviewer-risk score</span>
+          <span class="num" id="anScore">0</span><span class="den"> / 100</span>
+        </div>
+      </div>
+      <div style="flex:1;min-width:150px">
+        <span class="lbl" style="display:block;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);font-weight:700;margin-bottom:5px">Findings</span>
+        <div class="sev-counts" id="anPills"></div>
+      </div>
+      <div style="flex:2;min-width:220px">
+        <p class="note" id="anVerdict" style="margin:0;font-size:13.5px;color:var(--ink-2)"></p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><h3>Marked-up text</h3><span class="note" style="margin:0">Click a highlight or a finding to pair them.</span></div>
+      <div class="marked" id="anMarked"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><h3>Findings <span class="ref" id="anNum"></span></h3></div>
+      <div id="anList"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 2. DRILLS ================= -->
+<section class="panel" id="p-drills" role="tabpanel" aria-labelledby="tab-drills" hidden>
+  <div class="intro">
+    <h2>Rewrite Drills</h2>
+    <p>A weak passage is shown. You write the defensible version, then the drill scores it on four dimensions and shows the model answer. Write before you reveal — reading a good rewrite teaches far less than producing one and finding out where yours fell short.</p>
+    <p><strong>How scoring works.</strong> The score measures form, not meaning: whether you removed vague verbs and stacked hedges, whether you cited a source, whether you quantified. It cannot tell whether your invented figures are plausible. Treat a low score as a reliable signal and a high score as a permission to compare against the model answer, not as a pass.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="drill-meta" id="drMeta"></div>
+      <div class="btn-row" style="margin:0">
+        <button class="btn sec sm" id="drPrev" type="button">&#8592; Prev</button>
+        <button class="btn sec sm" id="drNext" type="button">Next &#8594;</button>
+        <button class="btn sec sm" id="drShuffle" type="button">Shuffle</button>
+      </div>
+    </div>
+    <p class="note" style="margin:0 0 9px"><strong id="drTask"></strong></p>
+    <div class="passage" id="drBefore"></div>
+    <label class="fld" for="drIn">
+      <span class="lab">Your rewrite <span class="req">*</span></span>
+      <textarea id="drIn" class="big" placeholder="Write the defensible version…" spellcheck="true"></textarea>
+    </label>
+    <div class="btn-row">
+      <button class="btn" id="drScore" type="button">Score my rewrite</button>
+      <button class="btn sec" id="drReveal" type="button">Reveal model answer</button>
+    </div>
+    <div id="drResult" hidden>
+      <div class="rubric" id="drRubric"></div>
+      <div class="score-strip" style="margin-bottom:0">
+        <div class="gauge"><div><span class="lbl">Drill score</span><span class="num" id="drTotal">0</span><span class="den"> / 100</span></div></div>
+        <div style="flex:2;min-width:220px"><p class="note" id="drVerdict" style="margin:0;font-size:13.5px;color:var(--ink-2)"></p></div>
+      </div>
+    </div>
+    <div class="model" id="drModel" hidden>
+      <h4>Model answer</h4>
+      <div class="mtext" id="drModelText"></div>
+      <div class="mwhy" id="drModelWhy"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 3. BUILDERS ================= -->
+<section class="panel" id="p-builders" role="tabpanel" aria-labelledby="tab-builders" hidden>
+  <div class="intro">
+    <h2>Document Builders</h2>
+    <p>Guided builders for the six passages that recur most across the book. Each one refuses to produce output until its required fields are filled — which is the point. An endpoint with no timepoint, or a response to a finding with no root cause, is not a draft to be improved later; it is a passage that cannot be written yet.</p>
+    <p>Output is plain text, ready to paste into your draft and adapt. Nothing is stored or transmitted.</p>
+  </div>
+  <div class="builder-nav" id="bNav"></div>
+  <div class="card">
+    <div class="card-head"><h3 id="bTitle"></h3></div>
+    <p class="note" id="bDesc" style="margin:0 0 14px"></p>
+    <div id="bFields"></div>
+    <div class="btn-row"><button class="btn" id="bBuild" type="button">Build passage</button>
+      <button class="btn sec" id="bExample" type="button">Fill with example</button>
+      <button class="btn sec" id="bReset" type="button">Clear</button></div>
+  </div>
+  <div class="card">
+    <div class="card-head"><h3>Output</h3>
+      <div class="btn-row" style="margin:0"><button class="btn sec sm" id="bCopy" type="button">Copy</button></div>
+    </div>
+    <div id="bMissing"></div>
+    <div class="out empty" id="bOut">Fill the required fields, then select Build passage.</div>
+  </div>
+</section>
+
+<!-- ================= 4. CHECKLISTS ================= -->
+<section class="panel" id="p-checklists" role="tabpanel" aria-labelledby="tab-checklists" hidden>
+  <div class="intro">
+    <h2>Checklist Runner</h2>
+    <p>All eight checklists from Appendix A, live. Tick items, add a note against any item that needed work, then export a dated summary you can attach to a review record. Run the universal checklist against every document; run the document-specific one on top of it.</p>
+    <p>Progress is kept in this browser only, and only if your browser allows local storage for files opened from disk. Export anything you need to keep.</p>
+  </div>
+  <div class="btn-row" style="margin:0 0 16px">
+    <button class="btn sec sm" id="ckExport" type="button">Export summary</button>
+    <button class="btn sec sm" id="ckDownload" type="button">Download .txt</button>
+    <button class="btn sec sm" id="ckReset" type="button">Reset all</button>
+    <span class="note" id="ckSaved" style="margin:0"></span>
+  </div>
+  <div id="ckWrap"></div>
+</section>
+
+<!-- ================= 5. QUIZ ================= -->
+<section class="panel" id="p-quiz" role="tabpanel" aria-labelledby="tab-quiz" hidden>
+  <div class="intro">
+    <h2>Glossary Quiz</h2>
+    <p>Sixteen terms from Appendix B, asked in both directions. Terms you get wrong are put back in the queue and asked again later in the round — the round ends when you have answered every term correctly once, not when you have seen every card.</p>
+  </div>
+  <div class="card" id="qzCard">
+    <p class="qcount" id="qzCount"></p>
+    <p class="qstem" id="qzStem"></p>
+    <p class="note" id="qzPrompt" style="margin:0 0 12px"></p>
+    <div id="qzOpts"></div>
+    <div id="qzFeedback" hidden style="margin-top:12px"></div>
+    <div class="btn-row"><button class="btn" id="qzNext" type="button" hidden>Next question</button>
+      <button class="btn sec" id="qzRestart" type="button">Restart round</button></div>
+  </div>
+  <div class="card" id="qzDone" hidden>
+    <h3>Round complete</h3>
+    <p id="qzSummary"></p>
+    <div class="btn-row"><button class="btn" id="qzAgain" type="button">New round</button></div>
+  </div>
+</section>
+
+<div class="foot wrap">
+  <p><strong>Write It Right: A Practical Guide to Medical Device Regulatory Writing</strong> — Hafez Selim,&#160;MD,&#160;PhD. Selim Medical Press. This toolkit is a companion to the book; section references point back to it.</p>
+  <p>All device names, study identifiers, report numbers, rates and dates in this toolkit are invented for teaching and describe no real device. The tools check the form of regulatory prose and do not constitute regulatory advice, nor do they assess whether a document meets any specific regulatory requirement. Everything runs locally in your browser; no text you enter is transmitted or stored anywhere outside this device.</p>
+</div>
+</main>
+<script>
+"use strict";
+
+/* =========================================================================
+   ANALYZER RULE SET
+   Each token rule: {id, cat, sev, ref, re, why, fix}
+   Severities: high (reviewer will almost certainly question it),
+               med (weakens the passage), low (worth a second look)
+   ========================================================================= */
+
+var TOKEN_RULES = [
+ { id:"vague-verb", cat:"Vague verb", sev:"high", ref:"Ch. 4.2 / 5.6",
+   re:/\b(address(?:ed|es|ing)?|ensur(?:e|ed|es|ing)|utiliz(?:e|ed|es|ing)|facilitat(?:e|ed|es|ing)|manag(?:ed|es|ing)\s+appropriately|handled|deal[t]?\s+with|look(?:ed)?\s+at|review(?:ed)?\s+and\s+accept(?:ed)?)\b/gi,
+   why:"A vague verb lets the sentence avoid committing to what actually happened. “Addressed” could mean eliminated, mitigated, transferred, or merely documented — a reviewer cannot tell, and in a risk management file that ambiguity is disqualifying.",
+   fix:"Name the action: eliminated by [design change] / reduced to ALARP via [mitigation] / accepted as residual risk per [rationale] / verified against [clause] by [test], recorded in [report]." },
+
+ { id:"overclaim", cat:"Overclaiming", sev:"high", ref:"Ch. 5.1",
+   re:/\b(proven|proves|guarantee[sd]?|eliminat(?:es|ed|ing)\s+(?:the\s+)?risk|100%\s+(?:safe|effective|reliable)|complete(?:ly)?\s+safe|no\s+risk|risk[- ]free|always\s+prevents?|never\s+fails?|safe\s+and\s+effective|fully\s+validated\s+and\s+safe)\b/gi,
+   why:"Language stronger than the evidence supports. Reviewers are trained specifically to hunt for this gap, because it is the fastest way to find where a sponsor’s confidence has outrun its data.",
+   fix:"Match the claim to the evidence: “demonstrated in [population] through [timepoint]”, “reduces”, “is designed to minimize”. Note that “safe and effective” is also FDA register and does not belong in an MDR document." },
+
+ { id:"untraceable", cat:"Untraceable claim", sev:"high", ref:"Ch. 3.3",
+   re:/\b(clinical experience has shown|it is (?:well[- ])?(?:established|known|accepted|recognized)|widely (?:accepted|recognized|reported)|studies have shown|literature (?:shows|suggests|indicates)|data on file|as is known|generally accepted that|has been shown to be)\b/gi,
+   why:"Experienced reviewers read untraceable phrases as a confession that the underlying evidence is weaker than the sentence implies. The reviewer’s real question, sentence by sentence, is: where does this come from, and can I verify it independently?",
+   fix:"Cite it: a study ID, report number, section, or table reference. If no citation exists, the claim cannot be made in this form." },
+
+ { id:"passive-decision", cat:"Accountability laundering", sev:"high", ref:"Ch. 5.6 / 4.4",
+   re:/\b(it was (?:determined|decided|concluded|agreed|considered|felt|judged)|(?:was|were) deemed|(?:was|were) considered (?:acceptable|adequate|satisfactory|sufficient|appropriate|not necessary)|a decision was (?:made|taken)|no (?:further )?action was (?:required|warranted|deemed necessary))\b/gi,
+   why:"Passive voice used around a decision erases who is accountable for it. This is functionally different from ordinary passive voice used for process description, and QMS auditors are specifically trained to notice it.",
+   fix:"Name the role, the date, and the record: “The Post-Market Surveillance Committee determined on [date] (minutes [ref]) that…”" },
+
+ { id:"empty-qualifier", cat:"Empty qualifier", sev:"high", ref:"Ch. 13.2 / 4.2",
+   re:/\b(as (?:appropriate|necessary|required|needed)|where applicable|in accordance with applicable (?:regulations|requirements|standards)|per (?:standard|normal|usual) (?:practice|procedure)|properly|suitably|adequately|accordingly)\b/gi,
+   why:"An empty qualifier pushes a decision the manufacturer should have made onto the reader — in an IFU, onto a user with less information than you have. It is usually a note the author left for themselves and never came back to finish.",
+   fix:"State the actual requirement: the agent, the frequency, the container, the clause, the jurisdiction-specific route." },
+
+ { id:"unquantified", cat:"Unquantified magnitude", sev:"med", ref:"Ch. 3.2 / 8",
+   re:/\b(significant(?:ly)?|substantial(?:ly)?|considerable|considerably|minimal|negligible|excellent|robust|comprehensive|extensive|numerous|various|a variety of|several|many|most of the|the majority|favou?rable results)\b/gi,
+   notIfSentence:/\bp\s?[=<>]\s?0?\.\d|\bstatistical(?:ly)?\b|\b95%\s?CI\b|\balpha\b|\b\u03B1\b/i,
+   why:"A magnitude word with no number behind it asserts the reader’s judgment instead of supplying the basis for it. “Not considered significant” is significance by fiat.",
+   fix:"Replace with the number and its denominator, and let the reader draw the conclusion: “18 complaints against 42,600 units distributed (0.042%), versus 0.039% in the prior period”." },
+
+ { id:"context-dep", cat:"Context-dependent reference", sev:"med", ref:"Ch. 1.2",
+   re:/\b(as (?:discussed|agreed|mentioned|noted)(?!\s+in\s+[A-Z0-9])|as previously (?:discussed|agreed|noted)|per our (?:conversation|discussion|call)|the (?:usual|normal|standard) (?:approach|process)|the known issue|following the meeting|we(?:’|')re good|as always)\b/gi,
+   why:"Only makes sense to a reader who was in the room. The future auditor reads this cold, years later, with no institutional memory — and needs it to stand on its own.",
+   fix:"Name the record: meeting minutes reference and date, or the document and section where the agreement is captured." },
+
+ { id:"hedge", cat:"Hedge word", sev:"low", ref:"Ch. 5.2",
+   re:/\b(may(?:\s+possibly)?|might|could(?:\s+potentially)?|potentially|possibly|perhaps|appears? to|seems? to|tends? to|arguably|somewhat|in some cases|to some extent|it is thought|suggests? that)\b/gi,
+   why:"A single hedge is often correct. Stacked hedges on a well-supported finding hide a real strength and force the reviewer to do the confidence-calibration work the writer should have done.",
+   fix:"If the data supports the finding, state it plainly with its magnitude and interval. If it does not, say that instead — do not split the difference." },
+
+ { id:"open-ended", cat:"Unresolved close", sev:"high", ref:"Ch. 16 / 15.2",
+   re:/\b(investigation (?:is )?(?:ongoing|continues|in progress)|will be (?:provided|determined|detailed|addressed) (?:when available|in due course|at a later (?:date|stage))|to be determined|\bTBD\b|will (?:look|be looking) into|under (?:review|investigation) at this time|no further action (?:is )?(?:required|needed) at this time)\b/gi,
+   why:"An open item with no date and no owner reads as an unmanaged safety signal. If a report must be filed before investigation concludes, state what is known, what is not yet known, and the target date for the supplemental report.",
+   fix:"Add: what is known, what is not, the interim risk position and its basis, a named owner, and a specific date by which the gap closes." },
+
+ { id:"framework-fda", cat:"FDA vocabulary", sev:"med", ref:"Ch. 2.4",
+   re:/\b(substantial(?:ly)? equivalen(?:t|ce)|predicate device|510\(k\)|premarket notification|de novo|general controls|special controls)\b/gi,
+   why:"FDA 510(k) vocabulary. If this passage sits in an EU MDR document, the terms are not interchangeable with MDR equivalence — substantial equivalence is a clearance comparison; MDR equivalence is a justification for borrowing another device’s clinical data.",
+   fix:"In an MDR document use “equivalence” and “equivalent device”, and argue clinical, technical, and biological characteristics explicitly. In an FDA document, this term is correct — dismiss this flag." },
+
+ { id:"framework-mdr", cat:"EU MDR vocabulary", sev:"low", ref:"Ch. 2.4",
+   re:/\b(Notified Body|CE mark(?:ing|ed)?|Annex (?:I|II|III|XIV|XV)\b|MDR Article \d+|PMCF|PSUR|Declaration of Conformity)\b/g,
+   why:"EU MDR vocabulary. Correct in an MDR document. Flagged only so you can confirm it is not sitting inside an FDA submission alongside 510(k) language — the seams between jurisdictions are where the most damaging errors happen.",
+   fix:"If this document serves one jurisdiction, confirm no terms from the other appear. If it serves both, check every recurring claim against a single source-of-truth claims table." },
+
+ { id:"completer", cat:"Completer-only reporting", sev:"high", ref:"Ch. 8.3",
+   re:/\b(among (?:those|subjects|patients) (?:who )?complet(?:ed|ing)|of (?:those|subjects|patients) completing|completers|evaluable (?:population|subjects|patients)|per[- ]protocol population\b(?![^.]*\bITT\b))/gi,
+   why:"Presenting outcomes only for subjects who completed, without the dropout rate and reasons, silently converts an intention-to-treat story into a best-case one.",
+   fix:"State N at each stage — enrolled, treated, analyzed, completed — every time a result is presented, and give the ITT result alongside." },
+
+ { id:"precision", cat:"Spurious precision", sev:"low", ref:"Ch. 8.4",
+   re:/\b\d+\.\d{2,}\s?%/g,
+   why:"Two or more decimal places on a percentage implies a resolution most device samples cannot support. “73.41%” from 15 subjects is 11/15.",
+   fix:"Match precision to the measurement. Report the fraction, or one decimal place with a confidence interval." },
+
+ { id:"marketing", cat:"Marketing register", sev:"med", ref:"Ch. 9.1",
+   re:/\b(valuable addition|state[- ]of[- ]the[- ]art (?:solution|technology)|cutting[- ]edge|innovative|revolutionary|gold standard|best[- ]in[- ]class|market[- ]leading|unique(?:ly)? (?:positioned|able)|armamentarium)\b/gi,
+   why:"Promotional register inside a regulatory document. A benefit-risk determination is a reasoned conclusion, not an endorsement, and marketing language signals to an assessor that the section was not written for them.",
+   fix:"Replace with the evidentiary statement the marketing phrase was standing in for — or delete it; most such phrases carry no content to preserve." }
+];
+
+/* Sentence-level rules: run on each sentence, return {reason} or null */
+var HEDGE_RE = /\b(may|might|could|potentially|possibly|perhaps|appears to|seems to|tends to|somewhat|in some cases|to some extent|suggests that)\b/gi;
+var COUNT_NOUN = /\b(complaint|complaints|event|events|adverse event|adverse events|incident|incidents|malfunction|malfunctions|failure|failures|subject|subjects|patient|patients|case|cases|report|reports)\b/i;
+var HAS_DENOM = /(%|\bper\s+\d|\bper\s+(?:unit|patient|device|100|1,000|1000)|\d\s*(?:out of|of)\s*\d|\d\s*\/\s*\d|\bn\s?=\s?\d|\bN\s?=\s?\d|\brate\b|\bunits (?:distributed|sold|in use)\b|\bpatient[- ]months\b|\bexposure\b|\bdenominator\b)/i;
+
+var DOC_RULES = [
+ { id:"drift", cat:"Terminology drift", sev:"med", ref:"Ch. 5.3",
+   test:function(t){
+     var alts=["the device","the system","the unit","the product","the apparatus","the instrument","the article"];
+     var hits=[];
+     alts.forEach(function(a){ if(new RegExp("\\b"+a+"\\b","i").test(t)) hits.push(a); });
+     if(hits.length<2) return null;
+     return { at:t.search(new RegExp("\\b"+hits[1]+"\\b","i")),
+              quote:hits[1],
+              detail:hits.length+" different names used for what appears to be the same thing: "+hits.join(", ")+"." };
+   },
+   why:"A device, hazard, endpoint, or population described slightly differently each time it is mentioned reads to an auditor as either sloppiness or, worse, as two different things that were never reconciled. Each shift is individually harmless and collectively fatal to internal consistency.",
+   fix:"Pick the term used in the risk management file and technical documentation and use it verbatim everywhere. Variety of expression is punished in regulatory writing, not rewarded." },
+
+ { id:"mixed-framework", cat:"Mixed regulatory frameworks", sev:"high", ref:"Ch. 2.4",
+   test:function(t){
+     var fda=/\b(substantial(?:ly)? equivalen(?:t|ce)|predicate device|510\(k\)|premarket notification)\b/i;
+     var mdr=/\b(Notified Body|CE mark(?:ing|ed)?|MDR|Annex (?:I|XIV|XV)\b|PMCF|PSUR)\b/i;
+     if(!(fda.test(t) && mdr.test(t))) return null;
+     var m=t.match(fda);
+     return { at:t.search(fda), quote:m[0],
+              detail:"FDA vocabulary (\u201C"+m[0]+"\u201D) and EU MDR vocabulary (\u201C"+t.match(mdr)[0]+"\u201D) appear in the same passage." };
+   },
+   why:"The most damaging errors happen at the seams between jurisdictions. Substantial equivalence is an FDA clearance comparison to a predicate; MDR equivalence is a justification for borrowing another device\u2019s clinical data, and requires clinical, technical, and biological characteristics to be argued simultaneously. They are not interchangeable.",
+   fix:"Decide which regulator is grading this document and use only that framework\u2019s vocabulary. If the dossier serves both, maintain a single source-of-truth claims table and check every recurring claim against it." }
+];
+
+var SENTENCE_RULES = [
+ { id:"hedge-stack", cat:"Stacked hedging", sev:"med", ref:"Ch. 5.2",
+   test:function(s){
+     var m = s.match(HEDGE_RE);
+     return (m && m.length >= 3) ? (m.length + " hedges in one sentence: " + m.join(", ")) : null;
+   },
+   why:"Three or more hedges in a single sentence hedge a finding into invisibility. This weakens the benefit-risk argument for no evidentiary reason, and is often read by assessors as a signal that the author does not believe their own data.",
+   fix:"Keep at most one qualifier, and make it carry real information (a population boundary, a confidence interval), not anxiety." },
+
+ { id:"no-denominator", cat:"Number without denominator", sev:"high", ref:"Ch. 5.7 / 8.1",
+   test:function(s){
+     if (!COUNT_NOUN.test(s)) return null;
+     if (HAS_DENOM.test(s)) return null;
+     var nums = s.match(/\b\d{1,6}\b/g);
+     if (!nums) return null;
+     return "Count present (" + nums.join(", ") + ") with no denominator, rate, or exposure in the same sentence.";
+   },
+   why:"A raw count without the population or exposure it came from is uninterpretable. “12 complaints were received” is meaningless without knowing whether that is 12 out of 40 units or 12 out of 40,000.",
+   fix:"Put the denominator in the same sentence or the same table row — not three pages earlier and not in an appendix." },
+
+ { id:"long-bundle", cat:"Bundled sentence", sev:"med", ref:"Ch. 4.1",
+   test:function(s){
+     var w = s.trim().split(/\s+/).length;
+     if (w < 42) return null;
+     if (!/\b(although|however|while|notwithstanding|whereas|but|therefore|thus|and therefore|which (?:do|does) not)\b/i.test(s)) return null;
+     return w + " words bundling a claim, a justification, and a caveat.";
+   },
+   why:"Compound sentences that bundle a claim, a justification, and a caveat are where ambiguity hides. Splitting them forces you to notice when the justification does not actually support the claim, or when the caveat quietly contradicts it.",
+   fix:"One claim, one sentence, one source. Split it and check whether each part still holds on its own — often it does not, which is the real finding." }
+];
+
+var ANALYZER_SAMPLES = [
+"In conclusion, the device is considered safe and effective based on the available clinical data and the literature review that was performed, and no significant safety concerns were identified during the evaluation period. It is well established that this technology is well tolerated. A total of 18 complaints were received, which is not considered significant. It was determined that no further action was required at this time.",
+"The system was evaluated following the concerns raised and the risk was addressed through appropriate means. The product met specification and performance was considered acceptable. While some limitations were noted, these may possibly suggest only a potential impact which could arguably be minimal in some cases, and therefore do not affect the overall conclusion. Investigation is ongoing.",
+"The subject device is substantially equivalent to the predicate device in intended use and technological characteristics, and therefore the clinical evaluation requirements under the MDR are satisfied. A comprehensive literature search was conducted in the relevant databases and the most pertinent articles were included. Among subjects completing the study, 82% achieved complete closure. Dispose of the device properly in accordance with applicable regulations."
+];
+
+/* =========================================================================
+   REWRITE DRILLS
+   ========================================================================= */
+var DRILLS = [
+ { doc:"CER", ch:"Ch. 7A / 9.1", task:"Rewrite this CER conclusion so a reviewer can verify every element of it.",
+   before:"In conclusion, the device is considered safe and effective based on the available clinical data and literature review, and no significant safety concerns were identified during the evaluation period.",
+   model:"Based on 24 months of post-market clinical follow-up data (n=1,240 devices, Section 8) and a systematic literature review of 14 equivalent-device publications (Section 6), the benefit-risk profile of [Device] remains favorable for its intended use in the management of partial- and full-thickness wounds. Two device-related non-serious adverse events were reported (Table 12), both consistent with the risks characterized in the risk management file (RMF-014) and adequately mitigated by existing IFU warnings. No new risks or trends were identified that would alter the risk-benefit determination made at CE marking.",
+   why:"The revision replaces vague adjectives (“safe and effective”, “significant”) with a sourced, quantified, scoped conclusion the reviewer can check against the cited sections and cross-check against the risk file. Note also that “safe and effective” is FDA register and does not belong in an MDR document." },
+
+ { doc:"Protocol", ch:"Ch. 7B / 10.2", dims:["spec","qty","hedge"], task:"Turn this topic into an endpoint a blinded statistician could execute without emailing you.",
+   before:"The primary endpoint is improvement in wound healing at the end of the study.",
+   model:"The primary endpoint is the proportion of subjects achieving complete wound closure (100% re-epithelialization, no drainage, confirmed by digital planimetry) by Week 12, analyzed on an intention-to-treat basis with last-observation-carried-forward imputation for missing assessments; arms compared by two-sided Fisher’s exact test at α=0.05.",
+   why:"“Improvement” and “end of the study” are undefined and unmeasurable. The revision specifies the metric, the measurement method, the timepoint, the analysis population, the missing-data handling, and the test — everything needed to execute the analysis without a clarifying email." },
+
+ { doc:"PSUR", ch:"Ch. 7C / 12.2", task:"Rewrite so the trend is interpretable and the conclusion is earned rather than asserted.",
+   before:"A total of 18 complaints were received during the reporting period, which is not considered significant.",
+   model:"A total of 18 complaints were received during the reporting period (July 2025–June 2026) against 42,600 units distributed, a complaint rate of 0.042%, consistent with the prior period’s rate of 0.039% (Table 4). No new complaint category emerged; device-related malfunction complaints (n=3) were each investigated (CAPA-2026-011 through 013) and attributed to a single lot-specific packaging defect, since corrected.",
+   why:"The revision adds the denominator that makes the rate interpretable, compares it to trend rather than asserting significance by fiat, and closes the loop by showing the malfunction complaints were investigated to root cause rather than dismissed." },
+
+ { doc:"IFU", ch:"Ch. 7D / 13.2", dims:["spec","src","hedge"], task:"Rewrite this warning so a first-time user knows what to do, not merely what to fear.",
+   before:"Use with caution in patients with sensitive skin.",
+   model:"Do not apply to broken, infected, or irritated skin. If redness, itching, or swelling develops during use, discontinue application and consult a healthcare professional. Patients with a known adhesive allergy should not use this product; see Section 4.2 for a full list of adhesive components.",
+   why:"“Use with caution” gives the clinician no action to take. The revision states the contraindication, the specific signs to watch for, the action to take if they occur, and points to the information needed to assess allergy risk in advance." },
+
+ { doc:"HA response", ch:"Ch. 7E / 15.2", task:"Rewrite so it contains all four elements of a complete response, in order.",
+   before:"We appreciate the reviewer’s comment and would like to note that our internal processes are robust and we are committed to continuous improvement. We will consider the feedback provided.",
+   model:"We agree that the complaint-handling timeline for CAPA-2026-011 exceeded the 30-day target defined in SOP-QA-014 (actual: 47 days). Root cause: a staffing gap in the complaint-intake queue during Q1 2026, now resolved (2 additional trained reviewers onboarded March 2026, evidence attached as Appendix C). We have added a weekly aging-report review to SOP-QA-014 Rev. 3 (effective April 2026) to prevent recurrence.",
+   why:"The bad version answers nothing — the reviewer cannot tell whether the sponsor agrees, disagrees, or even understood the finding. The revision states agreement, the specific root cause, the corrective action already taken, and the preventive control going forward." },
+
+ { doc:"CER", ch:"Ch. 9.4", task:"Rewrite this literature search description so a reviewer could re-run it and land within a few records of your result set.",
+   before:"A literature search was performed using major databases to identify relevant publications on the device and similar technologies. Articles were screened for relevance and the most pertinent were included.",
+   model:"PubMed, Embase, and the Cochrane Central Register were searched on 14 March 2026 for publications from January 2015 to February 2026, no language restriction, using the string (“wound dressing” OR “wound closure device”) AND (“diabetic foot ulcer” OR “venous leg ulcer”) AND (“randomi*” OR “cohort” OR “case series”). Inclusion: human subjects, ≥10 subjects, reporting closure, healing time, or device-related adverse events. Of 312 records identified, 41 underwent full-text review and 14 met inclusion criteria (PRISMA flow, Appendix B; excluded records with reasons, Appendix C).",
+   why:"Every parameter needed to reproduce the search is present, and the funnel from identified to included records is shown. The element writers most often omit is the last — the excluded records with reasons — without which a reviewer cannot tell whether an inconvenient paper was screened out on method or on conclusion." },
+
+ { doc:"CER", ch:"Ch. 7 (state of the art)", task:"Rewrite this state-of-the-art paragraph. A section that contains no numbers has not described the state of the art.",
+   before:"Wound care has advanced considerably in recent years and there are many treatment options available. The device represents a modern approach that offers advantages over traditional methods.",
+   model:"Standard care for Wagner Grade 1–2 diabetic foot ulcers comprises offloading, debridement, and moisture-retentive dressings, achieving complete closure in 24–41% of ulcers at 12 weeks across five randomized trials published 2015–2025 (Section 6.2, Table 3). The residual clinical need is the 59–76% of ulcers that remain open at 12 weeks, in whom infection and amputation risk rises with duration. The device is evaluated against a 12-week complete-closure benchmark drawn from this literature.",
+   why:"The original is unfalsifiable and would read identically for any product in the category. The revision quantifies the standard of care, names the residual clinical need, and establishes the benchmark the device will be judged against — which is the entire job of this section." },
+
+ { doc:"Protocol", ch:"Ch. 10.3", dims:["spec","qty","hedge"], task:"Rewrite this exclusion criterion so two coordinators at different sites would reach the same yes/no for the same patient.",
+   before:"Subjects with significant comorbidities that could affect wound healing will be excluded.",
+   model:"Subjects with any of the following will be excluded: HbA1c > 10.0% at screening (central laboratory); ankle-brachial index < 0.7 or > 1.3; active osteomyelitis at the wound site confirmed by imaging; systemic corticosteroid use exceeding 10 mg/day prednisone-equivalent within 30 days of screening.",
+   why:"“Significant comorbidities” delegates the eligibility definition out of the protocol and into investigator judgment, which produces inconsistent populations across sites and an uninterpretable pooled analysis. Each replacement rests on an observable fact: a lab value, a measurement, an imaging finding, a prescription record." },
+
+ { doc:"CSR", ch:"Ch. 11.2", dims:["spec","qty","hedge"], task:"Rewrite so every pre-specified endpoint is reported with equal rigor. Primary met (68% vs 41%, p=0.003); secondary 1 met (median 34 vs 52 days, p=0.01); secondary 2 not met (−18.2 vs −15.4 mm, p=0.21).",
+   before:"While the primary endpoint was met, the study provided additional supportive evidence of the device’s benefits across multiple measures.",
+   model:"The primary endpoint (complete wound closure by Week 12) was met: 68% versus 41% comparator (p=0.003). Of two pre-specified secondary endpoints, time-to-closure was significantly improved (median 34 versus 52 days, p=0.01); reduction in wound-related pain (VAS) did not differ between arms (mean change −18.2 versus −15.4 mm, p=0.21). No multiplicity adjustment was pre-specified; secondary results are descriptive.",
+   why:"The original dissolves a failed pre-specified endpoint into “additional supportive evidence” — a move detectable in thirty seconds by comparing the CSR against the protocol’s endpoint list. Reporting the negative plainly makes the positive primary more believable, not less." },
+
+ { doc:"CSR", ch:"Ch. 11.4", task:"Rewrite so the claim about deviations is demonstrated rather than asserted. 14/178 had major deviations: 6 eligibility, 5 out-of-window, 3 prohibited medication.",
+   before:"Protocol deviations occurred during the study but did not impact the study conclusions.",
+   model:"Major protocol deviations occurred in 14/178 treated subjects (7.9%): 6 eligibility violations, 5 primary endpoint assessments outside the Week 12 ±5-day window, and 3 instances of prohibited systemic corticosteroid use. All 14 remained in the ITT population per Protocol Section 11.3 and were excluded from the per-protocol population (N=164). The pre-specified per-protocol sensitivity analysis yielded a 26-percentage-point difference (69% versus 43%, p=0.004), concordant with the ITT result of 27 points. Deviation classification was performed by the Medical Monitor before database lock (Table 9).",
+   why:"A generic assurance that deviations did not affect conclusions, without the sensitivity analysis that supports it, will not satisfy an experienced reviewer — and the question it provokes costs more time than the analysis would have." },
+
+ { doc:"PSUR", ch:"Ch. 12.3", task:"Rewrite so the signal evaluation shows its reasoning instead of asserting a conclusion.",
+   before:"An increase in skin irritation complaints was noted but is not considered a new safety signal.",
+   model:"Skin irritation complaints increased from 4 (2024, rate 0.010%) to 11 (2025, rate 0.023%) against stable unit volume (Table 3). Batch analysis identified 8 of 11 events clustered in Lot 2025-B, associated with a supplier adhesive change (Deviation DEV-2025-047). This is assessed as a lot-specific manufacturing signal, not a device-design signal; it does not change the residual risk determination in RMF-014 Section 5.3 (skin irritation, already characterized). CAPA-2025-019 (supplier requalification) closed December 2025; no further complaints received in Q1 2026 post-CAPA.",
+   why:"The revision shows the actual investigative reasoning — the numbers, the root-cause link, the explicit tie back to the risk management file, and evidence the CAPA worked — instead of asserting a conclusion with no visible analysis behind it." },
+
+ { doc:"PSUR", ch:"Ch. 12.4", task:"Rewrite as the one unambiguous benefit-risk sentence this section requires. Nothing material changed this period.",
+   before:"Based on the data reviewed in this period, the benefit-risk profile of the device continues to be considered favorable and consistent with the previous assessment.",
+   model:"The benefit-risk determination of CER Rev. 03 Section 13 is unchanged. Basis: the complaint rate this period (0.042%, 18/42,600 units) is consistent with the prior two periods (0.039%, 0.041%; Table 4); no new complaint category emerged; no new clinical literature published this period reported a failure mode not already characterized in RMF-014. No CER update is triggered outside the scheduled cycle.",
+   why:"“Continues to be considered favorable” would be true of any period and therefore evidences no analysis — it is the exact phrasing that signals a re-dated document. Strip the numbers and dates from your own PSUR: if most of the remaining text is identical to last period’s, it is a template, not an analysis." },
+
+ { doc:"IFU", ch:"Ch. 13.2", dims:["spec","qty","hedge"], task:"Rewrite this cleaning instruction so the task can be performed correctly without contacting the manufacturer.",
+   before:"Clean the device regularly using appropriate cleaning agents.",
+   model:"After each use, wipe all external surfaces with a 70% isopropyl alcohol wipe. Do not immerse the device in liquid. Allow to air-dry for at least 60 seconds before storage. Do not use bleach-based or abrasive cleaners; these may degrade the housing.",
+   why:"“Regularly” and “appropriate” are undefined. The revision specifies frequency, agent, technique, drying time, and what not to use — everything needed to perform the task correctly the first time." },
+
+ { doc:"IFU", ch:"Ch. 13.2 / 13.4", dims:["spec","hedge"], task:"Rewrite this warning as an action, and translate it into patient-facing register for a home caregiver.",
+   before:"Discontinue use in the event of erythema, pruritus, or edema at the application site.",
+   model:"Stop using this product and call your doctor or nurse if the skin around the dressing becomes red, itchy, or swollen. Do not put a new dressing on the same area until a doctor or nurse has looked at it.",
+   why:"“Erythema” belongs in a CER; “redness” belongs in a patient-facing IFU. The revision also adds what not to do next — the instruction the original left the user to improvise under time pressure." },
+
+ { doc:"PMCF", ch:"Ch. 14.1", task:"Rewrite this PMCF objective so it names the residual question, a method sized to answer it, and a pre-defined success criterion.",
+   before:"PMCF activities will be conducted to gather additional clinical data on the device to support ongoing clinical evaluation.",
+   model:"Objective: characterize the rate of adhesive-related skin reactions in real-world use beyond the 90-day pivotal follow-up window. Method: prospective registry, target enrollment 300 subjects across 8 sites, 12-month follow-up; primary metric incidence of adhesive-related dermatologic adverse events per 100 patient-months. Success criterion: incidence within the 95% CI established in the pivotal study (Section 8.2); exceeding it triggers a CER update and risk file review.",
+   why:"An objective to “gather data” cannot fail and therefore proves nothing. An objective with a pre-defined success criterion can fail, which is precisely what makes it evidence." },
+
+ { doc:"HA response", ch:"Ch. 15.3", task:"The finding is correct: the protocol pre-specified three secondary endpoints and the CSR reported two. Rewrite this defensive response.",
+   before:"We respectfully note that the third measure referenced was always intended as an exploratory analysis, and its omission does not affect the interpretation of the study results. The submitted CSR is considered complete and accurate.",
+   model:"We agree with the finding. Protocol DEV-204 v2.0 Section 8.3 pre-specified three secondary endpoints and the CSR reported two. The third — ulcer recurrence at 6 months — was not met (14% device versus 12% comparator, p=0.62) and was incorrectly omitted during drafting. Root cause: the CSR endpoint section was built from the SAP output package rather than from the protocol’s endpoint list, and SOP-CW-006 did not require a protocol-to-CSR reconciliation step. CSR Rev. 02 (attached) reports all three endpoints at Section 11.4. Preventive action: SOP-CW-006 Rev. 04 (effective 1 September 2026) adds a mandatory reconciliation signed by the study statistician and medical writer.",
+   why:"The original asserts that a pre-specified endpoint was “always intended” as exploratory — a claim the reviewer falsifies in thirty seconds by opening the protocol. Once they do, every other statement in the submission becomes suspect. Conceding costs one paragraph; being caught costs the file." },
+
+ { doc:"Narrative", ch:"Ch. 16.2", task:"Rewrite so observed fact and interpretation are in clearly separate places.",
+   before:"The device failed to deliver the programmed dose due to a pump malfunction, and the patient experienced an allergic reaction to the adhesive.",
+   model:"Observed: the reporting clinician stated that delivered volume over the 4-hour infusion was approximately 180 mL against a programmed 240 mL. The patient developed erythema and pruritus confined to the dressing contact area within 24 hours of application, resolving over 72 hours after removal. Assessment pending evaluation: underdelivery is consistent with pump mechanism failure, line occlusion, programming error, or reservoir underfill; device evaluation (DEV-EVAL-2026-019) is required to distinguish these. The skin findings’ distribution and time course are consistent with contact dermatitis; allergic versus irritant mechanism cannot be distinguished without patch testing, which was not performed.",
+   why:"Both original clauses assert mechanisms the reporter was not positioned to determine. A narrative that asserts a root cause before evaluation, and is later contradicted by the evaluation, creates an inconsistency in the vigilance record far more damaging than the original uncertainty." },
+
+ { doc:"Narrative", ch:"Ch. 16 PITFALL", task:"The device evaluation needs 5 more weeks; the vigilance report is due in 3 days. Rewrite this closing.",
+   before:"Investigation is ongoing. A follow-up report will be provided when available.",
+   model:"Known at time of reporting: the event as described in Section 2; the affected unit’s lot and manufacture date; that no other complaint has been received from this lot (2,100 units distributed as of 12 September 2026); and that the patient recovered without sequelae. Not yet known: the device evaluation result. The returned unit was received 10 September 2026; evaluation under DEV-EVAL-SOP-004 requires 5 weeks including reproduction testing. Interim risk assessment: the failure mode is provisionally mapped to hazard H-09 (RMF-014, residual risk accepted, severity Moderate); no field action is indicated on the basis that no lot-level or product-level signal is present. Supplemental report will be submitted by 24 October 2026. Owner: [name], Complaint Investigation Lead.",
+   why:"Both versions admit the investigation is open. The difference is that this one states what is known, what is not, what interim risk position was taken and on what basis, and a date by which the gap closes. An open item with a date and an owner is a managed investigation; without them it is an unmanaged safety signal." }
+];
+
+/* =========================================================================
+   DOCUMENT BUILDERS
+   f = field: {k, label, hint, req, type:"text"|"area"|"select", opts, ex}
+   ========================================================================= */
+var BUILDERS = [
+{ id:"cer", name:"CER Conclusion", ref:"Ch. 9",
+  desc:"A benefit-risk conclusion that cannot outrun the evidence you enter. Every field becomes a verifiable element; anything you cannot fill is something the conclusion must not claim.",
+  f:[
+   {k:"device", label:"Device name", req:true, type:"text", ex:"VitaSeal Hydrocolloid Dressing"},
+   {k:"pop", label:"Intended purpose and population", hint:"The narrowest accurate statement — match the claims table, not the marketing.", req:true, type:"text", ex:"management of Wagner Grade 1–2 diabetic foot ulcers in adults aged 18–75 under healthcare professional supervision"},
+   {k:"benefit", label:"Primary benefit finding with magnitude", req:true, type:"text", ex:"68% complete wound closure at Week 12 versus 41% with standard care (p=0.003)"},
+   {k:"bsrc", label:"Source for the benefit finding", hint:"Study ID, N, and section or table.", req:true, type:"text", ex:"Study DEV-204, N=186, Section 8.1 Table 7"},
+   {k:"lit", label:"Literature corroboration", hint:"How many sources, what range, where.", req:false, type:"text", ex:"14 publications reporting closure of 58–71% in comparable populations (Section 6)"},
+   {k:"safety", label:"Safety findings with denominators", req:true, type:"text", ex:"four non-serious device-related application-site reactions in 186 subjects (2.2%); no device-related serious adverse events"},
+   {k:"ssrc", label:"Source for the safety findings", req:true, type:"text", ex:"CSR Section 12.2 Table 14; PSUR-2026-01 Section 4.2"},
+   {k:"risks", label:"Residual risks and risk-file reference", req:true, type:"text", ex:"two residual risks (H-05 skin irritation, H-07 infection), both accepted and mitigated by labeling per RMF-014 Section 5"},
+   {k:"horizon", label:"Evidence horizon", hint:"The boundary beyond which you have no data. Naming it is what keeps the conclusion honest.", req:true, type:"text", ex:"12 weeks"},
+   {k:"open", label:"Open question and where it is addressed", req:false, type:"text", ex:"long-term durability beyond 12 weeks; PMCF registry, Section 10"}
+  ],
+  build:function(v){
+    var s = "Clinical benefit is demonstrated by " + v.benefit + " (" + v.bsrc + ")";
+    s += v.lit ? ", consistent with " + v.lit + "." : ".";
+    s += " The safety profile is characterized by " + v.safety + " (" + v.ssrc + "). ";
+    s += "The risk management file records " + v.risks + ". ";
+    if (v.open) s += "Clinical benefit is established through " + v.horizon + "; " + v.open + " remains an open question, and this determination is therefore bounded to that horizon. ";
+    else s += "Clinical benefit is established through " + v.horizon + ", and this determination is bounded to that horizon. ";
+    s += "On the evidence presented in this report, the clinical benefits of " + v.device + " outweigh its risks for " + v.pop + ".";
+    return s;
+  }},
+
+{ id:"endpoint", name:"Endpoint Definition", ref:"Ch. 10.2",
+  desc:"If a blinded statistician could not produce a number from your endpoint without emailing you, it is not defined yet. This builder will not output until every element they would ask about is present.",
+  f:[
+   {k:"rank", label:"Endpoint rank", req:true, type:"select", opts:["primary","secondary","exploratory"], ex:"primary"},
+   {k:"metric", label:"Exact metric", hint:"A proportion, a change from baseline, a time-to-event — not a topic.", req:true, type:"text", ex:"proportion of subjects achieving complete wound closure"},
+   {k:"defn", label:"Operational definition of the outcome", req:true, type:"text", ex:"100% re-epithelialization with no drainage, confirmed at two consecutive visits ≥7 days apart"},
+   {k:"method", label:"Measurement method and instrument", req:true, type:"text", ex:"digital planimetry (Silhouette® imaging, calibrated monthly)"},
+   {k:"time", label:"Timepoint or window", req:true, type:"text", ex:"Week 12 (±5 days)"},
+   {k:"pop", label:"Analysis population", req:true, type:"select", opts:["intention-to-treat (all treated subjects)","per-protocol","modified intention-to-treat","both ITT (primary) and per-protocol (sensitivity)"], ex:"intention-to-treat (all treated subjects)"},
+   {k:"miss", label:"Missing-data handling", req:true, type:"select", opts:["missing treated as treatment failure","last observation carried forward","multiple imputation (m=20, MAR assumption)","complete-case with pre-specified sensitivity analysis"], ex:"missing treated as treatment failure"},
+   {k:"test", label:"Statistical test", req:true, type:"text", ex:"two-sided Fisher’s exact test"},
+   {k:"alpha", label:"Significance threshold and multiplicity", req:true, type:"text", ex:"α=0.05; no multiplicity adjustment — secondary endpoints are descriptive"}
+  ],
+  build:function(v){
+    return "The " + v.rank + " endpoint is the " + v.metric + ", defined as " + v.defn +
+      ", measured by " + v.method + ", assessed at " + v.time + ". The endpoint is analyzed on the " +
+      v.pop + " population, with " + v.miss + ". Arms are compared by " + v.test + " at " + v.alpha + ".";
+  }},
+
+{ id:"signal", name:"PSUR Signal Evaluation", ref:"Ch. 12.3",
+  desc:"A table of numbers with no accompanying narrative leaves the actual analysis undocumented. This builder walks the four-part reasoning a signal evaluation must show.",
+  f:[
+   {k:"what", label:"What was observed", hint:"The complaint or event category.", req:true, type:"text", ex:"unintended disconnection complaints"},
+   {k:"prior", label:"Prior period figure with rate", req:true, type:"text", ex:"5 events / 31,000 units (0.016%) in 2025"},
+   {k:"now", label:"Current period figure with rate", req:true, type:"text", ex:"17 events / 33,500 units (0.051%) in 2026"},
+   {k:"thresh", label:"Signal threshold and its source", req:true, type:"text", ex:"2-fold rate increase, PMS-PLAN-014 Section 6.2"},
+   {k:"inv", label:"Investigation performed and findings", req:true, type:"area", ex:"Device evaluation of 14 returned units found no device-side connector defect; all passed the ISO 80369 disconnection-force specification. Facility analysis identified 15 of 17 events at four facilities using a third-party accessory connector not listed in IFU Section 6.1; bench testing (Report VT-2026-041) reproduced reduced retention force with that connector (8.2 N versus 14.6 N specified, below the 12 N design input)."},
+   {k:"rmf", label:"Mapping to the risk management file", req:true, type:"text", ex:"maps to existing hazard H-11 (unintended disconnection, RMF-014), but its Remote probability estimate assumed use with specified accessories only"},
+   {k:"assess", label:"Assessment", req:true, type:"text", ex:"a use-related signal arising from accessory incompatibility, not a device design or manufacturing signal"},
+   {k:"action", label:"Actions taken or planned, with references", req:true, type:"area", ex:"(i) RMF-014 Rev. 07 adds hazardous situation H-11b with revised probability; (ii) IFU Rev. 09 Section 6.1 lists specified connector part numbers; (iii) Customer Notification CN-2026-003 issued 12 August 2026; (iv) CAPA-2026-031 opened for accessory-compatibility labeling across the family."},
+   {k:"br", label:"Effect on the benefit-risk conclusion", req:true, type:"text", ex:"the determination of CER Rev. 03 remains favorable for use as specified in the IFU, with the above controls added; a CER update outside the scheduled cycle is triggered"}
+  ],
+  build:function(v){
+    return "Signal evaluation — " + v.what + ".\n\n" +
+      "Observation: " + v.what + " rose from " + v.prior + " to " + v.now + ", exceeding the signal threshold of " + v.thresh + ". This was evaluated as a potential new signal.\n\n" +
+      "Investigation: " + v.inv + "\n\n" +
+      "Risk file comparison: This " + v.rmf + ".\n\n" +
+      "Assessment: This is assessed as " + v.assess + ".\n\n" +
+      "Actions: " + v.action + "\n\n" +
+      "Benefit-risk: Following this evaluation, " + v.br + ".";
+  }},
+
+{ id:"pmcf", name:"PMCF Objective", ref:"Ch. 14.1",
+  desc:"An objective to “collect data” cannot fail and therefore proves nothing. This builder requires a question, a method sized to answer it, and a criterion the plan can be judged against later.",
+  f:[
+   {k:"q", label:"Residual clinical question", hint:"State the uncertainty, not the activity. What does the file not yet know?", req:true, type:"area", ex:"The pivotal investigation followed subjects for 12 weeks; ulcer recurrence at the index site beyond that window is uncharacterized."},
+   {k:"method", label:"Method", req:true, type:"select", opts:["prospective registry","targeted survey of users or clinicians","structured literature and vigilance-database surveillance","post-market clinical investigation","registry linkage study"], ex:"prospective registry"},
+   {k:"size", label:"Target sample size and sites", req:true, type:"text", ex:"300 subjects across 8 sites"},
+   {k:"dur", label:"Follow-up duration", req:true, type:"text", ex:"24 months"},
+   {k:"metric", label:"Primary metric", req:true, type:"text", ex:"index-site ulcer recurrence at 12 and 24 months"},
+   {k:"crit", label:"Success criterion", hint:"A pre-defined value or range this can be judged against. If it cannot fail, rewrite it.", req:true, type:"text", ex:"12-month recurrence within the 8–18% range reported for standard care in CER Section 6.3"},
+   {k:"trig", label:"What follows if the criterion is not met", req:true, type:"text", ex:"a point estimate above 18%, or a lower confidence bound above that range, triggers a CER update outside the scheduled cycle and a review of RMF-014"}
+  ],
+  build:function(v){
+    return "Residual question. " + v.q + "\n\n" +
+      "Method. " + v.method.charAt(0).toUpperCase() + v.method.slice(1) + ", target enrollment " + v.size + ", " + v.dur + " follow-up. Primary metric: " + v.metric + ".\n\n" +
+      "Success criterion. " + v.crit + ".\n\n" +
+      "If not met. " + v.trig + ". This objective will be reported against in the PMCF report regardless of outcome.";
+  }},
+
+{ id:"ha", name:"Health Authority Response", ref:"Ch. 15.2",
+  desc:"The four elements of a complete response, enforced in order: direct answer first, then root cause, then evidence, then action with an owner and a date.",
+  f:[
+   {k:"finding", label:"The finding, quoted as written", req:true, type:"area", ex:"The biocompatibility rationale for the adhesive component is not addressed in the Clinical Evaluation Report."},
+   {k:"pos", label:"Your position", req:true, type:"select", opts:["We agree with the finding.","We agree in part.","We respectfully disagree, for the reasons and evidence below."], ex:"We agree with the finding."},
+   {k:"answer", label:"The direct answer, in one sentence", hint:"What the reviewer needs to know before any context.", req:true, type:"text", ex:"The rationale was inadvertently omitted from CER Section 14.3; it exists as Report BIO-2025-008 and is attached"},
+   {k:"cause", label:"Root cause", hint:"Specific and systemic. “Process gap”, “human error” and “training” are restatements, not root causes.", req:true, type:"area", ex:"The CER template’s Section 14 prompts covered chemical characterization only; biocompatibility summary was not a required field, so the omission would recur for any author."},
+   {k:"evid", label:"Evidence attached or cited precisely", req:true, type:"text", ex:"Report BIO-2025-008 (Appendix F); revised CER Rev. 03 Section 14.3 (attached)"},
+   {k:"capa", label:"Corrective and preventive action", req:true, type:"area", ex:"CER Rev. 03 incorporates the summary and cross-reference; no new testing was required. The CER template (TMP-CW-002 Rev. 05) adds a mandatory biocompatibility summary field, effective 1 October 2026."},
+   {k:"owner", label:"Owner", req:true, type:"text", ex:"[Name], Head of Regulatory Affairs"},
+   {k:"date", label:"Completion or target date", req:true, type:"text", ex:"completed 12 August 2026"}
+  ],
+  build:function(v){
+    return "Finding: " + v.finding + "\n\nResponse:\n" +
+      v.pos + " " + v.answer + ".\n\n" +
+      "Root cause. " + v.cause + "\n\n" +
+      "Evidence. " + v.evid + ".\n\n" +
+      "Corrective and preventive action. " + v.capa + "\n\n" +
+      "Owner: " + v.owner + ". Status: " + v.date + ".";
+  }},
+
+{ id:"narr", name:"Complaint / AE Narrative", ref:"Ch. 16.1",
+  desc:"The five questions a narrative must answer, in order — with observed fact and interpretation kept in separate fields, because merging them forces a later reader to guess which parts are established.",
+  f:[
+   {k:"date", label:"Date of event and date reported", req:true, type:"text", ex:"event 3 February 2026; reported to manufacturer 5 February 2026"},
+   {k:"obs", label:"What happened — observed facts only", hint:"What the reporter saw, heard, or measured. No mechanism, no cause.", req:true, type:"area", ex:"The reporting clinician stated the infusion device did not deliver the programmed rate for approximately 12 minutes before an occlusion alarm triggered. Treatment resumed after device restart."},
+   {k:"state", label:"Device and patient state before, during, after", req:true, type:"area", ex:"Device in service 14 months, lot 2025-C, used with the specified giving set at 8 mL/hr. Patient was receiving scheduled analgesia; no harm reported, and the patient completed the infusion without further interruption."},
+   {k:"inv", label:"Investigation performed and findings", req:true, type:"area", ex:"Returned device evaluation (Report DEV-EVAL-2026-019) identified a firmware timeout defect affecting the alarm-trigger threshold under a specific low-flow condition, reproduced in bench testing across 8/10 trials."},
+   {k:"caus", label:"Causality assessment", req:true, type:"select", opts:["device-related","possibly device-related","unlikely to be device-related","not device-related","inconclusive pending further evaluation"], ex:"device-related"},
+   {k:"reason", label:"Causality reasoning", hint:"Temporal relationship, evaluation findings, alternative explanations considered and ruled out or not.", req:true, type:"area", ex:"Temporal relationship is direct; the defect was reproduced under the reported use conditions in bench testing; no alternative explanation (occlusion, programming error, giving-set incompatibility) was consistent with the recorded pump log."},
+   {k:"act", label:"Action taken or planned, with reference", req:true, type:"area", ex:"Firmware patch v3.2.1 released 20 February 2026 to affected units (Field Safety Notice FSN-2026-004). Complaint trend for this failure mode is monitored in the next PSUR, Section 5.2."}
+  ],
+  build:function(v){
+    return "Event and reporting dates. " + v.date + ".\n\n" +
+      "Observed (as reported). " + v.obs + "\n\n" +
+      "Device and patient state. " + v.state + "\n\n" +
+      "Investigation and findings. " + v.inv + "\n\n" +
+      "Causality assessment: " + v.caus + ". Reasoning: " + v.reason + "\n\n" +
+      "Action. " + v.act;
+  }}
+];
+
+/* =========================================================================
+   CHECKLISTS (Appendix A)
+   ========================================================================= */
+var CHECKLISTS = [
+{ name:"Universal pre-submission", note:"Run against any document.", items:[
+ "Every quantitative claim has a cited, verifiable source",
+ "Terminology for device, hazards, endpoints, and population is identical to the risk management file and prior documents",
+ "No claim in the conclusion is unsupported by the body",
+ "Unfavorable or contradictory data is acknowledged and reasoned through, not omitted",
+ "Every rate or percentage is presented with its denominator",
+ "Passive voice has not been used to obscure who made a decision",
+ "Document structure follows the expected regulatory template for its type",
+ "The document has been read aloud (or by text-to-speech) at least once before finalization"]},
+{ name:"Clinical Evaluation Report", note:"Run on top of the universal checklist.", items:[
+ "Literature search is reproducible (databases, strings, dates, PRISMA flow stated)",
+ "Excluded records are listed with their exclusion reason",
+ "Equivalence claim (if used) addresses clinical, technical, and biological characteristics explicitly",
+ "Equivalence claim addresses access to the equivalent device's technical documentation",
+ "PMCF findings from the current period are integrated, not just appended",
+ "Unfavorable literature is discussed with its applicability characterized",
+ "Risk-benefit determination is an explicit paragraph, not implied by the data presented",
+ "Every claim also appears, consistently, in the IFU and labeling",
+ "The conclusion introduces no claim, scope, or population not argued in the body"]},
+{ name:"Clinical Investigation Plan / Protocol", note:"", items:[
+ "Every endpoint has a metric, timepoint, measurement method, and analysis method",
+ "Inclusion and exclusion criteria are objectively checkable, not judgment-based",
+ "Sample size justification is stated with its assumptions",
+ "Analysis population (ITT, per-protocol, or both) is pre-specified and one is named primary",
+ "Missing-data method is pre-specified by name",
+ "Deviation categories (major/minor) and their analytical handling are defined before enrollment starts",
+ "Statistical analysis plan is pre-specified, not deferred in full to a later document"]},
+{ name:"Clinical Study Report", note:"", items:[
+ "All pre-specified endpoints reported, met or not, with equal rigor",
+ "Results are reported against the protocol's original endpoint list, not a revised one",
+ "Subject disposition reconciles exactly across screened, enrolled, treated, analyzed, and completed",
+ "Every discontinuation has a stated reason",
+ "Every analysis population is defined and cross-referenced to the protocol section defining it",
+ "Protocol deviations are disclosed with their specific analytical impact stated",
+ "Any claim that deviations did not affect conclusions is supported by a sensitivity analysis",
+ "The synopsis is self-contained and could be read instead of the body"]},
+{ name:"PSUR / PMSR", note:"", items:[
+ "Current-period trend data is compared against 2–3 prior periods using the same denominator method",
+ "Partial reporting periods are labeled as such wherever counts appear",
+ "Every signal (new or ongoing) has a stated reasoning process, not just a data table",
+ "Signal threshold and its source are stated",
+ "All findings are cross-checked against the risk management file, by hazard identifier",
+ "Benefit-risk conclusion is explicitly stated as unchanged or changed, with rationale",
+ "Stripped of numbers and dates, the narrative is not identical to the prior period's"]},
+{ name:"Instructions for Use / labeling", note:"", items:[
+ "Warnings state the required action, not just the hazard",
+ "Warnings state how the user will recognize the hazard has occurred",
+ "Instructions are sequenced by task flow, not document convenience",
+ "Safety notes are repeated at the step they apply to",
+ "Language and terminology match the actual intended user (patient vs. clinician)",
+ "No empty qualifiers remain (“properly”, “as appropriate”, “in accordance with applicable regulations”)",
+ "Comprehension has been tested with representative users per IEC 62366-1",
+ "Indication statement is word-for-word identical to the claims table"]},
+{ name:"Health Authority / NB response", note:"", items:[
+ "Direct answer appears in the first sentence",
+ "Root cause is specific and systemic, not “human error” or “training”",
+ "Evidence is attached or cited precisely (document, section, page)",
+ "Valid findings are conceded plainly",
+ "Disagreements are argued with cited evidence, not assertion",
+ "Every commitment has an owner and a date",
+ "No question in the letter has been left unanswered"]},
+{ name:"Complaint / AE narrative", note:"", items:[
+ "Observed fact is separated explicitly from interpretation and hypothesis",
+ "Device and patient state before, during, and after the event is recorded",
+ "Investigation method is named, not just its conclusion",
+ "Causality assessment includes visible reasoning, not just a category label",
+ "Alternative explanations considered are stated, and whether they were ruled out",
+ "Narrative does not end on an open-ended “investigation ongoing” without a resolution plan",
+ "If filed before investigation concludes, it states what is known, what is not, and a supplemental report date",
+ "Action taken or planned is stated with an owner and, where applicable, a date"]}
+];
+
+/* =========================================================================
+   GLOSSARY (Appendix B)
+   ========================================================================= */
+var GLOSSARY = [
+ ["Benefit-risk determination","The explicit, reasoned conclusion in a CER or PSUR that a device’s clinical benefits outweigh its risks for its intended purpose and population."],
+ ["CAPA","Corrective and Preventive Action — the QMS record documenting root cause and the fix for a nonconformity."],
+ ["CER","Clinical Evaluation Report — the MDR document arguing device safety and performance from clinical evidence."],
+ ["CIP","Clinical Investigation Plan — the protocol governing a device clinical study."],
+ ["CSR","Clinical Study Report — the complete report of a clinical investigation’s conduct and results."],
+ ["Equivalence","A formal MDR argument that clinical data from another device can support the device under evaluation, based on matching clinical, technical, and biological characteristics."],
+ ["Hazard","Under ISO 14971, a potential source of harm — distinct from the hazardous situation that exposes someone to it and from the harm that results."],
+ ["Hazardous situation","Under ISO 14971, circumstances in which people, property, or the environment are exposed to a hazard."],
+ ["Harm","Under ISO 14971, the injury or damage that results when a hazardous situation leads to an adverse outcome."],
+ ["IFU","Instructions for Use — the user-facing document describing safe and correct device use."],
+ ["ITT population","Intention-to-treat — all randomized or enrolled subjects analyzed as assigned, regardless of adherence."],
+ ["Per-protocol population","Only subjects who completed the study as specified, without major deviations."],
+ ["PMCF","Post-Market Clinical Follow-up — the continuous MDR process of collecting clinical data on a marketed device to confirm safety and performance."],
+ ["PMSR","Post-Market Surveillance Report — the periodic surveillance summary required for lower-risk (Class I) devices."],
+ ["PSUR","Periodic Safety Update Report — the periodic surveillance summary required for higher-risk (Class IIa/IIb/III) devices under MDR Article 86."],
+ ["Residual risk","The risk remaining after mitigation measures have been applied, which must be judged acceptable against the benefit before a device can be marketed."],
+ ["RFI","Request for Information — a formal question from a regulator or Notified Body requiring a written response."],
+ ["Signal","A new or changed pattern in post-market data that may indicate an emerging or evolving risk requiring evaluation."],
+ ["State of the art","The developed stage of current technical and clinical capability at a given time, based on accepted evidence and practice — the benchmark a CER measures a device against."]
+];
+
+/* =========================================================================
+   SHARED HELPERS
+   ========================================================================= */
+function $(id){ return document.getElementById(id); }
+function el(tag, cls, txt){ var e=document.createElement(tag); if(cls)e.className=cls; if(txt!=null)e.textContent=txt; return e; }
+function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+function store(k, v){ try{ if(v===undefined) return localStorage.getItem("wir:"+k); localStorage.setItem("wir:"+k, v); }catch(e){ return null; } }
+function today(){ var d=new Date(); return d.toISOString().slice(0,10); }
+function copyText(txt, btn){
+  var done=function(){ var o=btn.textContent; btn.textContent="Copied"; setTimeout(function(){btn.textContent=o;},1400); };
+  try{
+    if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(done, function(){fallback();}); return; }
+  }catch(e){}
+  fallback();
+  function fallback(){
+    var ta=el("textarea"); ta.value=txt; ta.style.position="fixed"; ta.style.opacity="0";
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand("copy"); done(); }catch(e){ btn.textContent="Select and copy manually"; }
+    document.body.removeChild(ta);
+  }
+}
+
+/* ---------- theme ---------- */
+(function(){
+  var modes=["auto","light","dark"], i=0;
+  var saved=store("theme");
+  if(saved && modes.indexOf(saved)>-1) i=modes.indexOf(saved);
+  function apply(){
+    var m=modes[i];
+    if(m==="auto") document.documentElement.removeAttribute("data-theme");
+    else document.documentElement.setAttribute("data-theme", m);
+    $("themeBtn").textContent="Theme: "+m.charAt(0).toUpperCase()+m.slice(1);
+    store("theme", m);
+  }
+  $("themeBtn").addEventListener("click", function(){ i=(i+1)%modes.length; apply(); });
+  apply();
+})();
+
+/* ---------- tabs ---------- */
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll(".tab"));
+  function show(id){
+    tabs.forEach(function(t){
+      var on = t.id==="tab-"+id;
+      t.setAttribute("aria-selected", on?"true":"false");
+      $(t.getAttribute("aria-controls")).hidden = !on;
+    });
+    window.scrollTo({top:0, behavior:"smooth"});
+  }
+  tabs.forEach(function(t){
+    t.addEventListener("click", function(){ show(t.id.replace("tab-","")); });
+  });
+})();
+
+/* =========================================================================
+   1. ANALYZER
+   ========================================================================= */
+(function(){
+  var SEV_W = { high:11, med:6, low:2.5 };
+  var SEV_LABEL = { high:"High", med:"Medium", low:"Low" };
+  var sampleIdx = 0;
+
+  function splitSentences(text){
+    // A sentence ends at . ! ? only when followed by whitespace + an opening
+    // character, or by end of text. This keeps "2.2%", "Rev. 03", "e.g." and
+    // "No. 4" inside their sentence instead of splitting them apart.
+    var out=[], start=0, i=0, n=text.length;
+    while(i<n){
+      var c=text.charAt(i);
+      if(c==="."||c==="!"||c==="?"){
+        var j=i+1;
+        while(j<n && /[.!?)\]"\u201D\u2019']/.test(text.charAt(j))) j++;
+        var rest=text.slice(j);
+        var atEnd = /^\s*$/.test(rest);
+        var nextStarts = /^\s+["\u201C(\[]?[A-Z0-9\u2022\u2013-]/.test(rest);
+        var prev = text.slice(Math.max(0,i-6), i);
+        var isDecimal = c==="." && /\d$/.test(prev) && /^\d/.test(text.charAt(j)||"");
+        var isAbbrev = c==="." && /\b(?:Rev|Sect|Fig|No|Dr|e\.g|i\.e|vs|approx|Inc|Ltd|St|Co)$/i.test(prev);
+        if(!isDecimal && !isAbbrev && (atEnd || nextStarts)){
+          var seg=text.slice(start, j);
+          if(seg.trim().length) out.push({ text:seg, start:start, end:j });
+          start=j; i=j; continue;
+        }
+      }
+      i++;
+    }
+    if(start<n){ var last=text.slice(start); if(last.trim().length) out.push({ text:last, start:start, end:n }); }
+    return out;
+  }
+
+  function analyze(text){
+    var found=[];
+    var sents = splitSentences(text);
+    function sentenceAt(i){
+      for(var k=0;k<sents.length;k++){ if(i>=sents[k].start && i<sents[k].end) return sents[k].text; }
+      return text;
+    }
+    TOKEN_RULES.forEach(function(r){
+      if(r.onlyIfAlso && !r.onlyIfAlso.test(text)) return;
+      var re=new RegExp(r.re.source, r.re.flags), m, guard=0;
+      while((m=re.exec(text))!==null && guard++<900){
+        if(m[0].length===0){ re.lastIndex++; continue; }
+        if(r.notIfSentence && r.notIfSentence.test(sentenceAt(m.index))) continue;
+        found.push({ start:m.index, end:m.index+m[0].length, quote:m[0],
+                     cat:r.cat, sev:r.sev, ref:r.ref, why:r.why, fix:r.fix, id:r.id });
+      }
+    });
+    DOC_RULES.forEach(function(r){
+      var res=r.test(text);
+      if(res && res.at>=0){
+        found.push({ start:res.at, end:res.at+res.quote.length, quote:res.quote, detail:res.detail,
+                     cat:r.cat, sev:r.sev, ref:r.ref, why:r.why, fix:r.fix, id:r.id });
+      }
+    });
+    sents.forEach(function(s){
+      SENTENCE_RULES.forEach(function(r){
+        var res=r.test(s.text);
+        if(res){
+          found.push({ start:s.start, end:s.end, quote:s.text.trim(), detail:res,
+                       cat:r.cat, sev:r.sev, ref:r.ref, why:r.why, fix:r.fix, id:r.id, sentence:true });
+        }
+      });
+    });
+    found.sort(function(a,b){ return a.start-b.start || (b.end-b.start)-(a.end-a.start); });
+    return found;
+  }
+
+  function render(text, found){
+    // highlight non-sentence findings only (sentence spans would swallow everything)
+    var spans = found.filter(function(f){ return !f.sentence; });
+    var kept=[], lastEnd=-1;
+    spans.forEach(function(f){ if(f.start>=lastEnd){ kept.push(f); lastEnd=f.end; } });
+    var html="", pos=0;
+    kept.forEach(function(f, i){
+      html += esc(text.slice(pos, f.start));
+      html += '<mark class="'+f.sev+'" data-i="'+found.indexOf(f)+'" title="'+esc(f.cat+" — "+f.ref)+'">'+esc(text.slice(f.start,f.end))+'</mark>';
+      pos=f.end;
+    });
+    html += esc(text.slice(pos));
+    $("anMarked").innerHTML = html;
+
+    var list=$("anList"); list.innerHTML="";
+    if(!found.length){
+      var ok=el("div","finding low");
+      ok.innerHTML='<div class="f-top"><span class="f-cat">No pattern findings</span><span class="pill ok">Clean</span></div>'+
+        '<p class="f-why">No sentence-level defects from the book’s catalogue were detected. That means the writing habits are right — it does not mean the document is. The analyzer cannot judge whether your reasoning is sound, whether a cited source supports the claim, or whether a number is correct.</p>';
+      list.appendChild(ok);
+      return;
+    }
+    found.forEach(function(f, i){
+      var d=el("div","finding "+f.sev);
+      d.setAttribute("data-i", i);
+      var q = f.quote.length>190 ? f.quote.slice(0,190)+"…" : f.quote;
+      d.innerHTML =
+        '<div class="f-top"><span class="f-cat">'+esc(f.cat)+'</span>'+
+        '<span class="pill '+f.sev+'">'+SEV_LABEL[f.sev]+'</span>'+
+        '<span class="ref">'+esc(f.ref)+'</span></div>'+
+        '<p class="f-quote">“'+esc(q)+'”</p>'+
+        (f.detail?'<p class="f-why"><em>'+esc(f.detail)+'</em></p>':'')+
+        '<p class="f-why">'+f.why+'</p>'+
+        '<p class="f-fix"><b>Fix:</b> '+f.fix+'</p>';
+      d.addEventListener("click", function(){
+        document.querySelectorAll("mark.on").forEach(function(m){ m.classList.remove("on"); });
+        var m=$("anMarked").querySelector('mark[data-i="'+i+'"]');
+        if(m){ m.classList.add("on"); m.scrollIntoView({block:"center", behavior:"smooth"}); }
+      });
+      list.appendChild(d);
+    });
+    $("anMarked").addEventListener("click", function(ev){
+      var m=ev.target.closest("mark"); if(!m) return;
+      var card=list.querySelector('.finding[data-i="'+m.getAttribute("data-i")+'"]');
+      document.querySelectorAll("mark.on").forEach(function(x){ x.classList.remove("on"); });
+      m.classList.add("on");
+      if(card) card.scrollIntoView({block:"center", behavior:"smooth"});
+    });
+  }
+
+  function run(){
+    var text=$("anIn").value.trim();
+    if(!text){ $("anOut").hidden=true; return; }
+    var found=analyze(text);
+    var words=text.split(/\s+/).length;
+    var raw=found.reduce(function(a,f){ return a+SEV_W[f.sev]; }, 0);
+    var per100 = raw * 100 / Math.max(words, 25);
+    var score = Math.max(0, Math.min(100, Math.round(100 - per100 * 0.85)));
+
+    var counts={high:0,med:0,low:0};
+    found.forEach(function(f){ counts[f.sev]++; });
+    $("anScore").textContent = score;
+    $("anScore").style.color = score>=78 ? "var(--green)" : (score>=52 ? "var(--hi-med-b)" : "var(--red)");
+    var pills=$("anPills"); pills.innerHTML="";
+    ["high","med","low"].forEach(function(s){
+      if(counts[s]) pills.appendChild(el("span","pill "+s, counts[s]+" "+SEV_LABEL[s].toLowerCase()));
+    });
+    if(!found.length) pills.appendChild(el("span","pill ok","None found"));
+
+    var v;
+    if(score>=85) v="Sentence-level habits are sound. Move on to whether the reasoning and the sources hold — which is what a reviewer will actually test.";
+    else if(score>=70) v="Broadly solid, with specific defects worth fixing before this goes out. Start with the high-severity findings.";
+    else if(score>=50) v="A reviewer would likely raise questions on this passage. The high-severity findings are the ones that generate deficiency letters.";
+    else v="This passage would be hard for a reviewer to verify. Work through the high-severity findings first; most of them are missing facts rather than missing words.";
+    v += " Scored across " + words + " words.";
+    $("anVerdict").textContent = v;
+    $("anNum").textContent = found.length + (found.length===1?" finding":" findings");
+    render(text, found);
+    $("anOut").hidden=false;
+  }
+
+  $("anRun").addEventListener("click", run);
+  $("anClear").addEventListener("click", function(){ $("anIn").value=""; $("anOut").hidden=true; $("anCount").textContent=""; $("anIn").focus(); });
+  $("anSample").addEventListener("click", function(){
+    $("anIn").value = ANALYZER_SAMPLES[sampleIdx % ANALYZER_SAMPLES.length];
+    sampleIdx++; countWords(); run();
+  });
+  function countWords(){
+    var t=$("anIn").value.trim();
+    $("anCount").textContent = t ? (t.split(/\s+/).length + " words") : "";
+  }
+  $("anIn").addEventListener("input", countWords);
+})();
+
+/* =========================================================================
+   2. REWRITE DRILLS
+   ========================================================================= */
+(function(){
+  var order = DRILLS.map(function(_,i){ return i; });
+  var cur = 0;
+
+  var VAGUE = /\b(address(?:ed|es|ing)?|ensur(?:e|ed|es|ing)|utiliz(?:e|ed|es|ing)|facilitat(?:e|ed|es|ing)|significant(?:ly)?|substantial(?:ly)?|appropriate(?:ly)?|adequate(?:ly)?|properly|as necessary|as required|where applicable|various|several|numerous|comprehensive|robust|excellent|it was (?:determined|decided|concluded)|well[- ]established|clinical experience has shown|safe and effective|proven|guarantee)\b/gi;
+  var HEDGES = /\b(may|might|could|potentially|possibly|perhaps|appears? to|seems? to|tends? to|somewhat|in some cases|arguably)\b/gi;
+  var SOURCE = /(\b[A-Z]{2,6}[- ]?\d{2,4}[-–]?\d*\b|\bSection\s+\d|\bTable\s+\d|\bAppendix\s+[A-Z]|\bReport\b|\bStudy\s+[A-Z0-9]|\bRev\.\s?\d|\bProtocol\b|\bRMF\b|\bCAPA\b|\bSOP\b|\bISO\s?\d|\bIEC\s?\d|\bPRISMA\b)/g;
+  var QUANT = /(\d+(?:\.\d+)?\s?%|\bn\s?=\s?\d+|\bN\s?=\s?\d+|\bp\s?[=<>]\s?0?\.\d+|\b\d+\s?\/\s?\d+|\b\d{1,3}(?:,\d{3})+\b|\b\d+(?:\.\d+)?\s?(?:mm|mg|cm|mL|kg|N\b|°C|seconds?|secs?|minutes?|mins?|hours?|hrs?|days?|weeks?|months?|years?|subjects?|units?|patients?|events?|sites?|records?|publications?|complaints?|cases?)\b|\b\d+\s?[–-]\s?\d+\b|95%\s?CI|\bWeek\s?\d+|\bGrade\s?\d)/gi;
+
+  function uniq(matches){
+    if(!matches) return [];
+    var seen={}, out=[];
+    matches.forEach(function(m){ var k=m.toLowerCase(); if(!seen[k]){seen[k]=1; out.push(m);} });
+    return out;
+  }
+
+  var DIM_META = {
+    spec: { lab:"Specificity", col:"var(--navy)" },
+    src:  { lab:"Sourcing",    col:"var(--purple)" },
+    qty:  { lab:"Quantification", col:"var(--green)" },
+    hedge:{ lab:"Hedging",     col:"var(--red)" }
+  };
+  var DIM_NA = {
+    src:"Not scored on this drill \u2014 a passage of this type carries no report number or section reference, and inventing one would not improve it.",
+    qty:"Not scored on this drill \u2014 this passage type is not carrying figures, so quantification is not the skill being tested here.",
+    spec:"Not scored on this drill.",
+    hedge:"Not scored on this drill."
+  };
+
+  function score(txt, dims){
+    dims = dims || ["spec","src","qty","hedge"];
+    var words = txt.trim().split(/\s+/).filter(Boolean).length;
+    var vague = uniq(txt.match(VAGUE));
+    var hedge = uniq(txt.match(HEDGES));
+    var src   = uniq(txt.match(SOURCE));
+    var qty   = uniq(txt.match(QUANT));
+    // Integer point allocation that always sums to exactly 100.
+    var n = dims.length, base = Math.floor(100 / n), extra = 100 - base * n;
+    var caps = {};
+    dims.forEach(function(k, i){ caps[k] = base + (i < extra ? 1 : 0); });
+
+    // "significant"/"significantly" is a statistical term, not a vague one,
+    // when the sentence carries a p-value, a confidence interval, or alpha.
+    var statCtx = /\bp\s?[=<>]\s?0?\.\d|\b95%\s?CI\b|\bstatistical(?:ly)?\b|\u03B1\s?=/i.test(txt);
+    if(statCtx) vague = vague.filter(function(w){ return !/^significant/i.test(w); });
+
+    function clamp(k, x){ var c = caps[k] || 0; return Math.max(0, Math.min(c, Math.round(x))); }
+    var raw = {
+      spec:  clamp("spec",  (caps.spec  || 0) - vague.length * ((caps.spec  || 0) / 4)),
+      src:   clamp("src",   src.length === 0 ? 0 : (src.length === 1 ? (caps.src || 0) * 0.75 : (caps.src || 0))),
+      qty:   clamp("qty",   qty.length * ((caps.qty || 0) / 3)),
+      hedge: clamp("hedge", (caps.hedge || 0) - Math.max(0, hedge.length - 1) * ((caps.hedge || 0) / 3))
+    };
+    if(words < 12){
+      var f = words / 12;
+      ["spec","src","qty","hedge"].forEach(function(k){ raw[k] = Math.round(raw[k] * f); });
+    }
+    var notes = {
+      spec: vague.length ? "Vague term" + (vague.length>1?"s":"") + " still present: " + vague.slice(0,4).join(", ") + (vague.length>4?"\u2026":"") + "."
+                         : "No vague verbs or unquantified magnitude words detected.",
+      src:  src.length > 1 ? "References detected: " + src.slice(0,4).join(", ") + (src.length>4?"\u2026":"") + "."
+                       : (src.length === 1 ? "One reference (\u201C" + src[0] + "\u201D). Most passages of this type carry more than one \u2014 a claim, a number, and a risk statement usually trace to different records."
+                       : "No report number, section, table, study ID or standard cited \u2014 a reviewer has nothing to verify this against."),
+      qty:  qty.length ? "Quantities detected: " + qty.slice(0,4).join(", ") + (qty.length>4?"\u2026":"") + "."
+                       : "No figures, denominators, timepoints or intervals detected.",
+      hedge: hedge.length > 1 ? hedge.length + " hedge terms: " + hedge.slice(0,4).join(", ") + ". Keep at most one, and only if it carries real information."
+                              : (hedge.length === 1 ? "One hedge (\u201C" + hedge[0] + "\u201D) \u2014 not penalized; a single qualifier is often correct."
+                                                    : "No hedging.")
+    };
+    var rows = ["spec","src","qty","hedge"].map(function(k){
+      var on = dims.indexOf(k) > -1;
+      return { key:k, lab:DIM_META[k].lab, col:DIM_META[k].col, applies:on,
+               val: on ? raw[k] : null, max: on ? caps[k] : null,
+               note: on ? notes[k] : DIM_NA[k] };
+    });
+    var total = rows.reduce(function(a,r){ return a + (r.applies ? r.val : 0); }, 0);
+    return { words:words, rows:rows, total:Math.round(total) };
+  }
+
+  function show(){
+    var d = DRILLS[order[cur]];
+    $("drMeta").innerHTML = '<span class="badge">'+esc(d.doc)+'</span><span class="ref">'+esc(d.ch)+'</span>'+
+      '<span class="note" style="margin:0">Drill '+(cur+1)+' of '+DRILLS.length+'</span>';
+    $("drTask").textContent = d.task;
+    $("drBefore").textContent = d.before;
+    $("drIn").value = "";
+    $("drResult").hidden = true;
+    $("drModel").hidden = true;
+  }
+
+  function doScore(){
+    var txt = $("drIn").value.trim();
+    if(!txt){ $("drIn").focus(); return; }
+    var d = DRILLS[order[cur]];
+    var r = score(txt, d.dims);
+    var wrap = $("drRubric"); wrap.innerHTML = "";
+    r.rows.forEach(function(row){
+      var box = el("div","rub");
+      if(row.applies){
+        box.innerHTML = '<div class="rlab">'+row.lab+'</div>'+
+          '<div class="rval">'+row.val+'<small> / '+row.max+'</small></div>'+
+          '<div class="bar"><i style="width:'+(row.val/row.max*100)+'%;background:'+row.col+'"></i></div>'+
+          '<div class="rnote">'+esc(row.note)+'</div>';
+      } else {
+        box.style.opacity = ".6";
+        box.innerHTML = '<div class="rlab">'+row.lab+'</div>'+
+          '<div class="rval" style="color:var(--ink-3);font-size:16px">n/a</div>'+
+          '<div class="bar"><i style="width:0%"></i></div>'+
+          '<div class="rnote">'+esc(row.note)+'</div>';
+      }
+      wrap.appendChild(box);
+    });
+    var total = r.total;
+    $("drTotal").textContent = total;
+    $("drTotal").style.color = total>=75 ? "var(--green)" : (total>=50 ? "var(--hi-med-b)" : "var(--red)");
+    var v;
+    if(r.words < 12) v="Too short to score meaningfully. A defensible rewrite is almost always longer than the passage it replaces \u2014 the added length is the facts the original was missing.";
+    else if(total>=85) v="Strong on form. Now compare against the model answer: did you carry the same load-bearing elements, or different ones?";
+    else if(total>=65) v="Sound, with one dimension lagging. Look at the lowest bar above \u2014 that is usually a fact you did not go and find, not a wording problem.";
+    else if(total>=40) v="Partway there. The most common gap at this level is sourcing: the rewrite is more specific but still gives the reviewer nothing to verify it against.";
+    else v="This scores close to the original. Work through the dimensions one at a time rather than rewriting the whole passage again.";
+    var na = r.rows.filter(function(x){ return !x.applies; }).length;
+    $("drVerdict").textContent = v + " " + r.words + " words." +
+      (na ? " Dimensions marked n/a are not part of what this passage type is judged on; the remaining ones are scaled to total 100." : "");
+    $("drResult").hidden = false;
+  }
+
+  function reveal(){
+    var d = DRILLS[order[cur]];
+    $("drModelText").textContent = d.model;
+    $("drModelWhy").innerHTML = "<strong>Why it works:</strong> " + d.why;
+    $("drModel").hidden = false;
+    $("drModel").scrollIntoView({block:"nearest", behavior:"smooth"});
+  }
+
+  $("drScore").addEventListener("click", doScore);
+  $("drReveal").addEventListener("click", reveal);
+  $("drNext").addEventListener("click", function(){ cur=(cur+1)%DRILLS.length; show(); });
+  $("drPrev").addEventListener("click", function(){ cur=(cur-1+DRILLS.length)%DRILLS.length; show(); });
+  $("drShuffle").addEventListener("click", function(){
+    for(var i=order.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=order[i]; order[i]=order[j]; order[j]=t; }
+    cur=0; show();
+  });
+  show();
+})();
+
+/* =========================================================================
+   3. DOCUMENT BUILDERS
+   ========================================================================= */
+(function(){
+  var cur = 0;
+  var lastOut = "";
+
+  function renderNav(){
+    var nav = $("bNav"); nav.innerHTML = "";
+    BUILDERS.forEach(function(b, i){
+      var btn = el("button","bnav", b.name);
+      btn.type = "button";
+      btn.setAttribute("aria-pressed", i===cur ? "true" : "false");
+      btn.addEventListener("click", function(){ cur = i; renderNav(); renderFields(); clearOut(); });
+      nav.appendChild(btn);
+    });
+  }
+
+  function clearOut(){
+    $("bMissing").innerHTML = "";
+    $("bOut").textContent = "Fill the required fields, then select Build passage.";
+    $("bOut").className = "out empty";
+    lastOut = "";
+  }
+
+  function renderFields(){
+    var b = BUILDERS[cur];
+    $("bTitle").textContent = b.name + " Builder";
+    $("bDesc").innerHTML = esc(b.desc) + ' <span class="ref">' + esc(b.ref) + '</span>';
+    var wrap = $("bFields"); wrap.innerHTML = "";
+    b.f.forEach(function(f){
+      var lab = el("label","fld");
+      lab.setAttribute("for", "bf-" + b.id + "-" + f.k);
+      var s = el("span","lab");
+      s.innerHTML = esc(f.label) + (f.req ? ' <span class="req">*</span>' : ' <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--ink-3)">(optional)</span>');
+      lab.appendChild(s);
+      if(f.hint){ var h = el("span","hint", f.hint); lab.appendChild(h); }
+      var input;
+      if(f.type === "select"){
+        input = el("select");
+        var blank = el("option","", "— select —"); blank.value = ""; input.appendChild(blank);
+        f.opts.forEach(function(o){ var op = el("option","", o); op.value = o; input.appendChild(op); });
+      } else if(f.type === "area"){
+        input = el("textarea");
+      } else {
+        input = el("input"); input.type = "text";
+      }
+      input.id = "bf-" + b.id + "-" + f.k;
+      input.setAttribute("data-k", f.k);
+      lab.appendChild(input);
+      wrap.appendChild(lab);
+    });
+  }
+
+  function collect(){
+    var b = BUILDERS[cur], v = {}, missing = [];
+    b.f.forEach(function(f){
+      var node = $("bf-" + b.id + "-" + f.k);
+      var val = node ? String(node.value).trim() : "";
+      v[f.k] = val;
+      if(f.req && !val) missing.push(f.label);
+    });
+    return { v:v, missing:missing };
+  }
+
+  $("bBuild").addEventListener("click", function(){
+    var b = BUILDERS[cur], r = collect();
+    if(r.missing.length){
+      $("bMissing").innerHTML = '<div class="missing"><b>Cannot build yet — ' + r.missing.length +
+        ' required field' + (r.missing.length>1?'s':'') + ' empty:</b> ' + esc(r.missing.join("; ")) +
+        '. This is deliberate. A passage missing any of these is not a draft to be improved later; it is a passage that cannot be written until you have the fact.</div>';
+      $("bOut").textContent = "Fill the required fields, then select Build passage.";
+      $("bOut").className = "out empty";
+      lastOut = "";
+      return;
+    }
+    $("bMissing").innerHTML = "";
+    var txt = b.build(r.v);
+    lastOut = txt;
+    $("bOut").textContent = txt;
+    $("bOut").className = "out";
+  });
+
+  $("bExample").addEventListener("click", function(){
+    var b = BUILDERS[cur];
+    b.f.forEach(function(f){
+      var node = $("bf-" + b.id + "-" + f.k);
+      if(node && f.ex != null) node.value = f.ex;
+    });
+    $("bBuild").click();
+  });
+
+  $("bReset").addEventListener("click", function(){
+    var b = BUILDERS[cur];
+    b.f.forEach(function(f){ var n = $("bf-" + b.id + "-" + f.k); if(n) n.value = ""; });
+    clearOut();
+  });
+
+  $("bCopy").addEventListener("click", function(){
+    if(!lastOut){ return; }
+    copyText(lastOut, this);
+  });
+
+  renderNav(); renderFields(); clearOut();
+})();
+
+/* =========================================================================
+   4. CHECKLIST RUNNER
+   ========================================================================= */
+(function(){
+  var state = {};
+  try{
+    var raw = store("checklists");
+    if(raw) state = JSON.parse(raw) || {};
+  }catch(e){ state = {}; }
+
+  function key(ci, ii){ return ci + ":" + ii; }
+  function save(){
+    try{ store("checklists", JSON.stringify(state)); $("ckSaved").textContent = "Saved in this browser"; }
+    catch(e){ $("ckSaved").textContent = "Not saved — this browser blocks local storage for files; use Export."; }
+  }
+
+  function updateProgress(ci){
+    var list = CHECKLISTS[ci];
+    var done = 0;
+    list.items.forEach(function(_, ii){ if(state[key(ci,ii)] && state[key(ci,ii)].done) done++; });
+    var pct = Math.round(done / list.items.length * 100);
+    var p = $("ckp-" + ci);
+    if(p){
+      p.querySelector("span").textContent = done + " / " + list.items.length;
+      p.querySelector("i").style.width = pct + "%";
+    }
+  }
+
+  function render(){
+    var wrap = $("ckWrap"); wrap.innerHTML = "";
+    CHECKLISTS.forEach(function(list, ci){
+      var card = el("div","card");
+      var head = el("div","card-head");
+      var h = el("h3", null, list.name);
+      head.appendChild(h);
+      var prog = el("div","prog"); prog.id = "ckp-" + ci;
+      prog.innerHTML = '<span>0 / ' + list.items.length + '</span><span class="track"><i style="width:0%"></i></span>';
+      head.appendChild(prog);
+      card.appendChild(head);
+      if(list.note){ var n = el("p","note", list.note); n.style.margin = "0 0 8px"; card.appendChild(n); }
+
+      list.items.forEach(function(item, ii){
+        var k = key(ci, ii);
+        var st = state[k] || { done:false, note:"" };
+        var row = el("div","ck-item" + (st.done ? " done" : ""));
+        var cb = el("input"); cb.type = "checkbox"; cb.checked = !!st.done;
+        cb.id = "ck-" + ci + "-" + ii;
+        var body = el("div","ck-body");
+        var lbl = el("label","ck-text", item);
+        lbl.setAttribute("for", cb.id);
+        body.appendChild(lbl);
+        var note = el("textarea","ck-note");
+        note.rows = 1;
+        note.placeholder = "Note (optional) — what you found, what you changed";
+        note.value = st.note || "";
+        body.appendChild(note);
+        row.appendChild(cb); row.appendChild(body);
+
+        cb.addEventListener("change", function(){
+          state[k] = state[k] || { done:false, note:"" };
+          state[k].done = cb.checked;
+          row.classList.toggle("done", cb.checked);
+          updateProgress(ci); save();
+        });
+        note.addEventListener("input", function(){
+          state[k] = state[k] || { done:false, note:"" };
+          state[k].note = note.value;
+          save();
+        });
+        card.appendChild(row);
+      });
+      wrap.appendChild(card);
+      updateProgress(ci);
+    });
+  }
+
+  function summary(){
+    var lines = ["WRITE IT RIGHT — CHECKLIST REVIEW SUMMARY", "Date: " + today(), ""];
+    var anyOpen = false;
+    CHECKLISTS.forEach(function(list, ci){
+      var done = 0, rows = [];
+      list.items.forEach(function(item, ii){
+        var st = state[key(ci,ii)] || {};
+        if(st.done) done++;
+        var mark = st.done ? "[x]" : "[ ]";
+        if(!st.done) anyOpen = true;
+        rows.push("  " + mark + " " + item + (st.note ? "\n        Note: " + st.note : ""));
+      });
+      if(done === 0 && !rows.some(function(r){ return r.indexOf("Note:") > -1; })) return; // skip untouched lists
+      lines.push(list.name.toUpperCase() + "  (" + done + "/" + list.items.length + " complete)");
+      lines = lines.concat(rows);
+      lines.push("");
+    });
+    if(lines.length <= 3) lines.push("No checklist items have been completed yet.");
+    else if(anyOpen) lines.push("Open items remain. This summary records the state of review at the date above.");
+    return lines.join("\n");
+  }
+
+  $("ckExport").addEventListener("click", function(){ copyText(summary(), this); });
+  $("ckDownload").addEventListener("click", function(){
+    var blob = new Blob([summary()], { type:"text/plain;charset=utf-8" });
+    var a = el("a"); a.href = URL.createObjectURL(blob);
+    a.download = "write-it-right-checklist-" + today() + ".txt";
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(a.href); }, 2000);
+  });
+  $("ckReset").addEventListener("click", function(){
+    if(!window.confirm("Clear every tick and note across all eight checklists?")) return;
+    state = {}; save(); render(); $("ckSaved").textContent = "Cleared";
+  });
+
+  render();
+})();
+
+/* =========================================================================
+   5. GLOSSARY QUIZ
+   ========================================================================= */
+(function(){
+  var queue = [], answered = 0, firstTry = 0, wrongOnce = {}, current = null, total = 0;
+
+  function shuffle(a){
+    for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; }
+    return a;
+  }
+
+  function start(){
+    queue = shuffle(GLOSSARY.map(function(_, i){ return i; }));
+    total = queue.length;
+    answered = 0; firstTry = 0; wrongOnce = {};
+    $("qzDone").hidden = true; $("qzCard").hidden = false;
+    next();
+  }
+
+  function next(){
+    $("qzFeedback").hidden = true; $("qzFeedback").innerHTML = "";
+    $("qzNext").hidden = true;
+    if(!queue.length){ finish(); return; }
+    var idx = queue.shift();
+    var dir = Math.random() < 0.5 ? "t2d" : "d2t";   // term->definition or definition->term
+    var right = GLOSSARY[idx];
+    var pool = GLOSSARY.map(function(_, i){ return i; }).filter(function(i){ return i !== idx; });
+    var distract = shuffle(pool).slice(0, 3);
+    var opts = shuffle([idx].concat(distract));
+    current = { idx:idx, dir:dir };
+
+    $("qzCount").textContent = "Remaining in round: " + (queue.length + 1) + " of " + total +
+      "  ·  First-try correct: " + firstTry + "/" + Math.max(answered,0);
+    if(dir === "t2d"){
+      $("qzStem").textContent = right[0];
+      $("qzPrompt").textContent = "Which definition is correct?";
+    } else {
+      $("qzStem").textContent = "";
+      $("qzStem").textContent = "Which term does this define?";
+      $("qzPrompt").textContent = right[1];
+    }
+    var box = $("qzOpts"); box.innerHTML = "";
+    opts.forEach(function(i){
+      var b = el("button","qopt", dir === "t2d" ? GLOSSARY[i][1] : GLOSSARY[i][0]);
+      b.type = "button";
+      b.addEventListener("click", function(){ answer(i, b); });
+      box.appendChild(b);
+    });
+  }
+
+  function answer(chosen, btn){
+    var correct = chosen === current.idx;
+    [].slice.call($("qzOpts").children).forEach(function(b){ b.disabled = true; });
+    answered++;
+    if(correct){
+      btn.classList.add("right");
+      if(!wrongOnce[current.idx]) firstTry++;
+      $("qzFeedback").innerHTML = '<p class="note" style="margin:0;color:var(--green);font-weight:600">Correct.</p>';
+    } else {
+      btn.classList.add("wrong");
+      [].slice.call($("qzOpts").children).forEach(function(b){
+        var t = b.textContent;
+        if(t === GLOSSARY[current.idx][1] || t === GLOSSARY[current.idx][0]) b.classList.add("right");
+      });
+      wrongOnce[current.idx] = true;
+      queue.push(current.idx);          // re-ask later in the round
+      queue = queue.length > 2 ? shuffle(queue) : queue;
+      $("qzFeedback").innerHTML = '<p class="note" style="margin:0"><strong style="color:var(--red)">Not quite.</strong> ' +
+        esc(GLOSSARY[current.idx][0]) + ' — ' + esc(GLOSSARY[current.idx][1]) +
+        '<br/><em>This term goes back in the queue and will be asked again before the round ends.</em></p>';
+    }
+    $("qzFeedback").hidden = false;
+    $("qzNext").hidden = false;
+    $("qzNext").focus();
+  }
+
+  function finish(){
+    $("qzCard").hidden = true;
+    $("qzDone").hidden = false;
+    var missed = Object.keys(wrongOnce).length;
+    var msg = "Every one of the " + total + " terms answered correctly. First-try accuracy: " +
+      firstTry + " of " + total + " (" + Math.round(firstTry/total*100) + "%).";
+    if(missed) msg += " " + missed + " term" + (missed>1?"s":"") + " needed a second look: " +
+      Object.keys(wrongOnce).map(function(i){ return GLOSSARY[i][0]; }).join(", ") +
+      ". Those are worth re-reading in Appendix B before your next round.";
+    else msg += " Nothing needed re-asking.";
+    $("qzSummary").textContent = msg;
+  }
+
+  $("qzNext").addEventListener("click", next);
+  $("qzRestart").addEventListener("click", start);
+  $("qzAgain").addEventListener("click", start);
+  start();
+})();
+</script>
+</body>
+</html>

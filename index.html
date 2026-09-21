@@ -501,7 +501,7 @@ var TOKEN_RULES = [
  { id:"vague-verb", cat:"Vague verb", sev:"high", ref:"Ch. 4.2 / 5.6",
    re:/\b(address(?:ed|es|ing)?|ensur(?:e|ed|es|ing)|utiliz(?:e|ed|es|ing)|facilitat(?:e|ed|es|ing)|manag(?:ed|es|ing)\s+appropriately|handled|deal[t]?\s+with|look(?:ed)?\s+at|review(?:ed)?\s+and\s+accept(?:ed)?)\b/gi,
    why:"A vague verb lets the sentence avoid committing to what actually happened. “Addressed” could mean eliminated, mitigated, transferred, or merely documented — a reviewer cannot tell, and in a risk management file that ambiguity is disqualifying.",
-   fix:"Name the action: eliminated by [design change] / reduced to ALARP via [mitigation] / accepted as residual risk per [rationale] / verified against [clause] by [test], recorded in [report]." },
+   fix:"Name the action: eliminated by [design change] / reduced as far as possible via [mitigation] / accepted as residual risk per [rationale] / verified against [clause] by [test], recorded in [report]." },
 
  { id:"overclaim", cat:"Overclaiming", sev:"high", ref:"Ch. 5.1",
    re:/\b(proven|proves|guarantee[sd]?|eliminat(?:es|ed|ing)\s+(?:the\s+)?risk|100%\s+(?:safe|effective|reliable)|complete(?:ly)?\s+safe|no\s+risk|risk[- ]free|always\s+prevents?|never\s+fails?|safe\s+and\s+effective|fully\s+validated\s+and\s+safe)\b/gi,
@@ -554,6 +554,21 @@ var TOKEN_RULES = [
    why:"EU MDR vocabulary. Correct in an MDR document. Flagged only so you can confirm it is not sitting inside an FDA submission alongside 510(k) language — the seams between jurisdictions are where the most damaging errors happen.",
    fix:"If this document serves one jurisdiction, confirm no terms from the other appear. If it serves both, check every recurring claim against a single source-of-truth claims table." },
 
+
+ { id:"alarp", cat:"ALARP under EU MDR", sev:"high", ref:"Ch. 4.2",
+   re:/\b(ALARP|as low as reasonably practicable)\b/gi,
+   why:"ALARP lets risk reduction stop when further reduction would be grossly disproportionate in cost or effort. EU MDR does not permit that trade: Annex I, Chapter I, point 2 requires risks to be reduced \u201Cas far as possible without adversely affecting the benefit-risk ratio\u201D, and the word ALARP appears nowhere in the Regulation.",
+   fix:"Write \u201Creduced as far as possible\u201D (AFAP), then state the residual risk and its acceptability against the benefit. If this document serves a market where ALARP is the applicable standard, dismiss this flag." },
+
+ { id:"maude-submission", cat:"Incorrect reporting vocabulary", sev:"high", ref:"Ch. 16",
+   re:/\bMAUDE\s+(submission|report|filing)s?\b|\bsubmit(?:ted|ting)?\s+(?:a\s+|an\s+)?MAUDE\b/gi,
+   why:"Nobody submits to MAUDE. Manufacturers submit a Medical Device Report (MDR) under 21 CFR Part 803, electronically through eMDR; MAUDE is the public database those reports populate.",
+   fix:"Write \u201Csubmitted a Medical Device Report under 21 CFR Part 803 via eMDR\u201D. The EU equivalent is a Manufacturer Incident Report under Article 87 \u2014 and there, \u201CMDR\u201D means Regulation (EU) 2017/745 instead." },
+
+ { id:"locf", cat:"Unjustified LOCF", sev:"med", ref:"Ch. 10.4",
+   re:/\b(LOCF|last[- ]observation[- ]carried[- ]forward)\b/gi,
+   why:"LOCF gives an unbiased estimate only under restrictive assumptions, and EMA notes that in progressively deteriorating conditions it is likely to give overly optimistic results. It is not prohibited \u2014 it can be conservative where spontaneous improvement is expected \u2014 but reaching for it as a default invites the question of why.",
+   fix:"Define the estimand first (population, endpoint, treatment condition, summary measure, and a strategy for each intercurrent event), then choose an analysis that matches it. If LOCF is genuinely right, say why and pre-specify a sensitivity analysis." },
  { id:"completer", cat:"Completer-only reporting", sev:"high", ref:"Ch. 8.3",
    re:/\b(among (?:those|subjects|patients) (?:who )?complet(?:ed|ing)|of (?:those|subjects|patients) completing|completers|evaluable (?:population|subjects|patients)|per[- ]protocol population\b(?![^.]*\bITT\b))/gi,
    why:"Presenting outcomes only for subjects who completed, without the dropout rate and reasons, silently converts an intention-to-treat story into a best-case one.",
@@ -561,7 +576,7 @@ var TOKEN_RULES = [
 
  { id:"precision", cat:"Spurious precision", sev:"low", ref:"Ch. 8.4",
    re:/\b\d+\.\d{2,}\s?%/g,
-   why:"Two or more decimal places on a percentage implies a resolution most device samples cannot support. “73.41%” from 15 subjects is 11/15.",
+   why:"Two or more decimal places on a percentage implies a resolution most device samples cannot support. With n=15 every possible result is a fifteenth — 11/15 is 73.3%, 12/15 is 80.0% — so a figure like “73.41%” is not merely over-precise, it is unreachable, and a reviewer who does the division will wonder what was actually counted.",
    fix:"Match precision to the measurement. Report the fraction, or one decimal place with a confidence interval." },
 
  { id:"marketing", cat:"Marketing register", sev:"med", ref:"Ch. 9.1",
@@ -635,7 +650,7 @@ var SENTENCE_RULES = [
 
 var ANALYZER_SAMPLES = [
 "In conclusion, the device is considered safe and effective based on the available clinical data and the literature review that was performed, and no significant safety concerns were identified during the evaluation period. It is well established that this technology is well tolerated. A total of 18 complaints were received, which is not considered significant. It was determined that no further action was required at this time.",
-"The system was evaluated following the concerns raised and the risk was addressed through appropriate means. The product met specification and performance was considered acceptable. While some limitations were noted, these may possibly suggest only a potential impact which could arguably be minimal in some cases, and therefore do not affect the overall conclusion. Investigation is ongoing.",
+"The risk was reduced to ALARP and the system was evaluated following the concerns raised, which were addressed through appropriate means. The product met specification and performance was considered acceptable. While some limitations were noted, these may possibly suggest only a potential impact which could arguably be minimal in some cases, and therefore do not affect the overall conclusion. Investigation is ongoing.",
 "The subject device is substantially equivalent to the predicate device in intended use and technological characteristics, and therefore the clinical evaluation requirements under the MDR are satisfied. A comprehensive literature search was conducted in the relevant databases and the most pertinent articles were included. Among subjects completing the study, 82% achieved complete closure. Dispose of the device properly in accordance with applicable regulations."
 ];
 
@@ -645,13 +660,13 @@ var ANALYZER_SAMPLES = [
 var DRILLS = [
  { doc:"CER", ch:"Ch. 7A / 9.1", task:"Rewrite this CER conclusion so a reviewer can verify every element of it.",
    before:"In conclusion, the device is considered safe and effective based on the available clinical data and literature review, and no significant safety concerns were identified during the evaluation period.",
-   model:"Based on 24 months of post-market clinical follow-up data (n=1,240 devices, Section 8) and a systematic literature review of 14 equivalent-device publications (Section 6), the benefit-risk profile of [Device] remains favorable for its intended use in the management of partial- and full-thickness wounds. Two device-related non-serious adverse events were reported (Table 12), both consistent with the risks characterized in the risk management file (RMF-014) and adequately mitigated by existing IFU warnings. No new risks or trends were identified that would alter the risk-benefit determination made at CE marking.",
+   model:"Based on 24 months of post-market clinical follow-up data (n=1,240 devices, Section 8) and a systematic literature review of 14 equivalent-device publications (Section 6), the benefit-risk profile of [Device] remains favorable for its intended use in the management of partial- and full-thickness wounds. Two device-related non-serious adverse events were reported (Table 12), both consistent with the risks characterized in the risk management file (RMF-014) and adequately mitigated by existing IFU warnings. No new risks or trends were identified that would alter the benefit-risk determination made at CE marking.",
    why:"The revision replaces vague adjectives (“safe and effective”, “significant”) with a sourced, quantified, scoped conclusion the reviewer can check against the cited sections and cross-check against the risk file. Note also that “safe and effective” is FDA register and does not belong in an MDR document." },
 
  { doc:"Protocol", ch:"Ch. 7B / 10.2", dims:["spec","qty","hedge"], task:"Turn this topic into an endpoint a blinded statistician could execute without emailing you.",
    before:"The primary endpoint is improvement in wound healing at the end of the study.",
-   model:"The primary endpoint is the proportion of subjects achieving complete wound closure (100% re-epithelialization, no drainage, confirmed by digital planimetry) by Week 12, analyzed on an intention-to-treat basis with last-observation-carried-forward imputation for missing assessments; arms compared by two-sided Fisher’s exact test at α=0.05.",
-   why:"“Improvement” and “end of the study” are undefined and unmeasurable. The revision specifies the metric, the measurement method, the timepoint, the analysis population, the missing-data handling, and the test — everything needed to execute the analysis without a clarifying email." },
+   model:"The primary endpoint is the proportion of subjects achieving complete wound closure (100% re-epithelialization, no drainage, confirmed by digital planimetry) by Week 12, analyzed on all randomized subjects, with subjects who withdraw, are lost to follow-up, or start a prohibited rescue therapy before Week 12 counted as not achieving closure; arms compared by two-sided Fisher’s exact test at α=0.05.",
+   why:"“Improvement” and “end of the study” are undefined and unmeasurable. The revision specifies the metric, the measurement method, the timepoint, the analysis population, the test, and — the element most often missed — what happens to subjects who withdraw or switch therapy. That last piece is a strategy for intercurrent events rather than a bare imputation rule, which is the direction both ICH E9(R1) and ISO 14155:2026 push writers." },
 
  { doc:"PSUR", ch:"Ch. 7C / 12.2", task:"Rewrite so the trend is interpretable and the conclusion is earned rather than asserted.",
    before:"A total of 18 complaints were received during the reporting period, which is not considered significant.",
@@ -660,13 +675,13 @@ var DRILLS = [
 
  { doc:"IFU", ch:"Ch. 7D / 13.2", dims:["spec","src","hedge"], task:"Rewrite this warning so a first-time user knows what to do, not merely what to fear.",
    before:"Use with caution in patients with sensitive skin.",
-   model:"Do not apply to broken, infected, or irritated skin. If redness, itching, or swelling develops during use, discontinue application and consult a healthcare professional. Patients with a known adhesive allergy should not use this product; see Section 4.2 for a full list of adhesive components.",
+   model:"Do not use on wounds with clinical signs of infection (purulence, spreading erythema, or malodour) until the infection has been treated. Apply only to the wound bed and the intact skin surrounding it; do not apply the adhesive border over macerated or excoriated skin. If redness, itching, or swelling develops on the surrounding skin during use, remove the dressing and consult a healthcare professional. Do not use in patients with a known allergy to silicone adhesives; see Section 4.2 for the full adhesive composition.",
    why:"“Use with caution” gives the clinician no action to take. The revision states the contraindication, the specific signs to watch for, the action to take if they occur, and points to the information needed to assess allergy risk in advance." },
 
  { doc:"HA response", ch:"Ch. 7E / 15.2", task:"Rewrite so it contains all four elements of a complete response, in order.",
    before:"We appreciate the reviewer’s comment and would like to note that our internal processes are robust and we are committed to continuous improvement. We will consider the feedback provided.",
-   model:"We agree that the complaint-handling timeline for CAPA-2026-011 exceeded the 30-day target defined in SOP-QA-014 (actual: 47 days). Root cause: a staffing gap in the complaint-intake queue during Q1 2026, now resolved (2 additional trained reviewers onboarded March 2026, evidence attached as Appendix C). We have added a weekly aging-report review to SOP-QA-014 Rev. 3 (effective April 2026) to prevent recurrence.",
-   why:"The bad version answers nothing — the reviewer cannot tell whether the sponsor agrees, disagrees, or even understood the finding. The revision states agreement, the specific root cause, the corrective action already taken, and the preventive control going forward." },
+   model:"We agree that the complaint-handling timeline for CAPA-2026-011 exceeded the 30-day target defined in SOP-QA-014 (actual: 47 days). Root cause: SOP-QA-014 defined the 30-day target but specified no workload threshold, ageing trigger, or escalation path, so a Q1 2026 intake backlog accumulated without surfacing to a decision-maker until the target had already been missed. The immediate trigger was a vacancy in the intake queue; the systemic cause is that the procedure had no capacity control to detect it. Corrective action: the backlog was cleared and two additional reviewers were trained (March 2026, evidence attached as Appendix C). Preventive action: SOP-QA-014 Rev. 3 (effective April 2026) adds a weekly ageing report, a defined open-complaint threshold, and mandatory escalation to the Quality Manager when it is exceeded.",
+   why:"The bad version answers nothing — the reviewer cannot tell whether the sponsor agrees, disagrees, or even understood the finding. The revision states agreement, separates the immediate trigger from the systemic cause, and gives both the corrective action already taken and the preventive control that stops recurrence. Note what it does <em>not</em> say: “a staffing gap” on its own is an immediate cause, and a reviewer will ask why the procedure allowed one to go undetected for 47 days." },
 
  { doc:"CER", ch:"Ch. 9.4", task:"Rewrite this literature search description so a reviewer could re-run it and land within a few records of your result set.",
    before:"A literature search was performed using major databases to identify relevant publications on the device and similar technologies. Articles were screened for relevance and the most pertinent were included.",
@@ -683,12 +698,12 @@ var DRILLS = [
    model:"Subjects with any of the following will be excluded: HbA1c > 10.0% at screening (central laboratory); ankle-brachial index < 0.7 or > 1.3; active osteomyelitis at the wound site confirmed by imaging; systemic corticosteroid use exceeding 10 mg/day prednisone-equivalent within 30 days of screening.",
    why:"“Significant comorbidities” delegates the eligibility definition out of the protocol and into investigator judgment, which produces inconsistent populations across sites and an uninterpretable pooled analysis. Each replacement rests on an observable fact: a lab value, a measurement, an imaging finding, a prescription record." },
 
- { doc:"CSR", ch:"Ch. 11.2", dims:["spec","qty","hedge"], task:"Rewrite so every pre-specified endpoint is reported with equal rigor. Primary met (68% vs 41%, p=0.003); secondary 1 met (median 34 vs 52 days, p=0.01); secondary 2 not met (−18.2 vs −15.4 mm, p=0.21).",
+ { doc:"CIR", ch:"Ch. 11.2", dims:["spec","qty","hedge"], task:"Rewrite so every pre-specified endpoint is reported with equal rigor. Primary met (68% vs 41%, p=0.003); secondary 1 met (median 34 vs 52 days, p=0.01); secondary 2 not met (−18.2 vs −15.4 mm, p=0.21).",
    before:"While the primary endpoint was met, the study provided additional supportive evidence of the device’s benefits across multiple measures.",
    model:"The primary endpoint (complete wound closure by Week 12) was met: 68% versus 41% comparator (p=0.003). Of two pre-specified secondary endpoints, time-to-closure was significantly improved (median 34 versus 52 days, p=0.01); reduction in wound-related pain (VAS) did not differ between arms (mean change −18.2 versus −15.4 mm, p=0.21). No multiplicity adjustment was pre-specified; secondary results are descriptive.",
-   why:"The original dissolves a failed pre-specified endpoint into “additional supportive evidence” — a move detectable in thirty seconds by comparing the CSR against the protocol’s endpoint list. Reporting the negative plainly makes the positive primary more believable, not less." },
+   why:"The original dissolves a failed pre-specified endpoint into “additional supportive evidence” — a move detectable in thirty seconds by comparing the CIR against the protocol’s endpoint list. Reporting the negative plainly makes the positive primary more believable, not less." },
 
- { doc:"CSR", ch:"Ch. 11.4", task:"Rewrite so the claim about deviations is demonstrated rather than asserted. 14/178 had major deviations: 6 eligibility, 5 out-of-window, 3 prohibited medication.",
+ { doc:"CIR", ch:"Ch. 11.4", task:"Rewrite so the claim about deviations is demonstrated rather than asserted. 14/178 had major deviations: 6 eligibility, 5 out-of-window, 3 prohibited medication.",
    before:"Protocol deviations occurred during the study but did not impact the study conclusions.",
    model:"Major protocol deviations occurred in 14/178 treated subjects (7.9%): 6 eligibility violations, 5 primary endpoint assessments outside the Week 12 ±5-day window, and 3 instances of prohibited systemic corticosteroid use. All 14 remained in the ITT population per Protocol Section 11.3 and were excluded from the per-protocol population (N=164). The pre-specified per-protocol sensitivity analysis yielded a 26-percentage-point difference (69% versus 43%, p=0.004), concordant with the ITT result of 27 points. Deviation classification was performed by the Medical Monitor before database lock (Table 9).",
    why:"A generic assurance that deviations did not affect conclusions, without the sensitivity analysis that supports it, will not satisfy an experienced reviewer — and the question it provokes costs more time than the analysis would have." },
@@ -718,9 +733,9 @@ var DRILLS = [
    model:"Objective: characterize the rate of adhesive-related skin reactions in real-world use beyond the 90-day pivotal follow-up window. Method: prospective registry, target enrollment 300 subjects across 8 sites, 12-month follow-up; primary metric incidence of adhesive-related dermatologic adverse events per 100 patient-months. Success criterion: incidence within the 95% CI established in the pivotal study (Section 8.2); exceeding it triggers a CER update and risk file review.",
    why:"An objective to “gather data” cannot fail and therefore proves nothing. An objective with a pre-defined success criterion can fail, which is precisely what makes it evidence." },
 
- { doc:"HA response", ch:"Ch. 15.3", task:"The finding is correct: the protocol pre-specified three secondary endpoints and the CSR reported two. Rewrite this defensive response.",
-   before:"We respectfully note that the third measure referenced was always intended as an exploratory analysis, and its omission does not affect the interpretation of the study results. The submitted CSR is considered complete and accurate.",
-   model:"We agree with the finding. Protocol DEV-204 v2.0 Section 8.3 pre-specified three secondary endpoints and the CSR reported two. The third — ulcer recurrence at 6 months — was not met (14% device versus 12% comparator, p=0.62) and was incorrectly omitted during drafting. Root cause: the CSR endpoint section was built from the SAP output package rather than from the protocol’s endpoint list, and SOP-CW-006 did not require a protocol-to-CSR reconciliation step. CSR Rev. 02 (attached) reports all three endpoints at Section 11.4. Preventive action: SOP-CW-006 Rev. 04 (effective 1 September 2026) adds a mandatory reconciliation signed by the study statistician and medical writer.",
+ { doc:"HA response", ch:"Ch. 15.3", task:"The finding is correct: the protocol pre-specified three secondary endpoints and the CIR reported two. Rewrite this defensive response.",
+   before:"We respectfully note that the third measure referenced was always intended as an exploratory analysis, and its omission does not affect the interpretation of the study results. The submitted CIR is considered complete and accurate.",
+   model:"We agree with the finding. Protocol DEV-204 v2.0 Section 8.3 pre-specified three secondary endpoints and the CIR reported two. The third — ulcer recurrence at 6 months — was not met (14% device versus 12% comparator, p=0.62) and was incorrectly omitted during drafting. Root cause: the CIR endpoint section was built from the SAP output package rather than from the protocol’s endpoint list, and SOP-CW-006 did not require a protocol-to-CIR reconciliation step. CIR Rev. 02 (attached) reports all three endpoints at Section 11.4. Preventive action: SOP-CW-006 Rev. 04 (effective 1 September 2026) adds a mandatory reconciliation signed by the study statistician and medical writer.",
    why:"The original asserts that a pre-specified endpoint was “always intended” as exploratory — a claim the reviewer falsifies in thirty seconds by opening the protocol. Once they do, every other statement in the submission becomes suspect. Conceding costs one paragraph; being caught costs the file." },
 
  { doc:"Narrative", ch:"Ch. 16.2", task:"Rewrite so observed fact and interpretation are in clearly separate places.",
@@ -748,7 +763,7 @@ var BUILDERS = [
    {k:"bsrc", label:"Source for the benefit finding", hint:"Study ID, N, and section or table.", req:true, type:"text", ex:"Study DEV-204, N=186, Section 8.1 Table 7"},
    {k:"lit", label:"Literature corroboration", hint:"How many sources, what range, where.", req:false, type:"text", ex:"14 publications reporting closure of 58–71% in comparable populations (Section 6)"},
    {k:"safety", label:"Safety findings with denominators", req:true, type:"text", ex:"four non-serious device-related application-site reactions in 186 subjects (2.2%); no device-related serious adverse events"},
-   {k:"ssrc", label:"Source for the safety findings", req:true, type:"text", ex:"CSR Section 12.2 Table 14; PSUR-2026-01 Section 4.2"},
+   {k:"ssrc", label:"Source for the safety findings", req:true, type:"text", ex:"CIR Section 12.2 Table 14; PSUR-2026-01 Section 4.2"},
    {k:"risks", label:"Residual risks and risk-file reference", req:true, type:"text", ex:"two residual risks (H-05 skin irritation, H-07 infection), both accepted and mitigated by labeling per RMF-014 Section 5"},
    {k:"horizon", label:"Evidence horizon", hint:"The boundary beyond which you have no data. Naming it is what keeps the conclusion honest.", req:true, type:"text", ex:"12 weeks"},
    {k:"open", label:"Open question and where it is addressed", req:false, type:"text", ex:"long-term durability beyond 12 weeks; PMCF registry, Section 10"}
@@ -773,7 +788,7 @@ var BUILDERS = [
    {k:"method", label:"Measurement method and instrument", req:true, type:"text", ex:"digital planimetry (Silhouette® imaging, calibrated monthly)"},
    {k:"time", label:"Timepoint or window", req:true, type:"text", ex:"Week 12 (±5 days)"},
    {k:"pop", label:"Analysis population", req:true, type:"select", opts:["intention-to-treat (all treated subjects)","per-protocol","modified intention-to-treat","both ITT (primary) and per-protocol (sensitivity)"], ex:"intention-to-treat (all treated subjects)"},
-   {k:"miss", label:"Missing-data handling", req:true, type:"select", opts:["missing treated as treatment failure","last observation carried forward","multiple imputation (m=20, MAR assumption)","complete-case with pre-specified sensitivity analysis"], ex:"missing treated as treatment failure"},
+   {k:"miss", label:"Intercurrent-event and missing-data strategy", hint:"Say what happens when a subject withdraws, switches therapy or is lost — not just how a blank cell gets filled.", req:true, type:"select", opts:["subjects with the intercurrent event counted as treatment failures (composite strategy)","mixed model for repeated measures, using all observed data","multiple imputation (m=20, MAR assumption) with a tipping-point sensitivity analysis","treatment policy strategy — outcomes used regardless of adherence","last observation carried forward, justified in the protocol with a pre-specified sensitivity analysis"], ex:"subjects with the intercurrent event counted as treatment failures (composite strategy)"},
    {k:"test", label:"Statistical test", req:true, type:"text", ex:"two-sided Fisher’s exact test"},
    {k:"alpha", label:"Significance threshold and multiplicity", req:true, type:"text", ex:"α=0.05; no multiplicity adjustment — secondary endpoints are descriptive"}
   ],
@@ -886,7 +901,7 @@ var CHECKLISTS = [
  "Equivalence claim addresses access to the equivalent device's technical documentation",
  "PMCF findings from the current period are integrated, not just appended",
  "Unfavorable literature is discussed with its applicability characterized",
- "Risk-benefit determination is an explicit paragraph, not implied by the data presented",
+ "Benefit-risk determination is an explicit paragraph, not implied by the data presented",
  "Every claim also appears, consistently, in the IFU and labeling",
  "The conclusion introduces no claim, scope, or population not argued in the body"]},
 { name:"Clinical Investigation Plan / Protocol", note:"", items:[
@@ -897,7 +912,7 @@ var CHECKLISTS = [
  "Missing-data method is pre-specified by name",
  "Deviation categories (major/minor) and their analytical handling are defined before enrollment starts",
  "Statistical analysis plan is pre-specified, not deferred in full to a later document"]},
-{ name:"Clinical Study Report", note:"", items:[
+{ name:"Clinical Investigation Report", note:"", items:[
  "All pre-specified endpoints reported, met or not, with equal rigor",
  "Results are reported against the protocol's original endpoint list, not a revised one",
  "Subject disposition reconciles exactly across screened, enrolled, treated, analyzed, and completed",
@@ -950,7 +965,7 @@ var GLOSSARY = [
  ["CAPA","Corrective and Preventive Action — the QMS record documenting root cause and the fix for a nonconformity."],
  ["CER","Clinical Evaluation Report — the MDR document arguing device safety and performance from clinical evidence."],
  ["CIP","Clinical Investigation Plan — the protocol governing a device clinical study."],
- ["CSR","Clinical Study Report — the complete report of a clinical investigation’s conduct and results."],
+ ["CIR","Clinical Investigation Report — the complete report of a clinical investigation’s conduct and results."],
  ["Equivalence","A formal MDR argument that clinical data from another device can support the device under evaluation, based on matching clinical, technical, and biological characteristics."],
  ["Hazard","Under ISO 14971, a potential source of harm — distinct from the hazardous situation that exposes someone to it and from the harm that results."],
  ["Hazardous situation","Under ISO 14971, circumstances in which people, property, or the environment are exposed to a hazard."],

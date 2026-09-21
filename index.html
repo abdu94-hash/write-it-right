@@ -358,10 +358,10 @@ th.wt-act, td.wt-act{width:34px; text-align:center}
 <main class="wrap">
 
 <!-- ================= 1. ANALYZER ================= -->
-<section class="panel" id="p-analyzer" role="tabpanel" aria-labelledby="tab-analyzer">
+<section class="panel" id="p-analyzer" role="tabpanel" aria-labeledby="tab-analyzer">
   <div class="intro">
     <h2>Vagueness &amp; Hedge-Word Analyzer</h2>
-    <p>Paste a paragraph from a live draft — a CER conclusion, a PSUR trend statement, an IFU warning, a response to a finding. The analyzer flags the recurring defects catalogued in Chapter 5 and labels each with the section of the book that covers it.</p>
+    <p>Paste a paragraph from a live draft — a CER conclusion, a PSUR trend statement, an IFU warning, a response to a finding. The analyzer flags the recurring defects catalogued in Chapter 9 and labels each with the section of the book that covers it.</p>
     <p><strong>What it checks and what it cannot.</strong> This is a pattern checker for the <em>form</em> of regulatory prose. It cannot judge whether your clinical reasoning is sound, whether a cited study supports your claim, or whether a number is correct. A clean score means the sentence-level habits are right — not that the document is.</p>
   </div>
 
@@ -409,7 +409,7 @@ th.wt-act, td.wt-act{width:34px; text-align:center}
 </section>
 
 <!-- ================= 2. DRILLS ================= -->
-<section class="panel" id="p-drills" role="tabpanel" aria-labelledby="tab-drills" hidden>
+<section class="panel" id="p-drills" role="tabpanel" aria-labeledby="tab-drills" hidden>
   <div class="intro">
     <h2>Rewrite Drills</h2>
     <p>A weak passage is shown. You write the defensible version, then the drill scores it on four dimensions and shows the model answer. Write before you reveal — reading a good rewrite teaches far less than producing one and finding out where yours fell short.</p>
@@ -451,7 +451,7 @@ th.wt-act, td.wt-act{width:34px; text-align:center}
 </section>
 
 <!-- ================= 3. BUILDERS ================= -->
-<section class="panel" id="p-builders" role="tabpanel" aria-labelledby="tab-builders" hidden>
+<section class="panel" id="p-builders" role="tabpanel" aria-labeledby="tab-builders" hidden>
   <div class="intro">
     <h2>Document Builders</h2>
     <p>Guided builders for the six passages that recur most across the book. Each one refuses to produce output until its required fields are filled — which is the point. An endpoint with no timepoint, or a response to a finding with no root cause, is not a draft to be improved later; it is a passage that cannot be written yet.</p>
@@ -476,7 +476,7 @@ th.wt-act, td.wt-act{width:34px; text-align:center}
 </section>
 
 <!-- ================= 4. CHECKLISTS ================= -->
-<section class="panel" id="p-checklists" role="tabpanel" aria-labelledby="tab-checklists" hidden>
+<section class="panel" id="p-checklists" role="tabpanel" aria-labeledby="tab-checklists" hidden>
   <div class="intro">
     <h2>Checklist Runner</h2>
     <p>All eight checklists from Appendix A, live. Tick items, add a note against any item that needed work, then export a dated summary you can attach to a review record. Run the universal checklist against every document; run the document-specific one on top of it.</p>
@@ -492,7 +492,7 @@ th.wt-act, td.wt-act{width:34px; text-align:center}
 </section>
 
 <!-- ================= 5. WORKING TOOLS ================= -->
-<section class="panel" id="p-worktools" role="tabpanel" aria-labelledby="tab-worktools" hidden>
+<section class="panel" id="p-worktools" role="tabpanel" aria-labeledby="tab-worktools" hidden>
   <div class="intro">
     <h2>Working Tools</h2>
     <p>Seven fillable grids for the work itself, rather than for practice. Each one is a table you add rows to, and each exports to CSV so it can go into a review record, a technical file, or a spreadsheet your team already uses.</p>
@@ -521,7 +521,7 @@ th.wt-act, td.wt-act{width:34px; text-align:center}
 </section>
 
 <!-- ================= 6. QUIZ ================= -->
-<section class="panel" id="p-quiz" role="tabpanel" aria-labelledby="tab-quiz" hidden>
+<section class="panel" id="p-quiz" role="tabpanel" aria-labeledby="tab-quiz" hidden>
   <div class="intro">
     <h2>Glossary Quiz</h2>
     <p>Sixteen terms from Appendix B, asked in both directions. Terms you get wrong are put back in the queue and asked again later in the round — the round ends when you have answered every term correctly once, not when you have seen every card.</p>
@@ -558,32 +558,32 @@ th.wt-act, td.wt-act{width:34px; text-align:center}
    ========================================================================= */
 
 var TOKEN_RULES = [
- { id:"vague-verb", cat:"Vague verb", sev:"high", ref:"Ch. 4.2 / 5.6",
+ { id:"vague-verb", cat:"Vague verb", sev:"high", ref:"Ch. 5.1 / 5.6",
    re:/\b(address(?:ed|es|ing)?|ensur(?:e|ed|es|ing)|utiliz(?:e|ed|es|ing)|facilitat(?:e|ed|es|ing)|manag(?:ed|es|ing)\s+appropriately|handled|deal[t]?\s+with|look(?:ed)?\s+at|review(?:ed)?\s+and\s+accept(?:ed)?)\b/gi,
    why:"A vague verb lets the sentence avoid committing to what actually happened. “Addressed” could mean eliminated, mitigated, transferred, or merely documented — a reviewer cannot tell, and in a risk management file that ambiguity is disqualifying.",
    fix:"Name the action: eliminated by [design change] / reduced as far as possible via [mitigation] / accepted as residual risk per [rationale] / verified against [clause] by [test], recorded in [report]." },
 
- { id:"overclaim", cat:"Overclaiming", sev:"high", ref:"Ch. 5.1",
+ { id:"overclaim", cat:"Overclaiming", sev:"high", ref:"Ch. 9.1",
    re:/\b(proven|proves|guarantee[sd]?|eliminat(?:es|ed|ing)\s+(?:the\s+)?risk|100%\s+(?:safe|effective|reliable)|complete(?:ly)?\s+safe|no\s+risk|risk[- ]free|always\s+prevents?|never\s+fails?|safe\s+and\s+effective|fully\s+validated\s+and\s+safe)\b/gi,
    why:"Language stronger than the evidence supports. Reviewers are trained specifically to hunt for this gap, because it is the fastest way to find where a sponsor’s confidence has outrun its data.",
    fix:"Match the claim to the evidence: “demonstrated in [population] through [timepoint]”, “reduces”, “is designed to minimize”. Note that “safe and effective” is also FDA register and does not belong in an MDR document." },
 
- { id:"untraceable", cat:"Untraceable claim", sev:"high", ref:"Ch. 3.3",
+ { id:"untraceable", cat:"Untraceable claim", sev:"high", ref:"Ch. 3.2",
    re:/\b(clinical experience has shown|it is (?:well[- ])?(?:established|known|accepted|recognized)|widely (?:accepted|recognized|reported)|studies have shown|literature (?:shows|suggests|indicates)|data on file|as is known|generally accepted that|has been shown to be)\b/gi,
    why:"Experienced reviewers read untraceable phrases as a confession that the underlying evidence is weaker than the sentence implies. The reviewer’s real question, sentence by sentence, is: where does this come from, and can I verify it independently?",
    fix:"Cite it: a study ID, report number, section, or table reference. If no citation exists, the claim cannot be made in this form." },
 
- { id:"passive-decision", cat:"Accountability laundering", sev:"high", ref:"Ch. 5.6 / 4.4",
+ { id:"passive-decision", cat:"Accountability laundering", sev:"high", ref:"Ch. 9.6 / 4.4",
    re:/\b(it was (?:determined|decided|concluded|agreed|considered|felt|judged)|(?:was|were) deemed|(?:was|were) considered (?:acceptable|adequate|satisfactory|sufficient|appropriate|not necessary)|a decision was (?:made|taken)|no (?:further )?action was (?:required|warranted|deemed necessary))\b/gi,
    why:"Passive voice used around a decision erases who is accountable for it. This is functionally different from ordinary passive voice used for process description, and QMS auditors are specifically trained to notice it.",
    fix:"Name the role, the date, and the record: “The Post-Market Surveillance Committee determined on [date] (minutes [ref]) that…”" },
 
- { id:"empty-qualifier", cat:"Empty qualifier", sev:"high", ref:"Ch. 13.2 / 4.2",
+ { id:"empty-qualifier", cat:"Empty qualifier", sev:"high", ref:"Ch. 15.2 / 4.2",
    re:/\b(as (?:appropriate|necessary|required|needed)|where applicable|in accordance with applicable (?:regulations|requirements|standards)|per (?:standard|normal|usual) (?:practice|procedure)|properly|suitably|adequately|accordingly)\b/gi,
    why:"An empty qualifier pushes a decision the manufacturer should have made onto the reader — in an IFU, onto a user with less information than you have. It is usually a note the author left for themselves and never came back to finish.",
    fix:"State the actual requirement: the agent, the frequency, the container, the clause, the jurisdiction-specific route." },
 
- { id:"unquantified", cat:"Unquantified magnitude", sev:"med", ref:"Ch. 3.2 / 8",
+ { id:"unquantified", cat:"Unquantified magnitude", sev:"med", ref:"Ch. 3.1 / 8",
    re:/\b(significant(?:ly)?|substantial(?:ly)?|considerable|considerably|minimal|negligible|excellent|robust|comprehensive|extensive|numerous|various|a variety of|several|many|most of the|the majority|favou?rable results)\b/gi,
    notIfSentence:/\bp\s?[=<>]\s?0?\.\d|\bstatistical(?:ly)?\b|\b95%\s?CI\b|\balpha\b|\b\u03B1\b/i,
    why:"A magnitude word with no number behind it asserts the reader’s judgment instead of supplying the basis for it. “Not considered significant” is significance by fiat.",
@@ -594,12 +594,12 @@ var TOKEN_RULES = [
    why:"Only makes sense to a reader who was in the room. The future auditor reads this cold, years later, with no institutional memory — and needs it to stand on its own.",
    fix:"Name the record: meeting minutes reference and date, or the document and section where the agreement is captured." },
 
- { id:"hedge", cat:"Hedge word", sev:"low", ref:"Ch. 5.2",
+ { id:"hedge", cat:"Hedge word", sev:"low", ref:"Ch. 9.2",
    re:/\b(may(?:\s+possibly)?|might|could(?:\s+potentially)?|potentially|possibly|perhaps|appears? to|seems? to|tends? to|arguably|somewhat|in some cases|to some extent|it is thought|suggests? that)\b/gi,
    why:"A single hedge is often correct. Stacked hedges on a well-supported finding hide a real strength and force the reviewer to do the confidence-calibration work the writer should have done.",
    fix:"If the data supports the finding, state it plainly with its magnitude and interval. If it does not, say that instead — do not split the difference." },
 
- { id:"open-ended", cat:"Unresolved close", sev:"high", ref:"Ch. 16 / 15.2",
+ { id:"open-ended", cat:"Unresolved close", sev:"high", ref:"Ch. 18 / 15.2",
    re:/\b(investigation (?:is )?(?:ongoing|continues|in progress)|will be (?:provided|determined|detailed|addressed) (?:when available|in due course|at a later (?:date|stage))|to be determined|\bTBD\b|will (?:look|be looking) into|under (?:review|investigation) at this time|no further action (?:is )?(?:required|needed) at this time)\b/gi,
    why:"An open item with no date and no owner reads as an unmanaged safety signal. If a report must be filed before investigation concludes, state what is known, what is not yet known, and the target date for the supplemental report.",
    fix:"Add: what is known, what is not, the interim risk position and its basis, a named owner, and a specific date by which the gap closes." },
@@ -615,17 +615,17 @@ var TOKEN_RULES = [
    fix:"If this document serves one jurisdiction, confirm no terms from the other appear. If it serves both, check every recurring claim against a single source-of-truth claims table." },
 
 
- { id:"alarp", cat:"ALARP under EU MDR", sev:"high", ref:"Ch. 4.2",
+ { id:"alarp", cat:"ALARP under EU MDR", sev:"high", ref:"Ch. 5.1",
    re:/\b(ALARP|as low as reasonably practicable)\b/gi,
    why:"ALARP lets risk reduction stop when further reduction would be grossly disproportionate in cost or effort. EU MDR does not permit that trade: Annex I, Chapter I, point 2 requires risks to be reduced \u201Cas far as possible without adversely affecting the benefit-risk ratio\u201D, and the word ALARP appears nowhere in the Regulation.",
    fix:"Write \u201Creduced as far as possible\u201D (AFAP), then state the residual risk and its acceptability against the benefit. If this document serves a market where ALARP is the applicable standard, dismiss this flag." },
 
- { id:"maude-submission", cat:"Incorrect reporting vocabulary", sev:"high", ref:"Ch. 16",
+ { id:"maude-submission", cat:"Incorrect reporting vocabulary", sev:"high", ref:"Ch. 18",
    re:/\bMAUDE\s+(submission|report|filing)s?\b|\bsubmit(?:ted|ting)?\s+(?:a\s+|an\s+)?MAUDE\b/gi,
    why:"Nobody submits to MAUDE. Manufacturers submit a Medical Device Report (MDR) under 21 CFR Part 803, electronically through eMDR; MAUDE is the public database those reports populate.",
    fix:"Write \u201Csubmitted a Medical Device Report under 21 CFR Part 803 via eMDR\u201D. The EU equivalent is a Manufacturer Incident Report under Article 87 \u2014 and there, \u201CMDR\u201D means Regulation (EU) 2017/745 instead." },
 
- { id:"locf", cat:"Unjustified LOCF", sev:"med", ref:"Ch. 10.4",
+ { id:"locf", cat:"Unjustified LOCF", sev:"med", ref:"Ch. 12.4",
    re:/\b(LOCF|last[- ]observation[- ]carried[- ]forward)\b/gi,
    why:"LOCF gives an unbiased estimate only under restrictive assumptions, and EMA notes that in progressively deteriorating conditions it is likely to give overly optimistic results. It is not prohibited \u2014 it can be conservative where spontaneous improvement is expected \u2014 but reaching for it as a default invites the question of why.",
    fix:"Define the estimand first (population, endpoint, treatment condition, summary measure, and a strategy for each intercurrent event), then choose an analysis that matches it. If LOCF is genuinely right, say why and pre-specify a sensitivity analysis." },
@@ -639,7 +639,7 @@ var TOKEN_RULES = [
    why:"Two or more decimal places on a percentage implies a resolution most device samples cannot support. With n=15 every possible result is a fifteenth — 11/15 is 73.3%, 12/15 is 80.0% — so a figure like “73.41%” is not merely over-precise, it is unreachable, and a reviewer who does the division will wonder what was actually counted.",
    fix:"Match precision to the measurement. Report the fraction, or one decimal place with a confidence interval." },
 
- { id:"marketing", cat:"Marketing register", sev:"med", ref:"Ch. 9.1",
+ { id:"marketing", cat:"Marketing register", sev:"med", ref:"Ch. 11.1",
    re:/\b(valuable addition|state[- ]of[- ]the[- ]art (?:solution|technology)|cutting[- ]edge|innovative|revolutionary|gold standard|best[- ]in[- ]class|market[- ]leading|unique(?:ly)? (?:positioned|able)|armamentarium)\b/gi,
    why:"Promotional register inside a regulatory document. A benefit-risk determination is a reasoned conclusion, not an endorsement, and marketing language signals to an assessor that the section was not written for them.",
    fix:"Replace with the evidentiary statement the marketing phrase was standing in for — or delete it; most such phrases carry no content to preserve." }
@@ -651,7 +651,7 @@ var COUNT_NOUN = /\b(complaint|complaints|event|events|adverse event|adverse eve
 var HAS_DENOM = /(%|\bper\s+\d|\bper\s+(?:unit|patient|device|100|1,000|1000)|\d\s*(?:out of|of)\s*\d|\d\s*\/\s*\d|\bn\s?=\s?\d|\bN\s?=\s?\d|\brate\b|\bunits (?:distributed|sold|in use)\b|\bpatient[- ]months\b|\bexposure\b|\bdenominator\b)/i;
 
 var DOC_RULES = [
- { id:"drift", cat:"Terminology drift", sev:"med", ref:"Ch. 5.3",
+ { id:"drift", cat:"Terminology drift", sev:"med", ref:"Ch. 9.3",
    test:function(t){
      var alts=["the device","the system","the unit","the product","the apparatus","the instrument","the article"];
      var hits=[];
@@ -678,7 +678,7 @@ var DOC_RULES = [
 ];
 
 var SENTENCE_RULES = [
- { id:"hedge-stack", cat:"Stacked hedging", sev:"med", ref:"Ch. 5.2",
+ { id:"hedge-stack", cat:"Stacked hedging", sev:"med", ref:"Ch. 9.2",
    test:function(s){
      var m = s.match(HEDGE_RE);
      return (m && m.length >= 3) ? (m.length + " hedges in one sentence: " + m.join(", ")) : null;
@@ -686,7 +686,7 @@ var SENTENCE_RULES = [
    why:"Three or more hedges in a single sentence hedge a finding into invisibility. This weakens the benefit-risk argument for no evidentiary reason, and is often read by assessors as a signal that the author does not believe their own data.",
    fix:"Keep at most one qualifier, and make it carry real information (a population boundary, a confidence interval), not anxiety." },
 
- { id:"no-denominator", cat:"Number without denominator", sev:"high", ref:"Ch. 5.7 / 8.1",
+ { id:"no-denominator", cat:"Number without denominator", sev:"high", ref:"Ch. 9.7 / 8.1",
    test:function(s){
      if (!COUNT_NOUN.test(s)) return null;
      if (HAS_DENOM.test(s)) return null;
@@ -697,7 +697,7 @@ var SENTENCE_RULES = [
    why:"A raw count without the population or exposure it came from is uninterpretable. “12 complaints were received” is meaningless without knowing whether that is 12 out of 40 units or 12 out of 40,000.",
    fix:"Put the denominator in the same sentence or the same table row — not three pages earlier and not in an appendix." },
 
- { id:"long-bundle", cat:"Bundled sentence", sev:"med", ref:"Ch. 4.1",
+ { id:"long-bundle", cat:"Bundled sentence", sev:"med", ref:"Ch. 6.1",
    test:function(s){
      var w = s.trim().split(/\s+/).length;
      if (w < 42) return null;
@@ -718,92 +718,92 @@ var ANALYZER_SAMPLES = [
    REWRITE DRILLS
    ========================================================================= */
 var DRILLS = [
- { doc:"CER", ch:"Ch. 7A / 9.1", task:"Rewrite this CER conclusion so a reviewer can verify every element of it.",
+ { doc:"CER", ch:"Ch. 10A / 9.1", task:"Rewrite this CER conclusion so a reviewer can verify every element of it.",
    before:"In conclusion, the device is considered safe and effective based on the available clinical data and literature review, and no significant safety concerns were identified during the evaluation period.",
    model:"Based on 24 months of post-market clinical follow-up data (n=1,240 devices, Section 8) and a systematic literature review of 14 equivalent-device publications (Section 6), the benefit-risk profile of [Device] remains favorable for its intended use in the management of partial- and full-thickness wounds. Two device-related non-serious adverse events were reported (Table 12), both consistent with the risks characterized in the risk management file (RMF-014) and adequately mitigated by existing IFU warnings. No new risks or trends were identified that would alter the benefit-risk determination made at CE marking.",
    why:"The revision replaces vague adjectives (“safe and effective”, “significant”) with a sourced, quantified, scoped conclusion the reviewer can check against the cited sections and cross-check against the risk file. Note also that “safe and effective” is FDA register and does not belong in an MDR document." },
 
- { doc:"Protocol", ch:"Ch. 7B / 10.2", dims:["spec","qty","hedge"], task:"Turn this topic into an endpoint a blinded statistician could execute without emailing you.",
+ { doc:"Protocol", ch:"Ch. 10B / 10.2", dims:["spec","qty","hedge"], task:"Turn this topic into an endpoint a blinded statistician could execute without emailing you.",
    before:"The primary endpoint is improvement in wound healing at the end of the study.",
    model:"The primary endpoint is the proportion of subjects achieving complete wound closure (100% re-epithelialization, no drainage, confirmed by digital planimetry) by Week 12, analyzed on all randomized subjects, with subjects who withdraw, are lost to follow-up, or start a prohibited rescue therapy before Week 12 counted as not achieving closure; arms compared by two-sided Fisher’s exact test at α=0.05.",
    why:"“Improvement” and “end of the study” are undefined and unmeasurable. The revision specifies the metric, the measurement method, the timepoint, the analysis population, the test, and — the element most often missed — what happens to subjects who withdraw or switch therapy. That last piece is a strategy for intercurrent events rather than a bare imputation rule, which is the direction both ICH E9(R1) and ISO 14155:2026 push writers." },
 
- { doc:"PSUR", ch:"Ch. 7C / 12.2", task:"Rewrite so the trend is interpretable and the conclusion is earned rather than asserted.",
+ { doc:"PSUR", ch:"Ch. 10C / 12.2", task:"Rewrite so the trend is interpretable and the conclusion is earned rather than asserted.",
    before:"A total of 18 complaints were received during the reporting period, which is not considered significant.",
    model:"A total of 18 complaints were received during the reporting period (July 2025–June 2026) against 42,600 units distributed, a complaint rate of 0.042%, consistent with the prior period’s rate of 0.039% (Table 4). No new complaint category emerged; device-related malfunction complaints (n=3) were each investigated (CAPA-2026-011 through 013) and attributed to a single lot-specific packaging defect, since corrected.",
    why:"The revision adds the denominator that makes the rate interpretable, compares it to trend rather than asserting significance by fiat, and closes the loop by showing the malfunction complaints were investigated to root cause rather than dismissed." },
 
- { doc:"IFU", ch:"Ch. 7D / 13.2", dims:["spec","src","hedge"], task:"Rewrite this warning so a first-time user knows what to do, not merely what to fear.",
+ { doc:"IFU", ch:"Ch. 10D / 13.2", dims:["spec","src","hedge"], task:"Rewrite this warning so a first-time user knows what to do, not merely what to fear.",
    before:"Use with caution in patients with sensitive skin.",
    model:"Do not use on wounds with clinical signs of infection (purulence, spreading erythema, or malodour) until the infection has been treated. Apply only to the wound bed and the intact skin surrounding it; do not apply the adhesive border over macerated or excoriated skin. If redness, itching, or swelling develops on the surrounding skin during use, remove the dressing and consult a healthcare professional. Do not use in patients with a known allergy to silicone adhesives; see Section 4.2 for the full adhesive composition.",
    why:"“Use with caution” gives the clinician no action to take. The revision states the contraindication, the specific signs to watch for, the action to take if they occur, and points to the information needed to assess allergy risk in advance." },
 
- { doc:"HA response", ch:"Ch. 7E / 15.2", task:"Rewrite so it contains all four elements of a complete response, in order.",
+ { doc:"HA response", ch:"Ch. 10E / 15.2", task:"Rewrite so it contains all four elements of a complete response, in order.",
    before:"We appreciate the reviewer’s comment and would like to note that our internal processes are robust and we are committed to continuous improvement. We will consider the feedback provided.",
    model:"We agree that the complaint-handling timeline for CAPA-2026-011 exceeded the 30-day target defined in SOP-QA-014 (actual: 47 days). Root cause: SOP-QA-014 defined the 30-day target but specified no workload threshold, ageing trigger, or escalation path, so a Q1 2026 intake backlog accumulated without surfacing to a decision-maker until the target had already been missed. The immediate trigger was a vacancy in the intake queue; the systemic cause is that the procedure had no capacity control to detect it. Corrective action: the backlog was cleared and two additional reviewers were trained (March 2026, evidence attached as Appendix C). Preventive action: SOP-QA-014 Rev. 3 (effective April 2026) adds a weekly ageing report, a defined open-complaint threshold, and mandatory escalation to the Quality Manager when it is exceeded.",
    why:"The bad version answers nothing — the reviewer cannot tell whether the sponsor agrees, disagrees, or even understood the finding. The revision states agreement, separates the immediate trigger from the systemic cause, and gives both the corrective action already taken and the preventive control that stops recurrence. Note what it does <em>not</em> say: “a staffing gap” on its own is an immediate cause, and a reviewer will ask why the procedure allowed one to go undetected for 47 days." },
 
- { doc:"CER", ch:"Ch. 9.4", task:"Rewrite this literature search description so a reviewer could re-run it and land within a few records of your result set.",
+ { doc:"CER", ch:"Ch. 11.4", task:"Rewrite this literature search description so a reviewer could re-run it and land within a few records of your result set.",
    before:"A literature search was performed using major databases to identify relevant publications on the device and similar technologies. Articles were screened for relevance and the most pertinent were included.",
    model:"PubMed, Embase, and the Cochrane Central Register were searched on 14 March 2026 for publications from January 2015 to February 2026, no language restriction, using the string (“wound dressing” OR “wound closure device”) AND (“diabetic foot ulcer” OR “venous leg ulcer”) AND (“randomi*” OR “cohort” OR “case series”). Inclusion: human subjects, ≥10 subjects, reporting closure, healing time, or device-related adverse events. Of 312 records identified, 41 underwent full-text review and 14 met inclusion criteria (PRISMA flow, Appendix B; excluded records with reasons, Appendix C).",
    why:"Every parameter needed to reproduce the search is present, and the funnel from identified to included records is shown. The element writers most often omit is the last — the excluded records with reasons — without which a reviewer cannot tell whether an inconvenient paper was screened out on method or on conclusion." },
 
- { doc:"CER", ch:"Ch. 7 (state of the art)", task:"Rewrite this state-of-the-art paragraph. A section that contains no numbers has not described the state of the art.",
+ { doc:"CER", ch:"Ch. 10 (state of the art)", task:"Rewrite this state-of-the-art paragraph. A section that contains no numbers has not described the state of the art.",
    before:"Wound care has advanced considerably in recent years and there are many treatment options available. The device represents a modern approach that offers advantages over traditional methods.",
    model:"Standard care for Wagner Grade 1–2 diabetic foot ulcers comprises offloading, debridement, and moisture-retentive dressings, achieving complete closure in 24–41% of ulcers at 12 weeks across five randomized trials published 2015–2025 (Section 6.2, Table 3). The residual clinical need is the 59–76% of ulcers that remain open at 12 weeks, in whom infection and amputation risk rises with duration. The device is evaluated against a 12-week complete-closure benchmark drawn from this literature.",
    why:"The original is unfalsifiable and would read identically for any product in the category. The revision quantifies the standard of care, names the residual clinical need, and establishes the benchmark the device will be judged against — which is the entire job of this section." },
 
- { doc:"Protocol", ch:"Ch. 10.3", dims:["spec","qty","hedge"], task:"Rewrite this exclusion criterion so two coordinators at different sites would reach the same yes/no for the same patient.",
+ { doc:"Protocol", ch:"Ch. 12.3", dims:["spec","qty","hedge"], task:"Rewrite this exclusion criterion so two coordinators at different sites would reach the same yes/no for the same patient.",
    before:"Subjects with significant comorbidities that could affect wound healing will be excluded.",
    model:"Subjects with any of the following will be excluded: HbA1c > 10.0% at screening (central laboratory); ankle-brachial index < 0.7 or > 1.3; active osteomyelitis at the wound site confirmed by imaging; systemic corticosteroid use exceeding 10 mg/day prednisone-equivalent within 30 days of screening.",
    why:"“Significant comorbidities” delegates the eligibility definition out of the protocol and into investigator judgment, which produces inconsistent populations across sites and an uninterpretable pooled analysis. Each replacement rests on an observable fact: a lab value, a measurement, an imaging finding, a prescription record." },
 
- { doc:"CIR", ch:"Ch. 11.2", dims:["spec","qty","hedge"], task:"Rewrite so every pre-specified endpoint is reported with equal rigor. Primary met (68% vs 41%, p=0.003); secondary 1 met (median 34 vs 52 days, p=0.01); secondary 2 not met (−18.2 vs −15.4 mm, p=0.21).",
+ { doc:"CIR", ch:"Ch. 13.2", dims:["spec","qty","hedge"], task:"Rewrite so every pre-specified endpoint is reported with equal rigor. Primary met (68% vs 41%, p=0.003); secondary 1 met (median 34 vs 52 days, p=0.01); secondary 2 not met (−18.2 vs −15.4 mm, p=0.21).",
    before:"While the primary endpoint was met, the study provided additional supportive evidence of the device’s benefits across multiple measures.",
    model:"The primary endpoint (complete wound closure by Week 12) was met: 68% versus 41% comparator (p=0.003). Of two pre-specified secondary endpoints, time-to-closure was significantly improved (median 34 versus 52 days, p=0.01); reduction in wound-related pain (VAS) did not differ between arms (mean change −18.2 versus −15.4 mm, p=0.21). No multiplicity adjustment was pre-specified; secondary results are descriptive.",
    why:"The original dissolves a failed pre-specified endpoint into “additional supportive evidence” — a move detectable in thirty seconds by comparing the CIR against the protocol’s endpoint list. Reporting the negative plainly makes the positive primary more believable, not less." },
 
- { doc:"CIR", ch:"Ch. 11.4", task:"Rewrite so the claim about deviations is demonstrated rather than asserted. 14/178 had major deviations: 6 eligibility, 5 out-of-window, 3 prohibited medication.",
+ { doc:"CIR", ch:"Ch. 13.4", task:"Rewrite so the claim about deviations is demonstrated rather than asserted. 14/178 had major deviations: 6 eligibility, 5 out-of-window, 3 prohibited medication.",
    before:"Protocol deviations occurred during the study but did not impact the study conclusions.",
    model:"Major protocol deviations occurred in 14/178 treated subjects (7.9%): 6 eligibility violations, 5 primary endpoint assessments outside the Week 12 ±5-day window, and 3 instances of prohibited systemic corticosteroid use. All 14 remained in the ITT population per Protocol Section 11.3 and were excluded from the per-protocol population (N=164). The pre-specified per-protocol sensitivity analysis yielded a 26-percentage-point difference (69% versus 43%, p=0.004), concordant with the ITT result of 27 points. Deviation classification was performed by the Medical Monitor before database lock (Table 9).",
    why:"A generic assurance that deviations did not affect conclusions, without the sensitivity analysis that supports it, will not satisfy an experienced reviewer — and the question it provokes costs more time than the analysis would have." },
 
- { doc:"PSUR", ch:"Ch. 12.3", task:"Rewrite so the signal evaluation shows its reasoning instead of asserting a conclusion.",
+ { doc:"PSUR", ch:"Ch. 14.3", task:"Rewrite so the signal evaluation shows its reasoning instead of asserting a conclusion.",
    before:"An increase in skin irritation complaints was noted but is not considered a new safety signal.",
    model:"Skin irritation complaints increased from 4 (2024, rate 0.010%) to 11 (2025, rate 0.023%) against stable unit volume (Table 3). Batch analysis identified 8 of 11 events clustered in Lot 2025-B, associated with a supplier adhesive change (Deviation DEV-2025-047). This is assessed as a lot-specific manufacturing signal, not a device-design signal; it does not change the residual risk determination in RMF-014 Section 5.3 (skin irritation, already characterized). CAPA-2025-019 (supplier requalification) closed December 2025; no further complaints received in Q1 2026 post-CAPA.",
    why:"The revision shows the actual investigative reasoning — the numbers, the root-cause link, the explicit tie back to the risk management file, and evidence the CAPA worked — instead of asserting a conclusion with no visible analysis behind it." },
 
- { doc:"PSUR", ch:"Ch. 12.4", task:"Rewrite as the one unambiguous benefit-risk sentence this section requires. Nothing material changed this period.",
+ { doc:"PSUR", ch:"Ch. 14.4", task:"Rewrite as the one unambiguous benefit-risk sentence this section requires. Nothing material changed this period.",
    before:"Based on the data reviewed in this period, the benefit-risk profile of the device continues to be considered favorable and consistent with the previous assessment.",
    model:"The benefit-risk determination of CER Rev. 03 Section 13 is unchanged. Basis: the complaint rate this period (0.042%, 18/42,600 units) is consistent with the prior two periods (0.039%, 0.041%; Table 4); no new complaint category emerged; no new clinical literature published this period reported a failure mode not already characterized in RMF-014. No CER update is triggered outside the scheduled cycle.",
    why:"“Continues to be considered favorable” would be true of any period and therefore evidences no analysis — it is the exact phrasing that signals a re-dated document. Strip the numbers and dates from your own PSUR: if most of the remaining text is identical to last period’s, it is a template, not an analysis." },
 
- { doc:"IFU", ch:"Ch. 13.2", dims:["spec","qty","hedge"], task:"Rewrite this cleaning instruction so the task can be performed correctly without contacting the manufacturer.",
+ { doc:"IFU", ch:"Ch. 15.2", dims:["spec","qty","hedge"], task:"Rewrite this cleaning instruction so the task can be performed correctly without contacting the manufacturer.",
    before:"Clean the device regularly using appropriate cleaning agents.",
    model:"After each use, wipe all external surfaces with a 70% isopropyl alcohol wipe. Do not immerse the device in liquid. Allow to air-dry for at least 60 seconds before storage. Do not use bleach-based or abrasive cleaners; these may degrade the housing.",
    why:"“Regularly” and “appropriate” are undefined. The revision specifies frequency, agent, technique, drying time, and what not to use — everything needed to perform the task correctly the first time." },
 
- { doc:"IFU", ch:"Ch. 13.2 / 13.4", dims:["spec","hedge"], task:"Rewrite this warning as an action, and translate it into patient-facing register for a home caregiver.",
+ { doc:"IFU", ch:"Ch. 15.2 / 13.4", dims:["spec","hedge"], task:"Rewrite this warning as an action, and translate it into patient-facing register for a home caregiver.",
    before:"Discontinue use in the event of erythema, pruritus, or edema at the application site.",
    model:"Stop using this product and call your doctor or nurse if the skin around the dressing becomes red, itchy, or swollen. Do not put a new dressing on the same area until a doctor or nurse has looked at it.",
    why:"“Erythema” belongs in a CER; “redness” belongs in a patient-facing IFU. The revision also adds what not to do next — the instruction the original left the user to improvise under time pressure." },
 
- { doc:"PMCF", ch:"Ch. 14.1", task:"Rewrite this PMCF objective so it names the residual question, a method sized to answer it, and a pre-defined success criterion.",
+ { doc:"PMCF", ch:"Ch. 16.1", task:"Rewrite this PMCF objective so it names the residual question, a method sized to answer it, and a pre-defined success criterion.",
    before:"PMCF activities will be conducted to gather additional clinical data on the device to support ongoing clinical evaluation.",
    model:"Objective: characterize the rate of adhesive-related skin reactions in real-world use beyond the 90-day pivotal follow-up window. Method: prospective registry, target enrollment 300 subjects across 8 sites, 12-month follow-up; primary metric incidence of adhesive-related dermatologic adverse events per 100 patient-months. Success criterion: incidence within the 95% CI established in the pivotal study (Section 8.2); exceeding it triggers a CER update and risk file review.",
    why:"An objective to “gather data” cannot fail and therefore proves nothing. An objective with a pre-defined success criterion can fail, which is precisely what makes it evidence." },
 
- { doc:"HA response", ch:"Ch. 15.3", task:"The finding is correct: the protocol pre-specified three secondary endpoints and the CIR reported two. Rewrite this defensive response.",
+ { doc:"HA response", ch:"Ch. 17.3", task:"The finding is correct: the protocol pre-specified three secondary endpoints and the CIR reported two. Rewrite this defensive response.",
    before:"We respectfully note that the third measure referenced was always intended as an exploratory analysis, and its omission does not affect the interpretation of the study results. The submitted CIR is considered complete and accurate.",
    model:"We agree with the finding. Protocol DEV-204 v2.0 Section 8.3 pre-specified three secondary endpoints and the CIR reported two. The third — ulcer recurrence at 6 months — was not met (14% device versus 12% comparator, p=0.62) and was incorrectly omitted during drafting. Root cause: the CIR endpoint section was built from the SAP output package rather than from the protocol’s endpoint list, and SOP-CW-006 did not require a protocol-to-CIR reconciliation step. CIR Rev. 02 (attached) reports all three endpoints at Section 11.4. Preventive action: SOP-CW-006 Rev. 04 (effective 1 September 2026) adds a mandatory reconciliation signed by the study statistician and medical writer.",
    why:"The original asserts that a pre-specified endpoint was “always intended” as exploratory — a claim the reviewer falsifies in thirty seconds by opening the protocol. Once they do, every other statement in the submission becomes suspect. Conceding costs one paragraph; being caught costs the file." },
 
- { doc:"Narrative", ch:"Ch. 16.2", task:"Rewrite so observed fact and interpretation are in clearly separate places.",
-   before:"The device failed to deliver the programmed dose due to a pump malfunction, and the patient experienced an allergic reaction to the adhesive.",
-   model:"Observed: the reporting clinician stated that delivered volume over the 4-hour infusion was approximately 180 mL against a programmed 240 mL. The patient developed erythema and pruritus confined to the dressing contact area within 24 hours of application, resolving over 72 hours after removal. Assessment pending evaluation: underdelivery is consistent with pump mechanism failure, line occlusion, programming error, or reservoir underfill; device evaluation (DEV-EVAL-2026-019) is required to distinguish these. The skin findings’ distribution and time course are consistent with contact dermatitis; allergic versus irritant mechanism cannot be distinguished without patch testing, which was not performed.",
+ { doc:"Narrative", ch:"Ch. 18.2", task:"Rewrite so observed fact and interpretation are in clearly separate places.",
+   before:"The device failed to deliver the programd dose due to a pump malfunction, and the patient experienced an allergic reaction to the adhesive.",
+   model:"Observed: the reporting clinician stated that delivered volume over the 4-hour infusion was approximately 180 mL against a programd 240 mL. The patient developed erythema and pruritus confined to the dressing contact area within 24 hours of application, resolving over 72 hours after removal. Assessment pending evaluation: underdelivery is consistent with pump mechanism failure, line occlusion, programming error, or reservoir underfill; device evaluation (DEV-EVAL-2026-019) is required to distinguish these. The skin findings’ distribution and time course are consistent with contact dermatitis; allergic versus irritant mechanism cannot be distinguished without patch testing, which was not performed.",
    why:"Both original clauses assert mechanisms the reporter was not positioned to determine. A narrative that asserts a root cause before evaluation, and is later contradicted by the evaluation, creates an inconsistency in the vigilance record far more damaging than the original uncertainty." },
 
- { doc:"Narrative", ch:"Ch. 16 PITFALL", task:"The device evaluation needs 5 more weeks; the vigilance report is due in 3 days. Rewrite this closing.",
+ { doc:"Narrative", ch:"Ch. 18 PITFALL", task:"The device evaluation needs 5 more weeks; the vigilance report is due in 3 days. Rewrite this closing.",
    before:"Investigation is ongoing. A follow-up report will be provided when available.",
    model:"Known at time of reporting: the event as described in Section 2; the affected unit’s lot and manufacture date; that no other complaint has been received from this lot (2,100 units distributed as of 12 September 2026); and that the patient recovered without sequelae. Not yet known: the device evaluation result. The returned unit was received 10 September 2026; evaluation under DEV-EVAL-SOP-004 requires 5 weeks including reproduction testing. Interim risk assessment: the failure mode is provisionally mapped to hazard H-09 (RMF-014, residual risk accepted, severity Moderate); no field action is indicated on the basis that no lot-level or product-level signal is present. Supplemental report will be submitted by 24 October 2026. Owner: [name], Complaint Investigation Lead.",
    why:"Both versions admit the investigation is open. The difference is that this one states what is known, what is not, what interim risk position was taken and on what basis, and a date by which the gap closes. An open item with a date and an owner is a managed investigation; without them it is an unmanaged safety signal." }
@@ -814,7 +814,7 @@ var DRILLS = [
    f = field: {k, label, hint, req, type:"text"|"area"|"select", opts, ex}
    ========================================================================= */
 var BUILDERS = [
-{ id:"cer", name:"CER Conclusion", ref:"Ch. 9",
+{ id:"cer", name:"CER Conclusion", ref:"Ch. 11",
   desc:"A benefit-risk conclusion that cannot outrun the evidence you enter. Every field becomes a verifiable element; anything you cannot fill is something the conclusion must not claim.",
   f:[
    {k:"device", label:"Device name", req:true, type:"text", ex:"VitaSeal Hydrocolloid Dressing"},
@@ -839,7 +839,7 @@ var BUILDERS = [
     return s;
   }},
 
-{ id:"endpoint", name:"Endpoint Definition", ref:"Ch. 10.2",
+{ id:"endpoint", name:"Endpoint Definition", ref:"Ch. 12.2",
   desc:"If a blinded statistician could not produce a number from your endpoint without emailing you, it is not defined yet. This builder will not output until every element they would ask about is present.",
   f:[
    {k:"rank", label:"Endpoint rank", req:true, type:"select", opts:["primary","secondary","exploratory"], ex:"primary"},
@@ -858,7 +858,7 @@ var BUILDERS = [
       v.pop + " population, with " + v.miss + ". Arms are compared by " + v.test + " at " + v.alpha + ".";
   }},
 
-{ id:"signal", name:"PSUR Signal Evaluation", ref:"Ch. 12.3",
+{ id:"signal", name:"PSUR Signal Evaluation", ref:"Ch. 14.3",
   desc:"A table of numbers with no accompanying narrative leaves the actual analysis undocumented. This builder walks the four-part reasoning a signal evaluation must show.",
   f:[
    {k:"what", label:"What was observed", hint:"The complaint or event category.", req:true, type:"text", ex:"unintended disconnection complaints"},
@@ -881,7 +881,7 @@ var BUILDERS = [
       "Benefit-risk: Following this evaluation, " + v.br + ".";
   }},
 
-{ id:"pmcf", name:"PMCF Objective", ref:"Ch. 14.1",
+{ id:"pmcf", name:"PMCF Objective", ref:"Ch. 16.1",
   desc:"An objective to “collect data” cannot fail and therefore proves nothing. This builder requires a question, a method sized to answer it, and a criterion the plan can be judged against later.",
   f:[
    {k:"q", label:"Residual clinical question", hint:"State the uncertainty, not the activity. What does the file not yet know?", req:true, type:"area", ex:"The pivotal investigation followed subjects for 12 weeks; ulcer recurrence at the index site beyond that window is uncharacterized."},
@@ -899,7 +899,7 @@ var BUILDERS = [
       "If not met. " + v.trig + ". This objective will be reported against in the PMCF report regardless of outcome.";
   }},
 
-{ id:"ha", name:"Health Authority Response", ref:"Ch. 15.2",
+{ id:"ha", name:"Health Authority Response", ref:"Ch. 17.2",
   desc:"The four elements of a complete response, enforced in order: direct answer first, then root cause, then evidence, then action with an owner and a date.",
   f:[
    {k:"finding", label:"The finding, quoted as written", req:true, type:"area", ex:"The biocompatibility rationale for the adhesive component is not addressed in the Clinical Evaluation Report."},
@@ -920,11 +920,11 @@ var BUILDERS = [
       "Owner: " + v.owner + ". Status: " + v.date + ".";
   }},
 
-{ id:"narr", name:"Complaint / AE Narrative", ref:"Ch. 16.1",
+{ id:"narr", name:"Complaint / AE Narrative", ref:"Ch. 18.1",
   desc:"The five questions a narrative must answer, in order — with observed fact and interpretation kept in separate fields, because merging them forces a later reader to guess which parts are established.",
   f:[
    {k:"date", label:"Date of event and date reported", req:true, type:"text", ex:"event 3 February 2026; reported to manufacturer 5 February 2026"},
-   {k:"obs", label:"What happened — observed facts only", hint:"What the reporter saw, heard, or measured. No mechanism, no cause.", req:true, type:"area", ex:"The reporting clinician stated the infusion device did not deliver the programmed rate for approximately 12 minutes before an occlusion alarm triggered. Treatment resumed after device restart."},
+   {k:"obs", label:"What happened — observed facts only", hint:"What the reporter saw, heard, or measured. No mechanism, no cause.", req:true, type:"area", ex:"The reporting clinician stated the infusion device did not deliver the programd rate for approximately 12 minutes before an occlusion alarm triggered. Treatment resumed after device restart."},
    {k:"state", label:"Device and patient state before, during, after", req:true, type:"area", ex:"Device in service 14 months, lot 2025-C, used with the specified giving set at 8 mL/hr. Patient was receiving scheduled analgesia; no harm reported, and the patient completed the infusion without further interruption."},
    {k:"inv", label:"Investigation performed and findings", req:true, type:"area", ex:"Returned device evaluation (Report DEV-EVAL-2026-019) identified a firmware timeout defect affecting the alarm-trigger threshold under a specific low-flow condition, reproduced in bench testing across 8/10 trials."},
    {k:"caus", label:"Causality assessment", req:true, type:"select", opts:["device-related","possibly device-related","unlikely to be device-related","not device-related","inconclusive pending further evaluation"], ex:"device-related"},
@@ -1047,7 +1047,7 @@ var GLOSSARY = [
    col types: text | area | select
    ========================================================================= */
 var WORKTOOLS = [
-{ id:"trace", name:"Traceability Matrix", ref:"Ch. 3.3",
+{ id:"trace", name:"Traceability Matrix", ref:"Ch. 3.2",
   desc:"One row per claim. A reviewer's real question, sentence by sentence, is where a claim comes from and whether they can check it independently — this is that question in table form. Any row you cannot complete is a claim that is not yet defensible.",
   cols:[
    {k:"claim", label:"Claim, as written", type:"area", w:"22%"},
@@ -1061,7 +1061,7 @@ var WORKTOOLS = [
   seed:[{claim:"Benefits outweigh risks for Wagner Grade 1–2 DFU in adults", where:"CER §13.2", evid:"Study DEV-204, N=186, Table 7", etype:"Prospective investigation", rmf:"RMF-014 §5", status:"Verified"}]
 },
 
-{ id:"terms", name:"Controlled Terminology", ref:"Ch. 4.3 / 5.3",
+{ id:"terms", name:"Controlled Terminology", ref:"Ch. 5.2 / 5.3",
   desc:"The one tool here that does something to your draft. Enter the approved term for each concept — taken verbatim from the risk management file or technical documentation — and every variant you must not use. The Draft Analyzer then flags those variants in anything you paste into it.",
   feedsAnalyzer:true,
   cols:[
@@ -1076,7 +1076,7 @@ var WORKTOOLS = [
   ]
 },
 
-{ id:"litapp", name:"Literature Appraisal", ref:"Ch. 9.4 / 9.5",
+{ id:"litapp", name:"Literature Appraisal", ref:"Ch. 11.4 / 9.5",
   desc:"The appraisal step a reviewer checks first after reproducing your search. Record every record that reached full-text review, including the ones you excluded and why — an excluded-records list with reasons is what distinguishes a method-based exclusion from a conclusion-based one.",
   cols:[
    {k:"cite", label:"Citation", type:"area", w:"24%"},
@@ -1088,7 +1088,7 @@ var WORKTOOLS = [
    {k:"app", label:"Appraisal", type:"select", w:"13%", opts:["Contributory — pivotal","Contributory — supportive","Background / state of the art","Excluded"]},
    {k:"reason", label:"Reason / weighting", type:"area", w:"16%", ph:"Exclusion reason, or why weighted as it is"}
   ],
-  seed:[{cite:"Mahmood et al. 2024, multicentre cohort", design:"Prospective cohort", n:"412", pop:"Partial overlap", rel:"Equivalent device", app:"Contributory — supportive", reason:"Older, corticosteroid-exposed population; ascertainment by weekly assessment vs spontaneous reporting"}]
+  seed:[{cite:"Mahmood et al. 2024, multicenter cohort", design:"Prospective cohort", n:"412", pop:"Partial overlap", rel:"Equivalent device", app:"Contributory — supportive", reason:"Older, corticosteroid-exposed population; ascertainment by weekly assessment vs spontaneous reporting"}]
 },
 
 { id:"raci", name:"Authoring Plan / RACI",
@@ -1119,7 +1119,7 @@ var WORKTOOLS = [
   seed:[{item:"Indicated population", cer:"patients with diabetic foot ulcers", ifu:"chronic wounds", lab:"chronic wounds", cir:"adults 18–75, Wagner Grade 1–2, ≥4 weeks", status:"Differs — must reconcile"}]
 },
 
-{ id:"respond", name:"Response Tracker", ref:"Ch. 15",
+{ id:"respond", name:"Response Tracker", ref:"Ch. 17",
   desc:"One row per question or finding in the letter. The columns are the four elements of a complete response, in order, plus an owner and a date — so an unanswered question or a missing root cause is visible before the letter goes out rather than after.",
   cols:[
    {k:"ref", label:"Finding ref", type:"text", w:"9%", ph:"NB-Q-07"},
@@ -1134,7 +1134,7 @@ var WORKTOOLS = [
   seed:[{ref:"NB-Q-07", q:"Biocompatibility rationale for the adhesive is not addressed.", pos:"Agree", ans:"Omitted from CER §14.3; exists as Report BIO-2025-008, attached.", cause:"CER template had no required field for a biocompatibility summary — would recur for any author", evid:"Appendix F; CER Rev. 03", owner:"RA Lead", due:"2026-10-02"}]
 },
 
-{ id:"narr", name:"Narrative Completeness", ref:"Ch. 16",
+{ id:"narr", name:"Narrative Completeness", ref:"Ch. 18",
   desc:"One row per complaint or adverse event narrative. The first five columns are the five questions a narrative must answer, in order, with observed fact kept apart from interpretation. The IMDRF columns hold the codes from the categorised adverse event terminology — annexes A–G, most recent confirmed release March 2025.",
   cols:[
    {k:"ref", label:"Complaint ref", type:"text", w:"9%"},
@@ -1147,7 +1147,7 @@ var WORKTOOLS = [
    {k:"imdrfE", label:"IMDRF E — clinical signs", type:"text", w:"7%", ph:"E01…"},
    {k:"status", label:"Complete?", type:"select", w:"10%", opts:["Complete","Open — supplemental due","Fact and interpretation still merged","No resolution plan stated"]}
   ],
-  seed:[{ref:"CPL-2026-041", obs:"Clinician reported delivered volume ~180 mL against 240 mL programmed over 4 h.", state:"In service 14 months, lot 2025-C, 8 mL/hr, specified giving set.", inv:"DEV-EVAL-2026-019: firmware timeout defect reproduced 8/10 bench trials.", caus:"Device-related — reproduced under reported conditions; no alternative explanation fits the pump log.", act:"Firmware v3.2.1, FSN-2026-004, 20 Feb 2026. Owner: Complaint Lead.", imdrfA:"", imdrfE:"", status:"Complete"}]
+  seed:[{ref:"CPL-2026-041", obs:"Clinician reported delivered volume ~180 mL against 240 mL programd over 4 h.", state:"In service 14 months, lot 2025-C, 8 mL/hr, specified giving set.", inv:"DEV-EVAL-2026-019: firmware timeout defect reproduced 8/10 bench trials.", caus:"Device-related — reproduced under reported conditions; no alternative explanation fits the pump log.", act:"Firmware v3.2.1, FSN-2026-004, 20 Feb 2026. Owner: Complaint Lead.", imdrfA:"", imdrfE:"", status:"Complete"}]
 }
 ];
 
@@ -1270,7 +1270,7 @@ function copyText(txt, btn){
               found.push({
                 start: m.index, end: m.index + m[0].length, quote: m[0],
                 cat: "Terminology drift \u2014 your own sheet",
-                sev: "high", ref: "Ch. 5.3",
+                sev: "high", ref: "Ch. 9.3",
                 detail: "Your controlled terminology sheet lists this as a variant to avoid for \u201C" + t.concept + "\u201D.",
                 why: "A hazard, device, endpoint or population described differently each time it is mentioned reads to an auditor as either sloppiness or, worse, as two different things that were never reconciled. You have already decided what this one is called.",
                 fix: "Use \u201C" + (t.approved || "the approved term") + "\u201D" + (t.source ? " (" + t.source + ")" : "") + " verbatim.",

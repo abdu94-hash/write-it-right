@@ -273,6 +273,36 @@ mark.on{outline:2px solid var(--purple); outline-offset:1px}
 .prog .track{width:110px; height:7px; border-radius:4px; background:var(--surface-3); overflow:hidden}
 .prog .track i{display:block; height:100%; background:var(--green); transition:width .3s}
 
+/* ---------- working tools ---------- */
+.wt-scroll{overflow-x:auto; margin:0 0 14px; border:1px solid var(--line); border-radius:var(--r)}
+table.wt-table{border-collapse:collapse; width:100%; min-width:900px; background:var(--surface)}
+table.wt-table th{
+  background:var(--surface-3); color:var(--ink-2); text-align:left; vertical-align:bottom;
+  font-size:11px; font-weight:700; letter-spacing:.05em; text-transform:uppercase;
+  padding:8px 8px; border-bottom:2px solid var(--line-2); position:sticky; top:0; z-index:2;
+}
+table.wt-table td{padding:5px 6px; border-bottom:1px solid var(--line); vertical-align:top}
+table.wt-table tr:last-child td{border-bottom:0}
+.wt-in{
+  width:100%; background:var(--surface-2); color:var(--ink);
+  border:1px solid transparent; border-radius:4px; padding:6px 7px;
+  font-family:var(--serif); font-size:13.5px; line-height:1.45; resize:vertical;
+}
+select.wt-in, input.wt-in{font-family:var(--sans); font-size:13px}
+.wt-in:hover{border-color:var(--line-2)}
+.wt-in:focus{outline:2px solid var(--purple); outline-offset:0; border-color:var(--purple); background:var(--surface)}
+th.wt-act, td.wt-act{width:34px; text-align:center}
+.wt-del{
+  background:transparent; border:1px solid var(--line-2); color:var(--ink-3);
+  border-radius:4px; width:24px; height:24px; line-height:1; font-size:15px; padding:0;
+}
+.wt-del:hover{background:var(--hi-high); border-color:var(--hi-high-b); color:var(--hi-high-b)}
+.feeds{
+  background:var(--ok-bg); border:1px solid var(--ok-b); border-radius:var(--r-s);
+  padding:10px 13px; margin:0 0 12px; font-size:13.5px; line-height:1.55;
+}
+.feeds strong{color:var(--green)}
+
 /* ---------- quiz ---------- */
 .qopt{
   display:block; width:100%; text-align:left; background:var(--surface-2);
@@ -305,7 +335,7 @@ mark.on{outline:2px solid var(--purple); outline-offset:1px}
       <div class="mast-txt">
         <p class="kicker">Companion Toolkit</p>
         <h1>Write It Right</h1>
-        <p class="mast-sub">A Practical Guide to Medical Device Regulatory Writing — Hafez Selim,&#160;MD,&#160;PhD. Four tools that turn the book&rsquo;s exercises into repeatable practice. Nothing you type here leaves your device.</p>
+        <p class="mast-sub">A Practical Guide to Medical Device Regulatory Writing — Hafez Selim,&#160;MD,&#160;PhD. Six modules: four that turn the book&rsquo;s exercises into repeatable practice, and seven fillable working tools for the documents themselves. Nothing you type here leaves your device.</p>
       </div>
       <button class="theme-btn" id="themeBtn" type="button">Theme: Auto</button>
     </div>
@@ -319,7 +349,8 @@ mark.on{outline:2px solid var(--purple); outline-offset:1px}
       <button class="tab" role="tab" id="tab-drills" aria-controls="p-drills" aria-selected="false"><span class="tnum">2</span>Rewrite Drills</button>
       <button class="tab" role="tab" id="tab-builders" aria-controls="p-builders" aria-selected="false"><span class="tnum">3</span>Document Builders</button>
       <button class="tab" role="tab" id="tab-checklists" aria-controls="p-checklists" aria-selected="false"><span class="tnum">4</span>Checklists</button>
-      <button class="tab" role="tab" id="tab-quiz" aria-controls="p-quiz" aria-selected="false"><span class="tnum">5</span>Glossary Quiz</button>
+      <button class="tab" role="tab" id="tab-worktools" aria-controls="p-worktools" aria-selected="false"><span class="tnum">5</span>Working Tools</button>
+      <button class="tab" role="tab" id="tab-quiz" aria-controls="p-quiz" aria-selected="false"><span class="tnum">6</span>Glossary Quiz</button>
     </div>
   </div>
 </nav>
@@ -460,7 +491,36 @@ mark.on{outline:2px solid var(--purple); outline-offset:1px}
   <div id="ckWrap"></div>
 </section>
 
-<!-- ================= 5. QUIZ ================= -->
+<!-- ================= 5. WORKING TOOLS ================= -->
+<section class="panel" id="p-worktools" role="tabpanel" aria-labelledby="tab-worktools" hidden>
+  <div class="intro">
+    <h2>Working Tools</h2>
+    <p>Seven fillable grids for the work itself, rather than for practice. Each one is a table you add rows to, and each exports to CSV so it can go into a review record, a technical file, or a spreadsheet your team already uses.</p>
+    <p>Everything you type stays in this browser. Nothing is transmitted, and nothing is stored anywhere else &mdash; so real device names, study identifiers and draft claims are safe to enter. Export anything you need to keep.</p>
+  </div>
+  <div class="builder-nav" id="wtNav"></div>
+  <div class="card">
+    <div class="card-head">
+      <h3 id="wtTitle"></h3>
+      <span class="note" id="wtCount" style="margin:0"></span>
+    </div>
+    <p class="note" id="wtDesc" style="margin:0 0 12px"></p>
+    <div class="feeds" id="wtFeeds" hidden>
+      <strong>This one feeds the Draft Analyzer.</strong> Variants you list here are flagged wherever they appear in text you paste into tool&nbsp;1, with the approved term offered as the fix. Terminology drift stops being advice and becomes a check.
+    </div>
+    <div class="wt-scroll" id="wtGrid"></div>
+    <div class="btn-row">
+      <button class="btn" id="wtAdd" type="button">Add row</button>
+      <button class="btn sec" id="wtCsv" type="button">Download CSV</button>
+      <button class="btn sec" id="wtCopy" type="button">Copy as CSV</button>
+      <button class="btn sec" id="wtCsvAll" type="button">Download all seven</button>
+      <button class="btn sec" id="wtReset" type="button">Clear this tool</button>
+      <span class="note" id="wtSaved" style="margin:0"></span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 6. QUIZ ================= -->
 <section class="panel" id="p-quiz" role="tabpanel" aria-labelledby="tab-quiz" hidden>
   <div class="intro">
     <h2>Glossary Quiz</h2>
@@ -983,6 +1043,115 @@ var GLOSSARY = [
 ];
 
 /* =========================================================================
+   WORKING TOOLS — fillable, exportable grids
+   col types: text | area | select
+   ========================================================================= */
+var WORKTOOLS = [
+{ id:"trace", name:"Traceability Matrix", ref:"Ch. 3.3",
+  desc:"One row per claim. A reviewer's real question, sentence by sentence, is where a claim comes from and whether they can check it independently — this is that question in table form. Any row you cannot complete is a claim that is not yet defensible.",
+  cols:[
+   {k:"claim", label:"Claim, as written", type:"area", w:"22%"},
+   {k:"where", label:"Where it appears", type:"text", w:"14%", ph:"CER §13.2; IFU §1"},
+   {k:"evid", label:"Evidence source", type:"text", w:"15%", ph:"Study DEV-204, Table 7"},
+   {k:"etype", label:"Evidence type", type:"select", w:"15%",
+    opts:["Bench / verification","Pre-clinical / animal","Literature — subject device","Literature — equivalent device","Retrospective series","Prospective investigation","PMS / PMCF data"]},
+   {k:"rmf", label:"Risk file ref", type:"text", w:"12%", ph:"RMF-014 H-05"},
+   {k:"status", label:"Status", type:"select", w:"12%", opts:["Verified","Gap — evidence missing","Gap — wording differs","Pending check"]}
+  ],
+  seed:[{claim:"Benefits outweigh risks for Wagner Grade 1–2 DFU in adults", where:"CER §13.2", evid:"Study DEV-204, N=186, Table 7", etype:"Prospective investigation", rmf:"RMF-014 §5", status:"Verified"}]
+},
+
+{ id:"terms", name:"Controlled Terminology", ref:"Ch. 4.3 / 5.3",
+  desc:"The one tool here that does something to your draft. Enter the approved term for each concept — taken verbatim from the risk management file or technical documentation — and every variant you must not use. The Draft Analyzer then flags those variants in anything you paste into it.",
+  feedsAnalyzer:true,
+  cols:[
+   {k:"concept", label:"Concept", type:"text", w:"20%", ph:"the device"},
+   {k:"approved", label:"Approved term (verbatim)", type:"text", w:"28%", ph:"VitaSeal Hydrocolloid Dressing"},
+   {k:"source", label:"Source of truth", type:"text", w:"22%", ph:"RMF-014 §2.1"},
+   {k:"forbidden", label:"Variants to flag (comma separated)", type:"area", w:"30%", ph:"the system, the unit, the product"}
+  ],
+  seed:[
+   {concept:"The device", approved:"VitaSeal Hydrocolloid Dressing", source:"TD-001 §2.1", forbidden:"the system, the unit, the product, the article"},
+   {concept:"Infection hazard", approved:"microbial contamination leading to infection", source:"RMF-014 H-07", forbidden:"contamination risk, septic complication, microbial hazard, infection risk"}
+  ]
+},
+
+{ id:"litapp", name:"Literature Appraisal", ref:"Ch. 9.4 / 9.5",
+  desc:"The appraisal step a reviewer checks first after reproducing your search. Record every record that reached full-text review, including the ones you excluded and why — an excluded-records list with reasons is what distinguishes a method-based exclusion from a conclusion-based one.",
+  cols:[
+   {k:"cite", label:"Citation", type:"area", w:"24%"},
+   {k:"design", label:"Design", type:"select", w:"13%",
+    opts:["RCT","Prospective cohort","Retrospective cohort","Case series","Case report","Registry","Systematic review","Bench / in vitro"]},
+   {k:"n", label:"N", type:"text", w:"6%"},
+   {k:"pop", label:"Population match", type:"select", w:"14%", opts:["Matches intended population","Partial overlap","Outside intended population"]},
+   {k:"rel", label:"Device relevance", type:"select", w:"14%", opts:["Subject device","Equivalent device","Similar device","Not relevant"]},
+   {k:"app", label:"Appraisal", type:"select", w:"13%", opts:["Contributory — pivotal","Contributory — supportive","Background / state of the art","Excluded"]},
+   {k:"reason", label:"Reason / weighting", type:"area", w:"16%", ph:"Exclusion reason, or why weighted as it is"}
+  ],
+  seed:[{cite:"Mahmood et al. 2024, multicentre cohort", design:"Prospective cohort", n:"412", pop:"Partial overlap", rel:"Equivalent device", app:"Contributory — supportive", reason:"Older, corticosteroid-exposed population; ascertainment by weekly assessment vs spontaneous reporting"}]
+},
+
+{ id:"raci", name:"Authoring Plan / RACI",
+  ref:"Ch. 3.1",
+  desc:"Before drafting any section, name the decision its reader makes. A section that cannot be tied to a decision is not neutral — it is noise diluting the content that does the work. The ownership columns exist so the document does not stall in review.",
+  cols:[
+   {k:"sect", label:"Document / section", type:"text", w:"18%", ph:"CER §6 — State of the art"},
+   {k:"decision", label:"Reader's decision", type:"area", w:"26%", ph:"Does the state of the art support the claimed benefit?"},
+   {k:"r", label:"Author (R)", type:"text", w:"12%"},
+   {k:"a", label:"Approver (A)", type:"text", w:"12%"},
+   {k:"c", label:"Consulted", type:"text", w:"12%"},
+   {k:"i", label:"Informed", type:"text", w:"10%"},
+   {k:"due", label:"Due", type:"text", w:"10%"}
+  ],
+  seed:[{sect:"CER §6 — State of the art", decision:"Whether current standard of care already meets the claimed benefit", r:"Med. Writer", a:"Clinical Lead", c:"Regulatory, Risk", i:"QA", due:"2026-11-14"}]
+},
+
+{ id:"xdoc", name:"Cross-Document Consistency", ref:"Ch. 2.4 / 5.4",
+  desc:"Silent scope creep happens when different authors draft different documents from memory rather than from one approved claims table. Put each recurring claim, indication, population or figure in a row, write what each document actually says, and the drift becomes visible.",
+  cols:[
+   {k:"item", label:"Claim / indication / figure", type:"area", w:"20%"},
+   {k:"cer", label:"CER says", type:"area", w:"16%"},
+   {k:"ifu", label:"IFU says", type:"area", w:"16%"},
+   {k:"lab", label:"Labeling says", type:"area", w:"16%"},
+   {k:"cir", label:"Protocol / CIR says", type:"area", w:"16%"},
+   {k:"status", label:"Status", type:"select", w:"16%", opts:["Identical","Differs — justified","Differs — must reconcile","Not yet checked"]}
+  ],
+  seed:[{item:"Indicated population", cer:"patients with diabetic foot ulcers", ifu:"chronic wounds", lab:"chronic wounds", cir:"adults 18–75, Wagner Grade 1–2, ≥4 weeks", status:"Differs — must reconcile"}]
+},
+
+{ id:"respond", name:"Response Tracker", ref:"Ch. 15",
+  desc:"One row per question or finding in the letter. The columns are the four elements of a complete response, in order, plus an owner and a date — so an unanswered question or a missing root cause is visible before the letter goes out rather than after.",
+  cols:[
+   {k:"ref", label:"Finding ref", type:"text", w:"9%", ph:"NB-Q-07"},
+   {k:"q", label:"Question, as written", type:"area", w:"20%"},
+   {k:"pos", label:"Position", type:"select", w:"13%", opts:["Agree","Agree in part","Respectfully disagree"]},
+   {k:"ans", label:"Direct answer (first sentence)", type:"area", w:"20%"},
+   {k:"cause", label:"Root cause (systemic)", type:"area", w:"16%", ph:"Not “human error” or “training”"},
+   {k:"evid", label:"Evidence cited", type:"text", w:"10%"},
+   {k:"owner", label:"Owner", type:"text", w:"6%"},
+   {k:"due", label:"Due", type:"text", w:"6%"}
+  ],
+  seed:[{ref:"NB-Q-07", q:"Biocompatibility rationale for the adhesive is not addressed.", pos:"Agree", ans:"Omitted from CER §14.3; exists as Report BIO-2025-008, attached.", cause:"CER template had no required field for a biocompatibility summary — would recur for any author", evid:"Appendix F; CER Rev. 03", owner:"RA Lead", due:"2026-10-02"}]
+},
+
+{ id:"narr", name:"Narrative Completeness", ref:"Ch. 16",
+  desc:"One row per complaint or adverse event narrative. The first five columns are the five questions a narrative must answer, in order, with observed fact kept apart from interpretation. The IMDRF columns hold the codes from the categorised adverse event terminology — annexes A–G, most recent confirmed release March 2025.",
+  cols:[
+   {k:"ref", label:"Complaint ref", type:"text", w:"9%"},
+   {k:"obs", label:"1. What happened (observed only)", type:"area", w:"17%"},
+   {k:"state", label:"2. Device / patient state", type:"area", w:"14%"},
+   {k:"inv", label:"3. Investigation and findings", type:"area", w:"16%"},
+   {k:"caus", label:"4. Causality + reasoning", type:"area", w:"16%"},
+   {k:"act", label:"5. Action (owner, date)", type:"area", w:"14%"},
+   {k:"imdrfA", label:"IMDRF A — device problem", type:"text", w:"7%", ph:"A05…"},
+   {k:"imdrfE", label:"IMDRF E — clinical signs", type:"text", w:"7%", ph:"E01…"},
+   {k:"status", label:"Complete?", type:"select", w:"10%", opts:["Complete","Open — supplemental due","Fact and interpretation still merged","No resolution plan stated"]}
+  ],
+  seed:[{ref:"CPL-2026-041", obs:"Clinician reported delivered volume ~180 mL against 240 mL programmed over 4 h.", state:"In service 14 months, lot 2025-C, 8 mL/hr, specified giving set.", inv:"DEV-EVAL-2026-019: firmware timeout defect reproduced 8/10 bench trials.", caus:"Device-related — reproduced under reported conditions; no alternative explanation fits the pump log.", act:"Firmware v3.2.1, FSN-2026-004, 20 Feb 2026. Owner: Complaint Lead.", imdrfA:"", imdrfE:"", status:"Complete"}]
+}
+];
+
+/* =========================================================================
    SHARED HELPERS
    ========================================================================= */
 function $(id){ return document.getElementById(id); }
@@ -1089,6 +1258,30 @@ function copyText(txt, btn){
                      cat:r.cat, sev:r.sev, ref:r.ref, why:r.why, fix:r.fix, id:r.id });
       }
     });
+    // user-defined terminology from the Working Tools sheet
+    try {
+      if (typeof WT !== "undefined" && WT.terminologyRules) {
+        WT.terminologyRules().forEach(function(t){
+          t.variants.forEach(function(v){
+            var safe = v.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+            var re = new RegExp("\\b" + safe + "\\b", "gi"), m, guard = 0;
+            while ((m = re.exec(text)) !== null && guard++ < 200) {
+              if (m[0].length === 0) { re.lastIndex++; continue; }
+              found.push({
+                start: m.index, end: m.index + m[0].length, quote: m[0],
+                cat: "Terminology drift \u2014 your own sheet",
+                sev: "high", ref: "Ch. 5.3",
+                detail: "Your controlled terminology sheet lists this as a variant to avoid for \u201C" + t.concept + "\u201D.",
+                why: "A hazard, device, endpoint or population described differently each time it is mentioned reads to an auditor as either sloppiness or, worse, as two different things that were never reconciled. You have already decided what this one is called.",
+                fix: "Use \u201C" + (t.approved || "the approved term") + "\u201D" + (t.source ? " (" + t.source + ")" : "") + " verbatim.",
+                id: "user-term"
+              });
+            }
+          });
+        });
+      }
+    } catch (e) { /* terminology sheet unavailable; analyzer still runs */ }
+
     DOC_RULES.forEach(function(r){
       var res=r.test(text);
       if(res && res.at>=0){
@@ -1666,6 +1859,161 @@ function copyText(txt, btn){
   $("qzAgain").addEventListener("click", start);
   start();
 })();
+
+/* =========================================================================
+   6. WORKING TOOLS ENGINE
+   ========================================================================= */
+var WT = (function(){
+  var cur = 0;
+  var data = {};            // {toolId: [ {col:val}, ... ]}
+
+  try {
+    var raw = store("worktools");
+    if (raw) data = JSON.parse(raw) || {};
+  } catch(e) { data = {}; }
+
+  function save(){
+    try { store("worktools", JSON.stringify(data)); $("wtSaved").textContent = "Saved in this browser"; }
+    catch(e){ $("wtSaved").textContent = "Not saved — this browser blocks local storage for files; use Export."; }
+  }
+
+  function rowsFor(t){
+    if (!data[t.id]) data[t.id] = t.seed ? JSON.parse(JSON.stringify(t.seed)) : [blank(t)];
+    if (!data[t.id].length) data[t.id].push(blank(t));
+    return data[t.id];
+  }
+  function blank(t){ var r = {}; t.cols.forEach(function(c){ r[c.k] = ""; }); return r; }
+
+  function renderNav(){
+    var nav = $("wtNav"); nav.innerHTML = "";
+    WORKTOOLS.forEach(function(t, i){
+      var b = el("button","bnav", t.name);
+      b.type = "button";
+      b.setAttribute("aria-pressed", i === cur ? "true" : "false");
+      b.addEventListener("click", function(){ cur = i; render(); });
+      nav.appendChild(b);
+    });
+  }
+
+  function render(){
+    renderNav();
+    var t = WORKTOOLS[cur];
+    $("wtTitle").textContent = t.name;
+    $("wtDesc").innerHTML = esc(t.desc) + ' <span class="ref">' + esc(t.ref) + '</span>';
+    $("wtFeeds").hidden = !t.feedsAnalyzer;
+
+    var rows = rowsFor(t);
+    var wrap = $("wtGrid"); wrap.innerHTML = "";
+
+    var tbl = el("table","wt-table");
+    var thead = el("thead"); var htr = el("tr");
+    t.cols.forEach(function(c){
+      var th = el("th", null, c.label);
+      if (c.w) th.style.width = c.w;
+      htr.appendChild(th);
+    });
+    htr.appendChild(el("th","wt-act", ""));
+    thead.appendChild(htr); tbl.appendChild(thead);
+
+    var tb = el("tbody");
+    rows.forEach(function(row, ri){
+      var tr = el("tr");
+      t.cols.forEach(function(c){
+        var td = el("td");
+        var inp;
+        if (c.type === "select"){
+          inp = el("select");
+          var blankOpt = el("option","", "—"); blankOpt.value = ""; inp.appendChild(blankOpt);
+          c.opts.forEach(function(o){ var op = el("option","", o); op.value = o; inp.appendChild(op); });
+          inp.value = row[c.k] || "";
+        } else if (c.type === "area"){
+          inp = el("textarea"); inp.rows = 2; inp.value = row[c.k] || "";
+          if (c.ph) inp.placeholder = c.ph;
+        } else {
+          inp = el("input"); inp.type = "text"; inp.value = row[c.k] || "";
+          if (c.ph) inp.placeholder = c.ph;
+        }
+        inp.className = "wt-in";
+        inp.addEventListener("input", function(){ row[c.k] = inp.value; save(); });
+        inp.addEventListener("change", function(){ row[c.k] = inp.value; save(); });
+        td.appendChild(inp);
+        tr.appendChild(td);
+      });
+      var tda = el("td","wt-act");
+      var del = el("button","wt-del","×");
+      del.type = "button"; del.title = "Delete this row";
+      del.addEventListener("click", function(){
+        rows.splice(ri,1); if (!rows.length) rows.push(blank(t));
+        save(); render();
+      });
+      tda.appendChild(del); tr.appendChild(tda);
+      tb.appendChild(tr);
+    });
+    tbl.appendChild(tb);
+    wrap.appendChild(tbl);
+    $("wtCount").textContent = rows.length + (rows.length === 1 ? " row" : " rows");
+  }
+
+  function toCSV(t){
+    var rows = rowsFor(t);
+    function q(v){ v = String(v == null ? "" : v); return '"' + v.replace(/"/g,'""') + '"'; }
+    var out = [t.cols.map(function(c){ return q(c.label); }).join(",")];
+    rows.forEach(function(r){ out.push(t.cols.map(function(c){ return q(r[c.k]); }).join(",")); });
+    return out.join("\r\n");
+  }
+
+  function download(name, text, mime){
+    var blob = new Blob([text], { type: (mime || "text/plain") + ";charset=utf-8" });
+    var a = el("a"); a.href = URL.createObjectURL(blob); a.download = name;
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(a.href); }, 2000);
+  }
+
+  /* terminology sheet -> analyzer */
+  function terminologyRules(){
+    var t = null;
+    WORKTOOLS.forEach(function(x){ if (x.id === "terms") t = x; });
+    if (!t || !data[t.id]) return [];
+    var out = [];
+    data[t.id].forEach(function(r){
+      var approved = (r.approved || "").trim();
+      var variants = (r.forbidden || "").split(",").map(function(s){ return s.trim(); }).filter(Boolean);
+      if (!variants.length) return;
+      out.push({ concept: (r.concept || "this concept").trim(), approved: approved,
+                 source: (r.source || "").trim(), variants: variants });
+    });
+    return out;
+  }
+
+  return {
+    init: function(){
+      render();
+      $("wtAdd").addEventListener("click", function(){
+        var t = WORKTOOLS[cur]; rowsFor(t).push(blank(t)); save(); render();
+      });
+      $("wtCopy").addEventListener("click", function(){ copyText(toCSV(WORKTOOLS[cur]), this); });
+      $("wtCsv").addEventListener("click", function(){
+        var t = WORKTOOLS[cur];
+        download("write-it-right-" + t.id + "-" + today() + ".csv", toCSV(t), "text/csv");
+      });
+      $("wtCsvAll").addEventListener("click", function(){
+        var parts = [];
+        WORKTOOLS.forEach(function(t){
+          parts.push("### " + t.name + " (" + t.ref + ")");
+          parts.push(toCSV(t)); parts.push("");
+        });
+        download("write-it-right-working-tools-" + today() + ".csv", parts.join("\r\n"), "text/csv");
+      });
+      $("wtReset").addEventListener("click", function(){
+        var t = WORKTOOLS[cur];
+        if (!window.confirm("Clear every row in “" + t.name + "”?")) return;
+        delete data[t.id]; save(); render();
+      });
+    },
+    terminologyRules: terminologyRules
+  };
+})();
+WT.init();
 </script>
 </body>
 </html>

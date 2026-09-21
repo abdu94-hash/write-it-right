@@ -1987,6 +1987,9 @@ var WT = (function(){
 
   return {
     init: function(){
+      // seed every tool up front, so the terminology sheet feeds the analyzer
+      // from a cold start rather than only after its tab has been visited
+      WORKTOOLS.forEach(function(t){ rowsFor(t); });
       render();
       $("wtAdd").addEventListener("click", function(){
         var t = WORKTOOLS[cur]; rowsFor(t).push(blank(t)); save(); render();

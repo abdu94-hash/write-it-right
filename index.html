@@ -10,7 +10,7 @@
 :root{
   --navy:#2B3A55; --navy-2:#3d5075; --red:#C0392B; --green:#1E7A46; --purple:#4A3F9E;
   --bg:#F4F5F8; --surface:#FFFFFF; --surface-2:#F7F8FA; --surface-3:#EDEFF4;
-  --ink:#1A1A1A; --ink-2:#4A4F5A; --ink-3:#767C88;
+  --ink:#1A1A1A; --ink-2:#4A4F5A; --ink-3:#646A74;
   --line:#D5DAE3; --line-2:#B9C2D0;
   --hi-high:#FBD9D5; --hi-high-b:#C0392B;
   --hi-med:#FDEBCF; --hi-med-b:#B9761B;
@@ -28,7 +28,7 @@
   :root:not([data-theme="light"]){
     --navy:#8FA6CC; --navy-2:#A8BCDC; --red:#F08579; --green:#5FC28C; --purple:#A99BF0;
     --bg:#12151C; --surface:#1A1F29; --surface-2:#212733; --surface-3:#2A313F;
-    --ink:#E8EBF0; --ink-2:#B4BCCA; --ink-3:#848D9E;
+    --ink:#E8EBF0; --ink-2:#B4BCCA; --ink-3:#98A0AE;
     --line:#333B4A; --line-2:#414B5E;
     --hi-high:#4A2420; --hi-high-b:#F08579;
     --hi-med:#463318; --hi-med-b:#E0A44A;
@@ -42,7 +42,7 @@
 :root[data-theme="dark"]{
   --navy:#8FA6CC; --navy-2:#A8BCDC; --red:#F08579; --green:#5FC28C; --purple:#A99BF0;
   --bg:#12151C; --surface:#1A1F29; --surface-2:#212733; --surface-3:#2A313F;
-  --ink:#E8EBF0; --ink-2:#B4BCCA; --ink-3:#848D9E;
+  --ink:#E8EBF0; --ink-2:#B4BCCA; --ink-3:#98A0AE;
   --line:#333B4A; --line-2:#414B5E;
   --hi-high:#4A2420; --hi-high-b:#F08579;
   --hi-med:#463318; --hi-med-b:#E0A44A;
@@ -267,7 +267,7 @@ mark.on{outline:2px solid var(--purple); outline-offset:1px}
 .ck-item.done .ck-text{color:var(--ink-3); text-decoration:line-through}
 .ck-note{
   width:100%; margin-top:6px; font-size:13px; padding:5px 8px; font-family:var(--sans);
-  background:var(--surface-2); border:1px dashed var(--line-2); border-radius:4px; min-height:0;
+  background:var(--surface-2); color:var(--ink); border:1px dashed var(--line-2); border-radius:4px; min-height:0;
 }
 .prog{display:flex; align-items:center; gap:10px; font-size:13px; color:var(--ink-2); font-weight:600}
 .prog .track{width:110px; height:7px; border-radius:4px; background:var(--surface-3); overflow:hidden}
@@ -305,7 +305,7 @@ th.wt-act, td.wt-act{width:34px; text-align:center}
 
 /* ---------- quiz ---------- */
 .qopt{
-  display:block; width:100%; text-align:left; background:var(--surface-2);
+  display:block; width:100%; text-align:left; background:var(--surface-2); color:var(--ink);
   border:1px solid var(--line-2); border-radius:var(--r-s);
   padding:11px 13px; margin:0 0 9px; font-size:14.5px; line-height:1.5; font-family:var(--serif);
 }
